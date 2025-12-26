@@ -1,0 +1,106 @@
+---
+title: Java Flow Control
+description: Learn about Flow Control in Java. Understand how to control the execution flow of your program using decision-making, looping, and branching statements.
+icon: Route
+---
+
+In Java, the execution of code typically happens from top to bottom, line by line. However, simply executing lines sequentially is not enough for complex logic. We need to make decisions, repeat tasks, or jump to different parts of the code. This is where **Flow Control** comes in.
+
+**Flow Control** statements allow you to control the order in which the statements in your program are executed.
+
+## Types of Flow Control
+
+There are three main types of flow control statements in Java:
+
+1.  **Decision-Making Statements** (Selection)
+2.  **Looping Statements** (Iteration)
+3.  **Branching Statements** (Jump)
+
+<div className="p-4 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 my-6">
+
+```mermaid
+graph TD
+    A[Flow Control] --> B[Decision Making]
+    A --> C[Looping]
+    A --> D[Branching]
+
+    B --> B1[if-else]
+    B --> B2[switch]
+
+    C --> C1[for loop]
+    C --> C2[while loop]
+    C --> C3[do-while loop]
+    C --> C4[for-each loop]
+
+    D --> D1[break]
+    D --> D2[continue]
+    D --> D3[return]
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+```
+
+</div>
+
+## 1. Decision-Making Statements 🚦
+
+These statements allow your program to choose between different paths of execution based on certain conditions.
+
+- [**if...else Statement**](/docs/if-else-statement): Executes a block of code if a condition is true, and another block if it's false.
+- [**switch Statement**](/docs/switch-statement): Selects one of many code blocks to be executed.
+
+## 2. Looping Statements 🔄
+
+These statements allow you to execute a block of code repeatedly.
+
+- [**for Loop**](/docs/for-loop): Used when you know exactly how many times you want to loop.
+- [**Enhanced for Loop**](/docs/enhanced-for-loop): Used to iterate through elements of arrays and collections.
+- [**while Loop**](/docs/while-and-do-while-loop): Loops through a block of code as long as a specified condition is true.
+- [**do...while Loop**](/docs/while-and-do-while-loop): Similar to `while`, but guarantees the code block is executed at least once.
+
+## 3. Branching Statements ⤵️
+
+These statements allow you to transfer control to another part of your program.
+
+- [**break Statement**](/docs/break-statement): Terminates the loop or switch statement.
+- [**continue Statement**](/docs/continue-statement): Skips the current iteration of a loop and proceeds to the next one.
+- **return Statement**: Exits from the current method (we'll cover this in Methods).
+
+<Callout>
+
+**Tip 💡:** Mastering flow control is essential for writing logic. Without it, your program is just a static list of instructions!
+
+</Callout>
+
+<Quiz
+  question="Which type of flow control statement is used to repeat a block of code?"
+  options={["Decision-Making", "Looping", "Branching", "Sequential"]}
+  correctAnswerIndex={1}
+/>
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="flow-control"
+  nextChapterId="if-else-statement"
+  question="What is the output of this code snippet?"
+  expectedOutput="Start\nEnd"
+  hint="The if condition is false, so the block inside is skipped."
+  solution={`public class Main {
+    public static void main(String[] args) {
+        System.out.println("Start");
+        if (false) {
+            System.out.println("Middle");
+        }
+        System.out.println("End");
+    }
+}`}
+  defaultCode={`public class Main {
+    public static void main(String[] args) {
+        // Write your code here
+    }
+}`}
+/>

@@ -1,0 +1,131 @@
+---
+title: Java break Statement
+description: In this tutorial, we will learn how to use the Java break statement to terminate a loop or switch statement.
+icon: CirclePause
+---
+
+While working with loops, it is sometimes desirable to skip some statements inside the loop or terminate the loop immediately without checking the test expression.
+
+In such cases, `break` and `continue` statements are used. You will learn about the Java continue statement in the next tutorial.
+
+The break statement in Java terminates the loop immediately, and the control of the program moves to the next statement following the loop.
+
+<Quiz
+  question="What does the break statement do?"
+  options={[
+    "Skips the current iteration",
+    "Terminates the loop immediately",
+    "Restarts the loop",
+    "Pauses execution",
+  ]}
+  correctAnswerIndex={1}
+/>
+
+Here, `break` is a keyword. It terminates the loop immediately., and the control of the program moves to the next statement following the loop.
+
+It is almost always used with decision-making statements (Java if...else Statement).
+
+Here is the syntax of the break statement in Java:
+
+```java
+break;
+```
+
+## Example 1: Java break statement
+
+Java while loop is used to run a specific code until a certain condition is met. The syntax of the while loop is:
+
+```java
+class Test {
+    public static void main(String[] args) {
+
+        // for loop
+        for (int i = 1; i <= 10; ++i) {
+
+            // if the value of i is 5 the loop terminates
+            if (i == 5) {
+                break;
+            }
+            System.out.println(i);
+        }
+    }
+}
+```
+
+#### Output
+
+```plaintext
+1
+2
+3
+4
+```
+
+In the above program, we are using the `for` loop to print the value of i in each iteration. To know how for loop works, visit the Java `for` loop. Here, notice the statement,
+
+```java
+if (i == 5) {
+    break;
+}
+```
+
+This means when the value of `i` is equal to 5, the loop terminates. Hence we get the output with values less than 5 only.
+
+<Quiz
+  question="Can the break statement be used outside of loops or switch statements?"
+  options={[
+    "Yes, anywhere",
+    "No, only in loops and switch",
+    "Yes, in if statements",
+    "No, never",
+  ]}
+  correctAnswerIndex={1}
+/>
+
+<Callout>
+
+**Tip 💡:** `break` is your "Get Out of Jail Free" card for loops. Use it wisely to escape when you've found what you're looking for!
+
+</Callout>
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="break-statement"
+  nextChapterId="continue-statement"
+  question="Use break to stop the loop when i is 4. Loop runs from 1 to 5."
+  expectedOutput="1\n2\n3"
+  hint="Use 'if (i == 4) break;' to exit the loop."
+  solution={`public class Main {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 5; i++) {
+            if (i == 4) break;
+            System.out.println(i);
+        }
+    }
+}`}
+  defaultCode={``}
+/>
+<div className="mt-8" />
+
+## Key Takeaways
+
+- **Action**: Terminates the loop immediately.
+- **Flow**: Control jumps to the code _after_ the loop.
+- **Usage**: Commonly used to stop searching once an item is found.
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Nested Loops**: `break` only exits the _inner_ loop it's inside, not the outer loop. You need labeled breaks (advanced) for that.
+>
+> **Unreachable Code**: Any code written immediately after `break;` in the same block will cause a compile-time error because it can never be reached.
+
+## What's Next?
+
+What if we don't want to stop the whole loop, but just skip one item?
+[Learn Continue Statement →](/docs/continue-statement)

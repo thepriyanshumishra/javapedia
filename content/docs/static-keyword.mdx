@@ -1,0 +1,118 @@
+---
+title: Java static keyword
+description: In this tutorial, we will learn how to use the Java static keyword.
+icon: Zap
+---
+
+## What is a `static` keyword in Java?
+
+In Java, if we want to access class members, we must first create an instance of the class. But there will be situations where we want to access class members without creating any variables.
+In those situations, we need to declare the class members static.
+
+```java
+// static method
+static void myStaticMethod() { ... }
+```
+
+<Quiz
+  question="Can a static method access non-static variables?"
+  options={["Yes", "No", "Only if public", "Only if private"]}
+  correctAnswerIndex={1}
+/>
+
+Here, `myStaticMethod()` is a static method. It can be called without creating an object of the class.
+The `Math` class in Java has almost all of its members static. So, we can access its members without creating instances of the Math class.
+
+<Callout>
+
+**Tip 💡:** `static` means "Shared by everyone". Like the office coffee machine. You don't need your own personal coffee machine (object) to get coffee!
+
+</Callout>
+
+### Example 1
+
+```java
+public class Main {
+    public static void main( String[] args ) {
+
+        // accessing the methods of the Math class
+        System.out.println("Absolute value of -12 =  " + Math.abs(-12));
+        System.out.println("Value of PI = " + Math.PI);
+        System.out.println("Value of E = " + Math.E);
+        System.out.println("2^2 = " + Math.pow(2,2));
+    }
+}
+```
+
+### Output:
+
+```bash
+Absolute value of -12 = 12
+Value of PI = 3.141592653589793
+Value of E = 2.718281828459045
+2^2 = 4.0
+```
+
+In the above example, we have not created any instances of the Math class. But we are able to access its methods: `abs()` and `pow()` and variables: `PI` and `E`.
+
+It is possible because the methods and variables of the Math class are static.
+
+<Quiz
+  question="If you change the value of a static variable in one object, does it change for all other objects of that class?"
+  options={[
+    "Yes",
+    "No",
+    "Only if the variable is public",
+    "Only if the variable is final",
+  ]}
+  correctAnswerIndex={0}
+/>
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="static-keyword"
+  nextChapterId="this-keyword"
+  question="Create a class 'Counter' with a static variable 'count'. Increment it in the constructor. Create 2 objects and print 'count'."
+  expectedOutput="2"
+  hint="Use the 'static' keyword for the count variable so it's shared across objects."
+  solution={`class Counter {
+    static int count = 0;
+    Counter() {
+        count++;
+    }
+}
+
+public class Main {
+public static void main(String[] args) {
+new Counter();
+new Counter();
+System.out.println(Counter.count);
+}
+}`}
+defaultCode={``}
+/>
+
+<div className="mt-8" />
+
+## Key Takeaways
+
+- **Class Level**: Belongs to the class, not individual objects.
+- **Shared**: All objects share the SAME static variable.
+- **Utility**: Static methods are great for helper functions (like `Math.sqrt()`).
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Static vs Instance**: You CANNOT access non-static (instance) variables from a static method. The static method doesn't know _which_ object's variable to use!
+>
+> **Memory**: Static variables stay in memory for the entire life of the program. Use them wisely.
+
+## What's Next?
+
+We've covered the core of OOP! Now let's handle errors gracefully.
+[Learn Exception Handling →](/docs/exception-handling)

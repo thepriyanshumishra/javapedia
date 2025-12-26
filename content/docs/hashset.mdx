@@ -1,0 +1,114 @@
+---
+title: Java HashSet
+description: Learn about Java HashSet. Understand how to store unique elements, check for existence, and perform set operations.
+icon: Database
+---
+
+A `HashSet` is a collection of items where every item is **unique**.
+
+Think of a **VIP Party List** 🎟️.
+
+- You can't be on the list twice.
+- If you try to add "John" again, the bouncer says "He's already on the list!" and ignores you.
+- The order doesn't matter; you're either on the list or you're not.
+
+## Creating a HashSet
+
+```java
+import java.util.HashSet;
+
+HashSet<String> cars = new HashSet<String>();
+```
+
+## Common Operations
+
+### 1. Add Items
+
+```java
+cars.add("Volvo");
+cars.add("BMW");
+cars.add("Ford");
+cars.add("BMW"); // Duplicate! Will be ignored.
+cars.add("Mazda");
+
+System.out.println(cars);
+// Output: [Volvo, Mazda, Ford, BMW] (Order is not guaranteed!)
+```
+
+### 2. Check if Item Exists
+
+```java
+System.out.println(cars.contains("Mazda")); // Output: true
+```
+
+### 3. Remove Items
+
+```java
+cars.remove("Volvo");
+cars.clear(); // Removes ALL items
+```
+
+### 4. Set Size
+
+```java
+System.out.println(cars.size());
+```
+
+## Loop Through a HashSet
+
+```java
+for (String i : cars) {
+  System.out.println(i);
+}
+```
+
+<Callout>
+
+**Tip 💡:** `HashSet` is super fast for checking if something exists (`contains()`). It's much faster than `ArrayList` for this!
+
+</Callout>
+
+<Quiz
+  question="What is the main feature of a HashSet?"
+  options={[
+    "It maintains insertion order",
+    "It allows duplicates",
+    "It stores unique elements only",
+    "It stores key-value pairs",
+  ]}
+  correctAnswerIndex={2}
+/>
+
+---
+
+<Callout>
+
+**Note :** Java is a statically-typed language. It means that all variables must be declared before they can be used.
+
+</Callout>
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="hashset"
+  nextChapterId="generics"
+  question="Create a HashSet of Integers. Add 1, 2, and 1 again. Print the size."
+  expectedOutput="2"
+  hint="Duplicates are ignored in a HashSet."
+  solution={`import java.util.HashSet;
+
+public class Main {
+public static void main(String[] args) {
+HashSet<Integer> set = new HashSet<>();
+set.add(1);
+set.add(2);
+set.add(1);
+System.out.println(set.size());
+}
+}`}
+defaultCode={``}
+/>

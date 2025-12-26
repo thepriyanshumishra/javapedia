@@ -1,0 +1,35 @@
+---
+title: Functional Interfaces
+description: Understand Functional Interfaces and their role in Lambda Expressions.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Functional Interfaces
+
+A **Functional Interface** is an interface that contains exactly one abstract method. They can have any number of default or static methods. Functional interfaces are the basis for Lambda Expressions in Java.
+
+## The `@FunctionalInterface` Annotation
+
+While not mandatory, it is best practice to use the `@FunctionalInterface` annotation. This ensures the compiler checks that the interface has only one abstract method.
+
+```java
+@FunctionalInterface
+interface Calculator {
+    int calculate(int a, int b);
+}
+```
+
+## Built-in Functional Interfaces
+
+Java 8 introduced the `java.util.function` package containing common functional interfaces:
+
+1.  **`Predicate<T>`**: Takes an argument and returns a boolean.
+2.  **`Consumer<T>`**: Takes an argument and returns nothing (void).
+3.  **`Function<T, R>`**: Takes an argument of type T and returns a result of type R.
+4.  **`Supplier<T>`**: Takes no arguments and returns a result of type T.
+
+<Callout type="info" title="Tip 💡">
+  You don't always need to create your own functional interfaces. Check
+  `java.util.function` first!
+</Callout>

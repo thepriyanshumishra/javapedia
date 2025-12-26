@@ -1,0 +1,41 @@
+---
+title: Serialization
+description: Learn how to save the state of an object in Java using Serialization.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+
+# Java Serialization
+
+Serialization is the process of converting an object's state into a byte stream, which can be persisted to a file, database, or sent over a network. The reverse process is called Deserialization.
+
+## Why Serialization?
+
+- **Persistence**: Save the state of an object to a file.
+- **Communication**: Send objects over a network between different JVMs.
+- **Deep Copy**: Create an exact copy of an object.
+
+## The `Serializable` Interface
+
+To make a class serializable, it must implement the `java.io.Serializable` interface. This is a marker interface (it has no methods).
+
+```java
+import java.io.Serializable;
+
+class Student implements Serializable {
+    private static final long serialVersionUID = 1L;
+    int id;
+    String name;
+
+    public Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+}
+```
+
+<Callout type="info" title="Tip 💡">
+  Always declare a `serialVersionUID` to ensure version compatibility during
+  deserialization.
+</Callout>

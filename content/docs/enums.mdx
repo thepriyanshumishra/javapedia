@@ -1,0 +1,167 @@
+---
+title: Java Enums
+description: Learn about Java Enums (Enumerations). Understand how to define constants, use enums in switch statements, and add fields and methods to enums.
+icon: List
+---
+
+An **Enum** (Enumeration) is a special Java type used to define a collection of **constants**.
+
+Think of a **Menu** 📜.
+
+- Pizza Sizes: `SMALL`, `MEDIUM`, `LARGE`.
+- Days: `MONDAY`, `TUESDAY`, ... `SUNDAY`.
+- Traffic Lights: `RED`, `YELLOW`, `GREEN`.
+
+These values don't change. In Java, we use the `enum` keyword.
+
+## Defining an Enum
+
+```java
+enum Level {
+  LOW,
+  MEDIUM,
+  HIGH
+}
+```
+
+## Accessing Enum Constants
+
+You can access enum constants with the dot syntax:
+
+```java
+Level myVar = Level.MEDIUM;
+System.out.println(myVar); // Output: MEDIUM
+```
+
+## Enums in Switch Statement
+
+Enums are perfect for `switch` statements because they represent a fixed set of choices.
+
+```java
+enum Level {
+  LOW,
+  MEDIUM,
+  HIGH
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Level myVar = Level.MEDIUM;
+
+    switch(myVar) {
+      case LOW:
+        System.out.println("Low level");
+        break;
+      case MEDIUM:
+        System.out.println("Medium level");
+        break;
+      case HIGH:
+        System.out.println("High level");
+        break;
+    }
+  }
+}
+```
+
+## Loop Through an Enum
+
+The `values()` method returns an array of all enum constants.
+
+```java
+for (Level l : Level.values()) {
+  System.out.println(l);
+}
+```
+
+## Enums with Fields and Methods
+
+Enums are like classes! They can have attributes and methods.
+
+```java
+enum Size {
+    SMALL("S"), MEDIUM("M"), LARGE("L");
+
+    private String abbreviation;
+
+    // Constructor (Must be private or package-private)
+    Size(String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
+
+    public String getAbbreviation() {
+        return abbreviation;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Size s = Size.LARGE;
+        System.out.println("Size: " + s);
+        System.out.println("Abbreviation: " + s.getAbbreviation());
+    }
+}
+```
+
+<Callout>
+
+**Tip 💡:** Use Enums whenever you have a fixed set of related constants. It makes your code type-safe and readable. Don't use integers (0, 1, 2) for states; use Enums!
+
+</Callout>
+
+<Quiz
+  question="Which method returns all constants of an enum?"
+  options={["all()", "list()", "values()", "constants()"]}
+  correctAnswerIndex={2}
+/>
+
+---
+
+<Callout>
+
+**Note :** Java is a statically-typed language. It means that all variables must be declared before they can be used.
+
+</Callout>
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="enums"
+  nextChapterId="collections-framework"
+  question="Create an enum 'TrafficLight' with values RED, GREEN, YELLOW. In main, print TrafficLight.RED."
+  expectedOutput="RED"
+  hint="Define 'enum TrafficLight { RED, GREEN, YELLOW }'."
+  solution={`enum TrafficLight {
+    RED,
+    GREEN,
+    YELLOW
+}
+
+public class Main {
+public static void main(String[] args) {
+System.out.println(TrafficLight.RED);
+}
+}`}
+defaultCode={``}
+/>
+
+<div className="mt-8" />
+
+## Key Takeaways
+
+- **Fixed Set**: Use Enums for a known list of constants (Days, Colors, Status).
+- **Type Safety**: Prevents invalid values (unlike using `int` constants).
+- **Features**: Enums can have fields, methods, and constructors!
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Dynamic Data**: Don't use Enums for data that changes often (like User Names). Use them for static categories.
+
+## What's Next?
+
+Congratulations! You've covered the core and advanced topics.
+[Back to Home →](/)

@@ -1,0 +1,46 @@
+---
+title: Java Time API
+description: Master the modern Date and Time API introduced in Java 8.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Java Time API
+
+Prior to Java 8, date and time handling in Java was complex and error-prone. The new `java.time` package (JSR-310) provides a comprehensive and immutable API for date and time.
+
+## Key Classes
+
+- **`LocalDate`**: Represents a date without time (e.g., `2023-10-05`).
+- **`LocalTime`**: Represents a time without date (e.g., `14:30:00`).
+- **`LocalDateTime`**: Represents both date and time (e.g., `2023-10-05T14:30:00`).
+- **`ZonedDateTime`**: Represents a date and time with a time zone.
+- **`Period`**: Represents a quantity of time in terms of years, months, and days.
+- **`Duration`**: Represents a quantity of time in terms of seconds and nanoseconds.
+
+## Examples
+
+### Getting Current Date and Time
+
+```java
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
+
+public class TimeExample {
+    public static void main(String[] args) {
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.now();
+        LocalDateTime dateTime = LocalDateTime.now();
+
+        System.out.println("Date: " + date);
+        System.out.println("Time: " + time);
+        System.out.println("DateTime: " + dateTime);
+    }
+}
+```
+
+<Callout type="info" title="Tip 💡">
+  The classes in `java.time` are immutable and thread-safe, making them much
+  safer to use than the old `java.util.Date`.
+</Callout>

@@ -1,0 +1,43 @@
+---
+title: Build Tools (Maven)
+description: Learn how to manage dependencies and build your Java projects using Apache Maven.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Apache Maven
+
+Maven is a powerful project management tool that is based on POM (Project Object Model). It is used for projects build, dependency and documentation.
+
+## Why use Maven?
+
+- **Dependency Management**: Automatically downloads libraries and their dependencies.
+- **Standard Project Structure**: Provides a consistent directory structure.
+- **Build Lifecycle**: Standardized build process (compile, test, package, deploy).
+
+## The `pom.xml` File
+
+The `pom.xml` is the core of a Maven project. It contains configuration information about the project and configuration details used by Maven to build the project.
+
+```xml
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>my-app</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
+```
+
+<Callout type="info" title="Tip 💡">
+  Maven repositories like Maven Central host millions of libraries that you can
+  easily include in your project.
+</Callout>

@@ -1,0 +1,34 @@
+---
+title: Memory Management
+description: Deep dive into Java Memory Management, Stack vs Heap, and Garbage Collection.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Java Memory Management
+
+Understanding how Java manages memory is crucial for writing efficient applications. Java memory is primarily divided into **Stack** and **Heap**.
+
+## Stack vs Heap
+
+| Feature      | Stack Memory                       | Heap Memory                  |
+| :----------- | :--------------------------------- | :--------------------------- |
+| **Storage**  | Local variables, method calls      | Objects, instance variables  |
+| **Access**   | Fast access                        | Slower access                |
+| **Size**     | Small, fixed size                  | Large, dynamic size          |
+| **Lifetime** | Cleared when method execution ends | Cleared by Garbage Collector |
+
+## Garbage Collection (GC)
+
+Garbage Collection is the process of automatically identifying and discarding objects that are no longer in use to free up memory resources.
+
+### How it Works
+
+1.  **Mark**: The GC identifies which pieces of memory are in use and which are not.
+2.  **Sweep**: The GC removes objects identified during the "mark" phase.
+3.  **Compact**: (Optional) Memory is compacted to prevent fragmentation.
+
+<Callout type="info" title="Tip 💡">
+  You can request garbage collection using `System.gc()`, but it is not
+  guaranteed to run immediately.
+</Callout>

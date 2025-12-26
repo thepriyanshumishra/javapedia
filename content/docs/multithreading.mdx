@@ -1,0 +1,128 @@
+---
+title: Java Multithreading
+description: Learn about Java Multithreading. Understand how to run multiple tasks simultaneously using Threads and the Runnable interface.
+icon: Layers
+---
+
+**Multithreading** allows your program to do multiple things at the same time.
+
+Think of a **Kitchen** 🍳.
+
+- **Single-threaded**: One chef doing everything. Chop onions -> Boil water -> Cook pasta. (Slow)
+- **Multi-threaded**: Three chefs working together. Chef A chops, Chef B boils, Chef C cooks. (Fast!)
+
+## Creating a Thread
+
+There are two ways to create a thread in Java.
+
+### 1. Extend the Thread Class
+
+```java
+class MyThread extends Thread {
+  public void run() {
+    System.out.println("This code is running in a thread");
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    MyThread thread = new MyThread();
+    thread.start(); // Starts the thread
+    System.out.println("This code is outside of the thread");
+  }
+}
+```
+
+### 2. Implement the Runnable Interface
+
+This is the preferred way because you can still extend another class.
+
+```java
+class MyRunnable implements Runnable {
+  public void run() {
+    System.out.println("This code is running in a thread");
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    MyRunnable myRunnable = new MyRunnable();
+    Thread thread = new Thread(myRunnable);
+    thread.start();
+    System.out.println("This code is outside of the thread");
+  }
+}
+```
+
+## Concurrency Problems
+
+When multiple threads access the same variable at the same time, problems can occur.
+
+Imagine two people trying to write in the same notebook at the same time. 📝💥
+To fix this, we use **Synchronization** (taking turns).
+
+```java
+public synchronized void increment() {
+    count++;
+}
+```
+
+<Callout>
+
+**Tip 💡:** Always use `start()` to run a thread. If you call `run()`, it will execute like a normal method on the _current_ thread, not a new one!
+
+</Callout>
+
+<Quiz
+  question="Which method starts the execution of a thread?"
+  options={["run()", "start()", "init()", "execute()"]}
+  correctAnswerIndex={1}
+/>
+
+---
+
+<Callout>
+
+**Note :** Java is a statically-typed language. It means that all variables must be declared before they can be used.
+
+</Callout>
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="multithreading"
+  nextChapterId="introduction"
+  question="Create a thread using a lambda expression that prints 'Running'. Start it."
+  expectedOutput="Running"
+  hint="Thread t = new Thread(() -> System.out.println(\x22Running\x22)); t.start();"
+  solution={`public class Main {
+    public static void main(String[] args) {
+        Thread t = new Thread(() -> System.out.println("Running"));
+        t.start();
+    }
+}`}
+  defaultCode={``}
+/>
+<div className="mt-8" />
+
+## Key Takeaways
+
+- **Concurrency**: Doing multiple things at the same time.
+- **Runnable**: The preferred way to create threads (allows extending other classes).
+- **Synchronization**: Prevents threads from interfering with each other.
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Race Conditions**: When two threads try to change shared data at the same time, the result is unpredictable. Use `synchronized` to fix this.
+>
+> **Deadlocks**: When Thread A waits for Thread B, and Thread B waits for Thread A. They wait forever!
+
+## What's Next?
+
+How do we save data permanently?
+[Learn File Handling →](/docs/file-handling)

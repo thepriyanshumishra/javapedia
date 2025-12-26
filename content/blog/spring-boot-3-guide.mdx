@@ -1,0 +1,129 @@
+---
+title: The Ultimate Guide to Spring Boot 3
+description: A comprehensive guide to migrating to Spring Boot 3, utilizing Java 17+, Native Images, and the new Observability layer.
+date: 2024-12-15
+author: Priyanshu Mishra
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# The Ultimate Guide to Spring Boot 3 🍃
+
+Spring Boot 3 is the next generation of the world's most popular Java framework. It builds on Spring Framework 6 and requires Java 17 as a minimum baseline. This release focuses on native compilation, observability, and modernizing the enterprise Java stack.
+
+## Key Changes & Features
+
+### 1. Java 17 Baseline ☕️
+
+Spring Boot 3 requires Java 17. This is a bold move that pushes the ecosystem forward. It means you can immediately take advantage of:
+
+- **Records**: Concise data carriers.
+- **Text Blocks**: Multi-line strings.
+- **Switch Expressions**: Cleaner control flow.
+- **Pattern Matching**: `instanceof` improvements.
+
+### 2. The Great `javax` to `jakarta` Migration 📦
+
+The migration from Java EE to Jakarta EE is complete. All `javax.*` imports must be replaced with `jakarta.*` imports.
+
+| Package        | Old Import            | New Import              |
+| :------------- | :-------------------- | :---------------------- |
+| **Servlet**    | `javax.servlet.*`     | `jakarta.servlet.*`     |
+| **JPA**        | `javax.persistence.*` | `jakarta.persistence.*` |
+| **Validation** | `javax.validation.*`  | `jakarta.validation.*`  |
+
+<Callout type="warn" title="Dependency Check">
+  Ensure all your third-party dependencies (like Hibernate, Tomcat, Jetty) are
+  compatible with Jakarta EE 9/10.
+</Callout>
+
+### 3. Native Image Support with GraalVM 🚀
+
+Spring Boot 3 has first-class support for compiling Spring applications to native executables using GraalVM. This is achieved via the Spring AOT (Ahead-of-Time) engine.
+
+**Benefits:**
+
+- **Instant Startup**: Often < 100ms.
+- **Low Memory Footprint**: Great for serverless (AWS Lambda, Knative).
+
+**How to build:**
+
+```bash
+./mvnw -Pnative native:compile
+```
+
+### 4. Declarative HTTP Clients 🌐
+
+Inspired by libraries like Feign and Retrofit, Spring Framework 6 introduces declarative HTTP clients. You define an interface, and Spring generates the implementation.
+
+```java
+@HttpExchange("/users")
+public interface UserClient {
+
+    @GetExchange("/{id}")
+    User getUser(@PathVariable Long id);
+
+    @PostExchange
+    void createUser(@RequestBody User user);
+}
+```
+
+To enable it:
+
+```java
+@Configuration
+public class ClientConfig {
+    @Bean
+    UserClient userClient(WebClient.Builder builder) {
+        WebClientAdapter adapter = WebClientAdapter.forClient(builder.baseUrl("https://api.example.com").build());
+        return HttpServiceProxyFactory.builder(adapter).build().createClient(UserClient.class);
+    }
+}
+```
+
+### 5. Unified Observability Layer 📊
+
+Spring Boot 3 integrates **Micrometer Observation** directly into the core. This provides a unified API for metrics and distributed tracing.
+
+Instead of manually configuring Sleuth and Zipkin, you now use the unified Micrometer Tracing.
+
+```java
+@Bean
+ObservationRegistry observationRegistry() {
+    return ObservationRegistry.create();
+}
+```
+
+### 6. Problem Details (RFC 7807) ⚠️
+
+Spring Boot 3 supports the "Problem Details for HTTP APIs" standard out of the box. This standardizes error responses.
+
+Enable it in `application.properties`:
+
+```properties
+spring.mvc.problemdetails.enabled=true
+```
+
+**Example Response:**
+
+```json
+{
+  "type": "about:blank",
+  "title": "Bad Request",
+  "status": 400,
+  "detail": "Validation failed for argument...",
+  "instance": "/api/users"
+}
+```
+
+## Migration Strategy
+
+1.  **Upgrade to Spring Boot 2.7**: Ensure your app runs warning-free on the latest 2.x release.
+2.  **Upgrade to Java 17**: Update your JDK and fix any compilation errors.
+3.  **Run Migration Tool**: Use `spring-boot-properties-migrator` to identify removed properties.
+4.  **Update Imports**: Mass replace `javax.` with `jakarta.`.
+5.  **Upgrade Dependencies**: Bump versions of Hibernate, Jackson, etc.
+
+## Conclusion
+
+Spring Boot 3 sets the foundation for the next decade of Java development. While the migration can be significant, the benefits in performance (Native Images) and developer experience (Declarative Clients, Observability) are well worth the effort.

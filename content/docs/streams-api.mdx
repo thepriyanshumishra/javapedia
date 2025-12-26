@@ -1,0 +1,124 @@
+---
+title: Java Streams API
+description: Learn about the Java Streams API. Process collections of data functionally using methods like filter, map, reduce, and sorted.
+icon: Activity
+---
+
+The **Streams API** (Java 8+) allows you to process sequences of elements (like collections) in a functional style.
+
+Think of a **Factory Assembly Line** 🏭.
+
+- Raw materials (Data) come in.
+- Station 1: Filter out bad parts (`filter`).
+- Station 2: Paint them red (`map`).
+- Station 3: Sort them by size (`sorted`).
+- Station 4: Box them up (`collect`).
+
+## Creating a Stream
+
+You can create a stream from a Collection (like ArrayList).
+
+```java
+import java.util.ArrayList;
+import java.util.stream.Stream;
+
+ArrayList<String> names = new ArrayList<>();
+names.add("Alice");
+names.add("Bob");
+names.add("Charlie");
+
+Stream<String> nameStream = names.stream();
+```
+
+## Common Operations
+
+### 1. Filter (Select specific items)
+
+Keep only names starting with "A".
+
+```java
+names.stream()
+     .filter(s -> s.startsWith("A"))
+     .forEach(System.out::println);
+// Output: Alice
+```
+
+### 2. Map (Transform items)
+
+Convert all names to Uppercase.
+
+```java
+names.stream()
+     .map(s -> s.toUpperCase())
+     .forEach(System.out::println);
+// Output: ALICE, BOB, CHARLIE
+```
+
+### 3. Sorted (Sort items)
+
+Sort names alphabetically.
+
+```java
+names.stream()
+     .sorted()
+     .forEach(System.out::println);
+```
+
+### 4. Collect (Convert back to List)
+
+Usually, you want to save the result back into a List.
+
+```java
+import java.util.List;
+import java.util.stream.Collectors;
+
+List<String> result = names.stream()
+                           .filter(s -> s.length() > 3)
+                           .collect(Collectors.toList());
+```
+
+<Callout>
+
+**Tip 💡:** Streams don't change the original data structure. They create a new result. Your original `names` list remains untouched!
+
+</Callout>
+
+<Quiz
+  question="Which Stream operation transforms elements?"
+  options={["filter", "map", "reduce", "collect"]}
+  correctAnswerIndex={1}
+/>
+
+---
+
+<Callout>
+
+**Note :** Java is a statically-typed language. It means that all variables must be declared before they can be used.
+
+</Callout>
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="streams-api"
+  nextChapterId="multithreading"
+  question="Use streams to filter numbers greater than 5 from a list [2, 8, 1, 9] and print them."
+  expectedOutput="8\n9"
+  hint="list.stream().filter(n -> n &gt; 5).forEach(System.out::println);"
+  solution={`import java.util.Arrays;
+import java.util.List;
+
+public class Main {
+public static void main(String[] args) {
+List<Integer> list = Arrays.asList(2, 8, 1, 9);
+list.stream()
+.filter(n -> n > 5)
+.forEach(System.out::println);
+}
+}`}
+defaultCode={``}
+/>

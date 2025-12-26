@@ -1,0 +1,179 @@
+---
+title: Java Abstract Classes
+description: Learn about Abstract Classes in Java. Understand the difference between abstract and concrete methods, and when to use abstract classes vs interfaces.
+icon: Layers
+---
+
+An **Abstract Class** is a class that cannot be instantiated (you cannot create objects of it). It is used to provide a common template for other classes.
+
+Think of a **Vehicle** 🚗.
+
+- You can't just buy a "Vehicle". You buy a _Car_, _Truck_, or _Bike_.
+- "Vehicle" is an abstract concept. It has common features (engine, tires) but isn't a specific thing itself.
+
+In Java, we use the `abstract` keyword.
+
+## Abstract Class Syntax
+
+```java
+abstract class Vehicle {
+    // Abstract method (no body)
+    abstract void start();
+
+    // Concrete method (has body)
+    void stop() {
+        System.out.println("Vehicle stopped.");
+    }
+}
+```
+
+## Why use Abstract Classes?
+
+1.  **Abstraction**: Hide implementation details.
+2.  **Code Reusability**: Share common code (concrete methods) among subclasses.
+3.  **Template**: Force subclasses to implement specific methods (abstract methods).
+
+### Example: Shape Hierarchy
+
+```java
+abstract class Shape {
+    String color;
+
+    // Constructor
+    Shape(String color) {
+        this.color = color;
+    }
+
+    // Abstract method (Subclasses MUST implement this)
+    abstract double getArea();
+
+    // Concrete method (Subclasses inherit this)
+    void display() {
+        System.out.println("This is a " + color + " shape.");
+    }
+}
+
+class Circle extends Shape {
+    double radius;
+
+    Circle(String color, double radius) {
+        super(color);
+        this.radius = radius;
+    }
+
+    @Override
+    double getArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Rectangle extends Shape {
+    double length, width;
+
+    Rectangle(String color, double length, double width) {
+        super(color);
+        this.length = length;
+        this.width = width;
+    }
+
+    @Override
+    double getArea() {
+        return length * width;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Shape s = new Shape("Red"); // Error! Cannot instantiate abstract class
+
+        Circle c = new Circle("Red", 5);
+        c.display();
+        System.out.println("Area: " + c.getArea());
+    }
+}
+```
+
+<Callout>
+
+**Tip 💡:** Use an **Abstract Class** when you want to share code (variables/methods) among related classes. Use an **Interface** when you want to define a contract for unrelated classes.
+
+</Callout>
+
+## Abstract Class vs Interface
+
+| Feature         | Abstract Class                                 | Interface                                        |
+| :-------------- | :--------------------------------------------- | :----------------------------------------------- |
+| **Methods**     | Can have abstract and concrete methods         | Abstract by default (Java 8+ has default/static) |
+| **Variables**   | Can have any type (static, final, non-final)   | Only `public static final` (constants)           |
+| **Inheritance** | A class can extend only **one** abstract class | A class can implement **multiple** interfaces    |
+| **Constructor** | Can have constructors                          | Cannot have constructors                         |
+
+<Quiz
+  question="Can you create an object of an abstract class?"
+  options={[
+    "Yes",
+    "No",
+    "Only if it has no abstract methods",
+    "Only inside main method",
+  ]}
+  correctAnswerIndex={1}
+/>
+
+---
+
+<Callout>
+
+**Note :** Java is a statically-typed language. It means that all variables must be declared before they can be used.
+
+</Callout>
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="abstract-classes"
+  nextChapterId="enums"
+  question="Create an abstract class 'Animal' with abstract method 'sound()'. Create subclass 'Cat' that prints 'Meow'."
+  expectedOutput="Meow"
+  hint="Use 'extends Animal' in Cat class and override sound()."
+  solution={`abstract class Animal {
+    abstract void sound();
+}
+
+class Cat extends Animal {
+void sound() {
+System.out.println("Meow");
+}
+}
+
+public class Main {
+public static void main(String[] args) {
+Cat c = new Cat();
+c.sound();
+}
+}`}
+defaultCode={``}
+/>
+
+<div className="mt-8" />
+
+## Key Takeaways
+
+- **Partial Abstraction**: Can have both abstract (no body) and concrete (with body) methods.
+- **No Instantiation**: You cannot do `new AbstractClass()`.
+- **Constructors**: They CAN have constructors, which are called by subclasses.
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Missing Implementation**: If you extend an abstract class, you MUST implement ALL its abstract methods (unless your subclass is also abstract).
+>
+> **Vs Interface**: Use Abstract Class for "IS-A" relationships (Dog is an Animal). Use Interface for "CAN-DO" capabilities (Dog can Run).
+
+## What's Next?
+
+What if we want full abstraction and multiple inheritance?
+[Learn Interfaces →](/docs/interfaces)

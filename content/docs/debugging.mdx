@@ -1,0 +1,34 @@
+---
+title: Debugging Techniques
+description: Learn how to identify and fix bugs in your Java code effectively.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Debugging Techniques
+
+Debugging is the art of finding and resolving defects or problems within a computer program.
+
+## Common Debugging Strategies
+
+1.  **Print Debugging**: Using `System.out.println` to trace the flow and variable values. Simple but can clutter code.
+2.  **Using a Debugger**: Modern IDEs like IntelliJ IDEA and Eclipse have powerful built-in debuggers.
+    - **Breakpoints**: Pause execution at a specific line.
+    - **Step Over**: Execute the current line and move to the next.
+    - **Step Into**: Go inside the method call at the current line.
+    - **Watch Variables**: Monitor the values of specific variables in real-time.
+
+## Reading Stack Traces
+
+A stack trace shows the call stack at the moment an exception occurred. It is your best friend when debugging crashes.
+
+```
+Exception in thread "main" java.lang.NullPointerException
+    at com.example.MyApp.processData(MyApp.java:15)
+    at com.example.MyApp.main(MyApp.java:5)
+```
+
+<Callout type="info" title="Tip 💡">
+  Always read the stack trace from the top down. The first line tells you *what*
+  happened, and the following lines tell you *where*.
+</Callout>

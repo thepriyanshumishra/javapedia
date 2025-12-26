@@ -1,0 +1,163 @@
+---
+title: Java Generics
+description: Learn about Java Generics. Understand how to write type-safe code, use the diamond syntax <T>, and create generic classes and methods.
+icon: Code
+---
+
+**Generics** allow you to write a single class or method that works with different types of data (Integers, Strings, etc.).
+
+Think of a **Label Maker** 🏷️.
+
+- Without labels, you might put "Salt" in the "Sugar" jar. 🤢
+- With labels (Generics), you ensure that the "Sugar" jar ONLY contains "Sugar".
+
+## Why Generics? (Type Safety)
+
+Before Generics (Old Java), collections could hold _anything_.
+
+```java
+ArrayList list = new ArrayList();
+list.add("Hello");
+list.add(123); // Compiles fine, but might crash later!
+```
+
+With Generics, we specify the type:
+
+```java
+ArrayList<String> list = new ArrayList<>();
+list.add("Hello");
+// list.add(123); // Compile-time Error! Safe. 🛡️
+```
+
+## Generic Class
+
+We use the angle brackets `<T>` to define a generic type parameter. `T` stands for "Type".
+
+```java
+class Box<T> {
+    private T item;
+
+    public void set(T item) {
+        this.item = item;
+    }
+
+    public T get() {
+        return item;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Box for String
+        Box<String> stringBox = new Box<>();
+        stringBox.set("Hello");
+        System.out.println(stringBox.get());
+
+        // Box for Integer
+        Box<Integer> intBox = new Box<>();
+        intBox.set(100);
+        System.out.println(intBox.get());
+    }
+}
+```
+
+## Generic Methods
+
+You can also make individual methods generic.
+
+```java
+public class Main {
+    // Generic method to print any array
+    public static <E> void printArray(E[] elements) {
+        for (E element : elements) {
+            System.out.print(element + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        Integer[] intArray = { 1, 2, 3 };
+        String[] stringArray = { "A", "B", "C" };
+
+        printArray(intArray);
+        printArray(stringArray);
+    }
+}
+```
+
+<Callout>
+
+**Tip 💡:** Common type parameters:
+
+- `T` - Type
+- `E` - Element (used in Collections)
+- `K` - Key (used in Maps)
+- `V` - Value (used in Maps)
+
+</Callout>
+
+<Quiz
+  question="What does &lt;T&gt; represent in Generics?"
+  options={[
+    "A specific class named T",
+    "A type parameter",
+    "A template",
+    "A thread",
+  ]}
+  correctAnswerIndex={1}
+/>
+
+---
+
+<Callout>
+
+**Note :** Java is a statically-typed language. It means that all variables must be declared before they can be used.
+
+</Callout>
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="generics"
+  nextChapterId="file-handling"
+  question="Create a generic class 'Wrapper&lt;T&gt;' with a method 'get()' that returns the value. Instantiate it with 'Double' and value 5.5."
+  expectedOutput="5.5"
+  hint="Define 'class Wrapper&lt;T&gt; { T val; ... }'."
+  solution={`class Wrapper<T> {
+    private T value;
+    public Wrapper(T value) { this.value = value; }
+    public T get() { return value; }
+}
+
+public class Main {
+public static void main(String[] args) {
+Wrapper<Double> w = new Wrapper<>(5.5);
+System.out.println(w.get());
+}
+}`}
+defaultCode={``}
+/>
+
+<div className="mt-8" />
+
+## Key Takeaways
+
+- **Type Safety**: Catch type errors at compile time, not runtime.
+- **Reusability**: Write one class/method that works for many types.
+- **Syntax**: `<T>` is a placeholder for a Type.
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Primitives**: You cannot use primitives in Generics. `List<int>` is invalid. Use wrapper classes like `List<Integer>`.
+>
+> **Type Erasure**: Remember that generic type information is removed at runtime. `List<String>` becomes just `List`.
+
+## What's Next?
+
+How do we do multiple things at once?
+[Learn Multithreading →](/docs/multithreading)

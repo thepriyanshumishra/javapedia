@@ -1,0 +1,188 @@
+---
+title: Java Method Overloading
+description: In this tutorial, we will learn how to implements methods overloading or function overloading in Java.
+icon: Copy
+---
+
+## What is Method Overloading in Java?
+
+In Java, method overloading allows multiple methods with the same name but different parameter lists to coexist in the same class. This can involve variations in the number or types of parameters, or both. Overloaded methods provide flexibility by offering different ways to call a method, depending on the parameters passed.
+
+### Example:
+
+```java
+// method overloading
+void func() { ... }
+void func(int a) { ... }
+float func(double a) { ... }
+float func(int a, float b) { ... }
+```
+
+<Quiz
+  question="Can we overload methods by changing only the return type?"
+  options={["Yes", "No", "Sometimes", "Only in interfaces"]}
+  correctAnswerIndex={1}
+/>
+
+Here, the `func()` method is overloaded. These methods have the same name but accept different arguments. While the return types differ, this does not affect method overloading; overloading is purely based on parameters.
+
+## Why Use Method Overloading?
+
+Consider the scenario where you need to sum numbers but could have different parameter requirements (e.g., 2 or 3 numbers). You could create separate methods like `sum2(int, int)` and `sum3(int, int, int)`. However, using method overloading allows a more readable approach by keeping the method name the same:
+
+```java
+int sum(int a, int b) { ... }
+int sum(int a, int b, int c) { ... }
+```
+
+Here, `sum()` is overloaded to handle different numbers of arguments.
+
+<Callout>
+
+**Tip 💡:** Overloading is like ordering coffee. You can say "Coffee" (default), "Coffee with milk" (1 param), or "Coffee with milk and sugar" (2 params). Same name, different ingredients!
+
+</Callout>
+
+<Quiz
+  question="Which of the following is NOT a way to overload a method?"
+  options={[
+    "Changing number of parameters",
+    "Changing parameter data types",
+    "Changing return type only",
+    "Changing order of parameters",
+  ]}
+  correctAnswerIndex={2}
+/>
+
+## Performing Method Overloading in Java
+
+Method overloading can be achieved in two main ways:
+
+### 1. Changing the Number of Parameters
+
+```java
+class MethodOverloading {
+    private static void display(int a) {
+        System.out.println("Argument: " + a);
+    }
+
+    private static void display(int a, int b) {
+        System.out.println("Arguments: " + a + " and " + b);
+    }
+
+    public static void main(String[] args) {
+        display(1);
+        display(1, 4);
+    }
+}
+```
+
+### Output
+
+```bash
+Argument: 1
+Arguments: 1 and 4
+```
+
+### 2. Changing the Parameter Data Type
+
+```java
+class MethodOverloading {
+    private static void display(int a) {
+        System.out.println("Got Integer data.");
+    }
+
+    private static void display(String a) {
+        System.out.println("Got String object.");
+    }
+
+    public static void main(String[] args) {
+        display(1);
+        display("Hello");
+    }
+}
+```
+
+### Output
+
+```bash
+Got Integer data.
+Got String object.
+```
+
+## Real-World Example
+
+In a utility class, you might use overloading to format numbers:
+
+```java
+class HelperService {
+    private String formatNumber(int value) {
+        return String.format("%d", value);
+    }
+
+    private String formatNumber(double value) {
+        return String.format("%.3f", value);
+    }
+
+    private String formatNumber(String value) {
+        return String.format("%.2f", Double.parseDouble(value));
+    }
+
+    public static void main(String[] args) {
+        HelperService hs = new HelperService();
+        System.out.println(hs.formatNumber(500));
+        System.out.println(hs.formatNumber(89.9934));
+        System.out.println(hs.formatNumber("550"));
+    }
+}
+```
+
+### Output
+
+```bash
+500
+89.993
+550.00
+```
+
+## Important Points
+
+- Method overloading requires methods with different parameters within the same class.
+- Overloading is achieved by varying either the number or type of parameters.
+- Changing only the return type does not constitute overloading; there must be a parameter difference.
+
+<Callout>
+
+**Tip:** _Constructor overloading in Java works similarly to method overloading._
+
+</Callout>
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="method-overloading"
+  nextChapterId="constructors"
+  question="Overload 'add' method to add two integers and two strings. Print the result of add(10, 20) and add('Hello', 'World')."
+  expectedOutput="30\nHelloWorld"
+  hint="Define two static methods named 'add' with different parameter types (int, int) and (String, String)."
+  solution={`public class Main {
+    public static void main(String[] args) {
+        System.out.println(add(10, 20));
+        System.out.println(add("Hello", "World"));
+    }
+
+    static int add(int a, int b) {
+        return a + b;
+    }
+
+    static String add(String a, String b) {
+        return a + b;
+    }
+
+}`}
+defaultCode={``}
+/>

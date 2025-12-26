@@ -1,0 +1,104 @@
+---
+title: Java Lambda Expressions
+description: Learn about Java Lambda Expressions (Java 8+). Understand functional programming, the arrow syntax ->, and how to write concise code.
+icon: Code
+---
+
+**Lambda Expressions** were added in Java 8. They allow you to write shorter, cleaner code, especially when working with collections.
+
+Think of a **Short Note** 📝.
+
+- Instead of writing a full formal letter (Anonymous Inner Class), you just write a quick sticky note (Lambda).
+- "Dear Sir, I would like to print this..." vs "Print this."
+
+## Syntax
+
+```java
+(parameter1, parameter2) -> { code block }
+```
+
+## Example: Using Lambda with ArrayList
+
+Before Java 8, printing a list was verbose. Now:
+
+```java
+import java.util.ArrayList;
+
+public class Main {
+  public static void main(String[] args) {
+    ArrayList<Integer> numbers = new ArrayList<Integer>();
+    numbers.add(5);
+    numbers.add(9);
+    numbers.add(8);
+    numbers.add(1);
+
+    // Using Lambda Expression
+    numbers.forEach( (n) -> { System.out.println(n); } );
+  }
+}
+```
+
+## Storing a Lambda in a Variable
+
+You can store a lambda expression in a variable if the type is a **Functional Interface** (an interface with only one method). Java provides many built-in ones like `Consumer`.
+
+```java
+import java.util.ArrayList;
+import java.util.function.Consumer;
+
+public class Main {
+  public static void main(String[] args) {
+    ArrayList<Integer> numbers = new ArrayList<Integer>();
+    numbers.add(5);
+    numbers.add(9);
+    numbers.add(8);
+    numbers.add(1);
+
+    // Storing lambda in a Consumer interface
+    Consumer<Integer> method = (n) -> { System.out.println(n); };
+
+    numbers.forEach(method);
+  }
+}
+```
+
+<Callout>
+
+**Tip 💡:** If your lambda has only one parameter, you can omit the parentheses! `n -> System.out.println(n)`. If it has one line of code, you can omit the curly braces!
+
+</Callout>
+
+<Quiz
+  question="Which symbol is used for Lambda Expressions?"
+  options={["=>", "->", "::", ">>"]}
+  correctAnswerIndex={1}
+/>
+
+---
+
+<Callout>
+
+**Note :** Java is a statically-typed language. It means that all variables must be declared before they can be used.
+
+</Callout>
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="lambda-expressions"
+  nextChapterId="streams-api"
+  question="Use a lambda to print 'Hello' inside a Runnable. Run it."
+  expectedOutput="Hello"
+  hint="Runnable r = () -> System.out.println(\x22Hello\x22); r.run();"
+  solution={`public class Main {
+    public static void main(String[] args) {
+        Runnable r = () -> System.out.println("Hello");
+        r.run();
+    }
+}`}
+  defaultCode={``}
+/>

@@ -1,0 +1,42 @@
+---
+title: Unit Testing (JUnit)
+description: Ensure your code works as expected with JUnit testing framework.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+# Unit Testing with JUnit
+
+Unit testing is the practice of testing small units of code (typically methods) in isolation to ensure they work correctly. JUnit is the most popular testing framework for Java.
+
+## Writing a Test Case
+
+A test case is a method annotated with `@Test`.
+
+```java
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CalculatorTest {
+
+    @Test
+    public void testAddition() {
+        Calculator calculator = new Calculator();
+        int result = calculator.add(2, 3);
+        assertEquals(5, result, "2 + 3 should equal 5");
+    }
+}
+```
+
+## Common Annotations
+
+- **`@Test`**: Identifies a method as a test method.
+- **`@BeforeEach`**: Executed before each test method.
+- **`@AfterEach`**: Executed after each test method.
+- **`@BeforeAll`**: Executed once before all test methods in the class.
+- **`@AfterAll`**: Executed once after all test methods in the class.
+
+<Callout type="info" title="Tip 💡">
+  Write tests that cover both positive cases (expected input) and negative cases
+  (invalid input/exceptions).
+</Callout>

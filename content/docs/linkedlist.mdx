@@ -1,0 +1,99 @@
+---
+title: Java LinkedList
+description: Learn about Java LinkedList. Understand how it differs from ArrayList, when to use it, and its special methods for manipulating the beginning and end of the list.
+icon: Link
+---
+
+The `LinkedList` class is almost identical to `ArrayList` in how you use it, but it works differently internally.
+
+Think of a **Treasure Hunt Chain** 🔗.
+
+- **ArrayList**: A row of numbered lockers. You can go directly to Locker #5.
+- **LinkedList**: A series of clues. Clue #1 points to Clue #2, which points to Clue #3. To get to Clue #5, you MUST visit 1, 2, 3, and 4 first.
+
+## ArrayList vs LinkedList
+
+| Feature                | ArrayList                  | LinkedList                      |
+| :--------------------- | :------------------------- | :------------------------------ |
+| **Internal Structure** | Dynamic Array              | Doubly Linked List              |
+| **Accessing Items**    | Fast (Direct access)       | Slow (Must travel the chain)    |
+| **Adding/Removing**    | Slow (Must shift elements) | Fast (Just change the pointers) |
+| **Memory**             | Less memory                | More memory (Stores pointers)   |
+
+## When to use which?
+
+- Use **ArrayList** when you want to access random items frequently.
+- Use **LinkedList** when you want to add/remove items from the middle frequently.
+
+## Creating a LinkedList
+
+```java
+import java.util.LinkedList;
+
+LinkedList<String> cars = new LinkedList<String>();
+```
+
+## Special Methods
+
+`LinkedList` has extra methods because it implements the `Deque` interface too.
+
+- `addFirst()`
+- `addLast()`
+- `removeFirst()`
+- `removeLast()`
+- `getFirst()`
+- `getLast()`
+
+```java
+LinkedList<String> cars = new LinkedList<String>();
+cars.add("Volvo");
+cars.add("BMW");
+
+cars.addFirst("Ford"); // Adds to the beginning
+System.out.println(cars); // [Ford, Volvo, BMW]
+```
+
+<Callout>
+
+**Tip 💡:** If you are building a **Queue** (First In, First Out) or a **Stack** (Last In, First Out), `LinkedList` is your best friend!
+
+</Callout>
+
+<Quiz
+  question="Which list is faster for adding items at the beginning?"
+  options={["ArrayList", "LinkedList", "Both are same", "Neither"]}
+  correctAnswerIndex={1}
+/>
+
+---
+
+<Callout>
+
+**Note :** Java is a statically-typed language. It means that all variables must be declared before they can be used.
+
+</Callout>
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="linkedlist"
+  nextChapterId="hashmap"
+  question="Create a LinkedList of Strings. Add 'A', then add 'B' to the first position. Print the first element."
+  expectedOutput="B"
+  hint="Use 'addFirst(\x22B\x22)' and 'getFirst()'."
+  solution={`import java.util.LinkedList;
+
+public class Main {
+public static void main(String[] args) {
+LinkedList<String> list = new LinkedList<>();
+list.add("A");
+list.addFirst("B");
+System.out.println(list.getFirst());
+}
+}`}
+defaultCode={``}
+/>

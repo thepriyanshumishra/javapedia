@@ -1,0 +1,248 @@
+---
+title: Java Access Modifiers
+description: Master Java Access Modifiers (public, private, protected, default). Learn how to control visibility of classes, variables, and methods with real-world examples.
+icon: Lock
+---
+
+In Java, **Access Modifiers** are keywords that set the accessibility (visibility) of classes, variables, methods, and constructors.
+
+Think of your house 🏠.
+
+- **Public**: The street outside (Everyone can see it).
+- **Private**: Your diary (Only you can see it).
+- **Protected**: Your family photos (Only family and relatives can see them).
+- **Default**: Your living room (Only people inside the house can see it).
+
+## Types of Access Modifiers
+
+There are four main access modifiers in Java:
+
+1. **Default** (No keyword required)
+2. **Private**
+3. **Protected**
+4. **Public**
+
+<div className="overflow-x-auto">
+  <table className="min-w-full text-left text-sm whitespace-nowrap">
+    <thead className="border-b-2 border-neutral-200 bg-neutral-50 tracking-wider uppercase dark:border-neutral-600 dark:bg-neutral-800">
+      <tr>
+        <th scope="col" className="px-6 py-4">
+          Modifier
+        </th>
+        <th scope="col" className="px-6 py-4">
+          Class
+        </th>
+        <th scope="col" className="px-6 py-4">
+          Package
+        </th>
+        <th scope="col" className="px-6 py-4">
+          Subclass
+        </th>
+        <th scope="col" className="px-6 py-4">
+          World
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr className="border-b border-neutral-100 dark:border-neutral-700">
+        <th scope="row" className="px-6 py-4 font-medium">
+          public
+        </th>
+        <td className="px-6 py-4 font-bold text-green-600">Yes</td>
+        <td className="px-6 py-4 font-bold text-green-600">Yes</td>
+        <td className="px-6 py-4 font-bold text-green-600">Yes</td>
+        <td className="px-6 py-4 font-bold text-green-600">Yes</td>
+      </tr>
+      <tr className="border-b border-neutral-100 dark:border-neutral-700">
+        <th scope="row" className="px-6 py-4 font-medium">
+          protected
+        </th>
+        <td className="px-6 py-4 font-bold text-green-600">Yes</td>
+        <td className="px-6 py-4 font-bold text-green-600">Yes</td>
+        <td className="px-6 py-4 font-bold text-green-600">Yes</td>
+        <td className="px-6 py-4 font-bold text-red-600">No</td>
+      </tr>
+      <tr className="border-b border-neutral-100 dark:border-neutral-700">
+        <th scope="row" className="px-6 py-4 font-medium">
+          default
+        </th>
+        <td className="px-6 py-4 font-bold text-green-600">Yes</td>
+        <td className="px-6 py-4 font-bold text-green-600">Yes</td>
+        <td className="px-6 py-4 font-bold text-red-600">No</td>
+        <td className="px-6 py-4 font-bold text-red-600">No</td>
+      </tr>
+      <tr className="border-b border-neutral-100 dark:border-neutral-700">
+        <th scope="row" className="px-6 py-4 font-medium">
+          private
+        </th>
+        <td className="px-6 py-4 font-bold text-green-600">Yes</td>
+        <td className="px-6 py-4 font-bold text-red-600">No</td>
+        <td className="px-6 py-4 font-bold text-red-600">No</td>
+        <td className="px-6 py-4 font-bold text-red-600">No</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+---
+
+## 1. Default Access Modifier
+
+If you don't declare any modifier, it is treated as **default**. The default modifier is accessible **only within the same package**.
+
+```java
+package com.javapedia;
+
+class Logger {
+    void message() {
+        System.out.println("This is a default message");
+    }
+}
+```
+
+If you try to access `Logger` class from outside the `com.javapedia` package, you will get a compilation error.
+
+## 2. Private Access Modifier
+
+The **private** modifier is the most restrictive. Methods, variables, and constructors declared as private are accessible **only within the declared class**.
+
+<Callout>
+
+**Tip 💡:** Use `private` for sensitive data like passwords or internal logic that shouldn't be touched by others. This is the core of **Encapsulation**.
+
+</Callout>
+
+```java
+class Data {
+    // private variable
+    private String name;
+
+    // getter method
+    public String getName() {
+        return this.name;
+    }
+
+    // setter method
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+public class Main {
+    public static void main(String[] main){
+        Data d = new Data();
+
+        // access the private variable using the setter and getter
+        d.setName("Java");
+        System.out.println(d.getName());
+    }
+}
+```
+
+## 3. Protected Access Modifier
+
+The **protected** modifier is accessible within the **same package** and **subclasses** (even if they are in a different package).
+
+```java
+class Animal {
+    // protected method
+    protected void display() {
+        System.out.println("I am an animal");
+    }
+}
+
+class Dog extends Animal {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        // accessing protected method
+        dog.display();
+    }
+}
+```
+
+## 4. Public Access Modifier
+
+The **public** modifier is accessible from **everywhere**. It has the widest scope.
+
+```java
+public class Animal {
+    public int legCount;
+
+    public void display() {
+        System.out.println("I am an animal.");
+        System.out.println("I have " + legCount + " legs.");
+    }
+}
+```
+
+<Quiz
+  question="Which access modifier makes a member visible only within its own class?"
+  options={["public", "protected", "private", "default"]}
+  correctAnswerIndex={2}
+/>
+
+---
+
+## Summary
+
+- **private**: Class only. (Strictly personal)
+- **default**: Package only. (Neighbors)
+- **protected**: Package + Kids. (Family inheritance)
+- **public**: Everyone. (Global)
+
+<Callout>
+
+**Note :** Java is a statically-typed language. It means that all variables must be declared before they can be used.
+
+</Callout>
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="access-modifiers"
+  nextChapterId="encapsulation"
+  question="Create a class 'Secret' with a private integer 'code' set to 1234. Create a public method 'reveal()' to print it."
+  expectedOutput="1234"
+  hint="Declare 'private int code = 1234;' inside the class. Then make a 'public void reveal()' method."
+  solution={`class Secret {
+    private int code = 1234;
+
+    public void reveal() {
+        System.out.println(code);
+    }
+
+}
+
+public class Main {
+public static void main(String[] args) {
+Secret s = new Secret();
+s.reveal();
+}
+}`}
+defaultCode={``}
+/>
+
+<div className="mt-8" />
+
+## Key Takeaways
+
+- **Private**: Visible ONLY inside the class.
+- **Default**: Visible inside the package.
+- **Protected**: Visible inside package + subclasses.
+- **Public**: Visible everywhere.
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Over-sharing**: Don't make everything `public`. Start with `private` and open up access only when necessary.
+>
+> **Default vs Protected**: Remember, `default` does NOT allow access in subclasses outside the package. `protected` does.
+
+## What's Next?
+
+How do we refer to the object we are currently working inside?
+[Learn 'this' Keyword →](/docs/this-keyword)
