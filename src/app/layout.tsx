@@ -1,4 +1,6 @@
 import SearchDialog from "@/components/search";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { RootProvider } from "fumadocs-ui/provider";
 import type { Metadata } from "next";
@@ -108,6 +110,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </RootProvider>
       </body>
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS!} />
+      <Analytics />
+      <SpeedInsights />
     </html>
   );
 }
