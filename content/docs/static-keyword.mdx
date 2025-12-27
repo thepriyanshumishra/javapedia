@@ -6,8 +6,8 @@ icon: Zap
 
 ## What is a `static` keyword in Java?
 
-In Java, if we want to access class members, we must first create an instance of the class. But there will be situations where we want to access class members without creating any variables.
-In those situations, we need to declare the class members static.
+In Java, if we want to access class members, we usually must first create an instance of the class. However, there are situations where we want to access class members without creating an instance.
+In those situations, we declare the class members `static`.
 
 ```java
 // static method
@@ -21,7 +21,7 @@ static void myStaticMethod() { ... }
 />
 
 Here, `myStaticMethod()` is a static method. It can be called without creating an object of the class.
-The `Math` class in Java has almost all of its members static. So, we can access its members without creating instances of the Math class.
+The `Math` class in Java has almost all of its members static. So, we can access its members without creating instances of the `Math` class.
 
 <Callout>
 
@@ -53,7 +53,7 @@ Value of E = 2.718281828459045
 2^2 = 4.0
 ```
 
-In the above example, we have not created any instances of the Math class. But we are able to access its methods: `abs()` and `pow()` and variables: `PI` and `E`.
+In the above example, we have not created any instances of the `Math` class. But we are able to access its methods (`abs()` and `pow()`) and variables (`PI` and `E`).
 
 It is possible because the methods and variables of the Math class are static.
 

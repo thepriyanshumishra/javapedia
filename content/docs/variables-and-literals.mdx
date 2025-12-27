@@ -10,7 +10,7 @@ In this tutorial, we will learn about Java variables and literals with the help 
 
 A variable is a location in memory (storage area) to hold data.
 
-To indicate the storage area, each variable should be given a unique name (identifier). Learn more about [Java identifiers](https://javapedia.vercel.app/java-introduction/keywords-identifiers).
+To indicate the storage area, each variable should be given a unique name (identifier).
 
 <Quiz
   question="Which of the following is a valid variable name in Java?"
@@ -29,14 +29,14 @@ int speedLimit = 80;
 
 ```
 
-Here, `speedLimit` is a variable of `int` data type and we have assigned value **80** to it.
+Here, `speedLimit` is a variable of `int` data type, and we have assigned the value **80** to it.
 
-The int data type suggests that the variable can only hold integers.
+The `int` data type suggests that the variable can only hold integers.
 To learn more, visit [Java data types](/docs/variables-primitive-data-types).
 
-In the example, we have assigned value to the variable during declaration. However, it's not mandatory.
+In the example, we assigned a value to the variable during declaration. However, this is not mandatory.
 
-You can declare variables and assign variables separately. For example,
+You can declare variables and assign values separately. For example,
 
 ```java
 int speedLimit;
@@ -56,7 +56,7 @@ must be declared before they can be used.
 
 ### Change values of variables
 
-The value of a variable can be changed in the program, hence the name variable. For example,
+The value of a variable can be changed in the program, hence the name 'variable'. For example,
 
 ```java
 int speedLimit = 80;
@@ -68,7 +68,7 @@ Here, initially, the value of `speedLimit` is **80**. Later, we changed it to **
 
 However, we cannot change the data type of a variable in Java within the same scope.
 
-What is the variable scope?
+What is variable scope?
 
 Don't worry about it for now. Just remember that we can't do something like this:
 
@@ -78,13 +78,13 @@ int speedLimit = 80;
 float speedLimit;
 ```
 
-To learn more, visit: [Can I change declaration type for a variable in Java](http://stackoverflow.com/questions/27092245/can-i-change-declaration-type-for-a-variable-in-java)?
+To learn more, visit: [Can I change declaration type for a variable in Java?](http://stackoverflow.com/questions/27092245/can-i-change-declaration-type-for-a-variable-in-java)
 
 ---
 
 ### Rules for Naming Variables in Java
 
-Java programming language has its own set of rules and conventions for naming variables. Here's what you need to know:
+The Java programming language has its own set of rules and conventions for naming variables. Here's what you need to know:
 
 - Java is case sensitive. Hence, `age` and `AGE` are two different variables. For example,
 
@@ -96,7 +96,7 @@ System.out.println(age); // prints 24
 System.out.println(AGE); // prints 25
 ```
 
-- Variables must start with either a **letter** or an **underscore**, **\_** or a **dollar**, **$** sign. For example,
+- Variables must start with either a **letter**, an **underscore** (`_`), or a **dollar** (`$`) sign. For example,
 
 ```java
 int age; // valid name and good practice
@@ -116,10 +116,10 @@ int 1age; // invalid variables
 int my age; // invalid variables
 ```
 
-Here, is we need to use variable names having more than one word, use all lowercase letters for the first word and capitalize the first letter of each subsequent word. For example, `myAge`.
+Here, if we need to use variable names having more than one word, use all lowercase letters for the first word and capitalize the first letter of each subsequent word. For example, `myAge`.
 
-- When creating variables, choose a name that makes sense. For example, `score` , `number` , `level` makes more sense than variable names such as `s` ,`n` , and `l`.
-- If you choose one-word variable names, use all lowercase letters. For example, it's better to use `speed` rather than `SPEED`, or `sPEED`.
+- When creating variables, choose a name that makes sense. For example, `score`, `number`, `level` make more sense than variable names such as `s`, `n`, and `l`.
+- If you choose one-word variable names, use all lowercase letters. For example, it's better to use `speed` rather than `SPEED` or `sPEED`.
 
 <Callout>
 
@@ -129,7 +129,7 @@ Here, is we need to use variable names having more than one word, use all lowerc
 
 ---
 
-There are 4 types of variables in Java programming language:
+There are 4 types of variables in the Java programming language:
 
 - **Instance Variables (Non-Static Fields)**
 - **Class Variables (Static Fields)**
@@ -161,15 +161,15 @@ float b = 2.5;
 char c = 'F';
 ```
 
-Here, `1` , `2.5` , and `'F'` are literals.
+Here, `1`, `2.5`, and `'F'` are literals.
 
-Here are different types of literals in Java.
+Here are different types of literals in Java:
 
 ---
 
 ### 1. Boolean Literals
 
-In Java, boolean literals are used to initialize boolean data types. They can store two values: true and false. For example,
+In Java, boolean literals are used to initialize boolean data types. They can store two values: `true` and `false`. For example,
 
 ```java
 boolean flag1 = false;
@@ -182,7 +182,7 @@ Here, `false` and `true` are two boolean literals.
 
 ### 2. Integer Literals
 
-An integer literal is a numeric value(associated with numbers) without any fractional or exponential part. There are 4 types of integer literals in Java:
+An integer literal is a numeric value (associated with numbers) without any fractional or exponential part. There are 4 types of integer literals in Java:
 
 1. binary (base 2)
 2. decimal (base 10)
@@ -253,13 +253,13 @@ type variables.
 
 ### 4. Character Literals
 
-Character literals are unicode character enclosed inside single quotes. For example,
+Character literals are Unicode characters enclosed inside single quotes. For example,
 
 ```java
 char letter = 'a';
 ```
 
-Here, `a` is the character literal.
+Here, `'a'` is the character literal.
 
 We can also use escape sequences as character literals. For example, **\b** (backspace), **\t** (tab), **\n** (new line), etc.
 
@@ -267,14 +267,14 @@ We can also use escape sequences as character literals. For example, **\b** (bac
 
 ### 5. String Literals
 
-A string literal is a sequence of characters enclosed inside double-quotes. For example,
+A string literal is a sequence of characters enclosed inside double quotes. For example,
 
 ```java
 String str1 = "Java Programming";
 String str2 = "Javapedia";
 ```
 
-Here, `Java Programming` and `Javapedia` are two string literals.
+Here, `"Java Programming"` and `"Javapedia"` are two string literals.
 
 <div className="mt-8" />
 

@@ -31,12 +31,12 @@ switch (expression) {
 
 The `expression` is evaluated once and compared with the values of each case.
 
-- If `expression` matches with `value1`, the code of `case value1` are executed. Similarly, the code of `case value2` is executed if `expression` matches with `value2`.
+- If `expression` matches `value1`, the code of `case value1` is executed. Similarly, the code of `case value2` is executed if `expression` matches `value2`.
 - If there is no match, the code of the **default case** is executed.
 
 <Callout>
 
-**Note:** The working of the switch-case statement is similar to the [Java if...else...if ladder](/docs/if-else-statement#3-java-if-else-if-statement). However, the syntax of the `switch` statement is cleaner and much easier to read and write.
+**Note:** The working of the switch-case statement is similar to the [Java if...else...if ladder](/docs/if-else-statement). However, the syntax of the `switch` statement is cleaner and much easier to read and write.
 
 </Callout>
 
@@ -99,7 +99,7 @@ size = "Large";
 break;
 ```
 
-Here, the `size` variable is assigned with the value `Large`.
+Here, the `size` variable is assigned the value `Large`.
 
 ## Flowchart of switch Statement
 
@@ -141,7 +141,7 @@ case 29:
 ...
 ```
 
-The `break` statement is used to terminate the **switch-case** statement. If `break` is not used, all the cases after the matching case are also executed. For example,
+The `break` statement is used to terminate the **switch-case** statement. If `break` is not used, all the cases after the matching case are also executed (fall-through). For example,
 
 #### Input
 
@@ -178,11 +178,11 @@ Case 3
 Default case
 ```
 
-In the above example, `expression` matches with `case 2`. Here, we haven't used the break statement after each case.
+In the above example, `expression` matches `case 2`. Here, we haven't used the `break` statement after each case.
 
 Hence, all the cases after `case 2` are also executed.
 
-This is why the `break` statement is needed to terminate the **switch-case** statement after the matching case. To learn more, visit Java break Statement.
+This is why the `break` statement is needed to terminate the **switch-case** statement after the matching case. To learn more, visit [Java break Statement](/docs/break-statement).
 
 <Quiz
   question="What happens if you omit the 'break' statement in a switch case?"
@@ -237,13 +237,13 @@ class Main {
 Unknown Size
 ```
 
-In the above example, we have created a **switch-case** statement. Here, the value of `expression` doesn't match with any of the cases.
+In the above example, we created a **switch-case** statement. Here, the value of `expression` doesn't match any of the cases.
 
 Hence, the code inside the **default case** is executed.
 
 ```java
 default:
-  System.out.println("Unknown Size);
+  System.out.println("Unknown Size");
 ```
 
 <br />

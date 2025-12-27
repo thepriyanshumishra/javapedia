@@ -734,8 +734,8 @@ const OpenSourcePage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Help us reach more developers by sharing Javapedia with youramming
-              education. Every contribution makes a difference.
+              Help us reach more developers by sharing Javapedia with your programming
+              community. Every contribution makes a difference.
             </motion.p>
 
             <motion.div
