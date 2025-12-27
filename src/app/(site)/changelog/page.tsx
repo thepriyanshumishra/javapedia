@@ -9,6 +9,7 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { extractWhatsNew } from "@/lib/github";
+import Image from "next/image";
 
 interface ChangelogEntry {
   version: string;
@@ -90,31 +91,28 @@ export default function ChangelogPage() {
       <div className="mb-12 flex justify-center gap-4">
         <button
           onClick={() => setFilter("all")}
-          className={`rounded-lg border px-4 py-2 text-sm font-medium transition-all ${
-            filter === "all"
+          className={`rounded-lg border px-4 py-2 text-sm font-medium transition-all ${filter === "all"
               ? "border-primary/20 bg-primary/10 text-primary"
               : "border-border bg-background text-foreground hover:bg-accent"
-          }`}
+            }`}
         >
           All Releases
         </button>
         <button
           onClick={() => setFilter("stable")}
-          className={`rounded-lg border px-4 py-2 text-sm font-medium transition-all ${
-            filter === "stable"
+          className={`rounded-lg border px-4 py-2 text-sm font-medium transition-all ${filter === "stable"
               ? "border-green-500/20 bg-green-500/10 text-green-600 dark:text-green-400"
               : "border-border bg-background text-foreground hover:bg-accent"
-          }`}
+            }`}
         >
           Stable
         </button>
         <button
           onClick={() => setFilter("prerelease")}
-          className={`rounded-lg border px-4 py-2 text-sm font-medium transition-all ${
-            filter === "prerelease"
+          className={`rounded-lg border px-4 py-2 text-sm font-medium transition-all ${filter === "prerelease"
               ? "border-yellow-500/20 bg-yellow-500/10 text-yellow-600 dark:text-yellow-400"
               : "border-border bg-background text-foreground hover:bg-accent"
-          }`}
+            }`}
         >
           Prerelease
         </button>
@@ -236,10 +234,13 @@ export default function ChangelogPage() {
                     </div>
                     {entry.author && (
                       <div className="flex items-center gap-2">
-                        <img
+                        <Image
                           src={entry.author.avatar}
                           alt={entry.author.name}
                           className="h-5 w-5 rounded-full"
+                          width={20}
+                          height={20}
+                          unoptimized
                         />
                         <span>
                           by <strong>{entry.author.name}</strong>
@@ -257,11 +258,13 @@ export default function ChangelogPage() {
                   </div>
                   <div className="prose prose-sm dark:prose-invert max-w-none">
                     <div className="bg-card border-border hover:border-border/80 rounded-xl border p-6 transition-all duration-200 hover:shadow-lg">
-                      <img
+                      <Image
                         src={`https://og-javapedia.vercel.app/og?title=${entry.version} Release`}
                         alt="Javapedia Badge"
                         className="border-border mt-0 mb-4 w-full rounded-xl border"
-                        loading="lazy"
+                        width={800}
+                        height={400}
+                        unoptimized
                       />
                       <h4 className="text-card-foreground mb-3 text-lg font-bold">
                         What&apos;s New

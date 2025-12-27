@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
+import Image from "next/image";
 
 // Reusable SectionBadge component
 const SectionBadge = ({
@@ -191,10 +192,12 @@ export default function AboutPage() {
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
           >
-            <img
+            <Image
               src="/mission.svg"
               alt="Javapedia Learning Platform - Free Java Programming Education"
               className="relative z-10 aspect-square h-80 w-80 rounded-full border-2 border-white/20 bg-white object-cover shadow-2xl transition-transform duration-300 dark:border-neutral-800 dark:bg-neutral-900"
+              width={320}
+              height={320}
             />
           </motion.div>
         </motion.div>
@@ -469,13 +472,20 @@ export default function AboutPage() {
                 className="relative mx-auto mb-6 h-32 w-32"
                 whileHover={{ scale: 1.05 }}
               >
-                <motion.img
-                  src="https://github.com/thepriyanshumishra.png"
-                  alt="Priyanshu Mishra - Founder & Lead Developer"
-                  className="h-full w-full rounded-full object-cover shadow-lg ring-4 ring-orange-500/20"
+                <motion.div
+                  className="h-full w-full rounded-full shadow-lg ring-4 ring-orange-500/20"
                   whileHover={{ rotate: 5 }}
                   transition={{ duration: 0.3 }}
-                />
+                >
+                  <Image
+                    src="https://github.com/thepriyanshumishra.png"
+                    alt="Priyanshu Mishra - Founder & Lead Developer"
+                    className="h-full w-full rounded-full object-cover"
+                    width={128}
+                    height={128}
+                    unoptimized
+                  />
+                </motion.div>
               </motion.div>{" "}
               <h3 className="text-foreground font-funnel-display mb-2 text-2xl font-bold">
                 Priyanshu Mishra

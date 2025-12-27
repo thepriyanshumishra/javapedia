@@ -1,5 +1,7 @@
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
+import Image from "next/image";
+import dynamic from "next/dynamic";
 import * as icons from "lucide-react";
 import { InstagramIcon, LinkedInIcon } from "@/components/icons";
 import { Challenge } from "@/components/gamification/challenge";
@@ -7,7 +9,16 @@ import { Quiz } from "@/components/gamification/quiz";
 import { cn } from "@/lib/utils";
 import { Card, Cards } from "fumadocs-ui/components/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { ProgramExplorer } from "@/components/programs/program-explorer";
+
+const ProgramExplorer = dynamic(
+  () =>
+    import("@/components/programs/program-explorer").then(
+      (mod) => mod.ProgramExplorer
+    ),
+  {
+    loading: () => <div className="h-96 w-full animate-pulse rounded-xl bg-muted" />,
+  }
+);
 
 // Custom styled components
 const components: MDXComponents = {
@@ -74,15 +85,26 @@ const components: MDXComponents = {
   img: ({
     className,
     alt,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    width: _width,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    height: _height,
+    src,
     ...props
-  }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      className={cn("rounded-md border bg-muted", className)}
-      alt={alt}
-      {...props}
-    />
-  ),
+  }: React.ImgHTMLAttributes<HTMLImageElement>) => {
+    if (!src) return null;
+    return (
+      <Image
+        className={cn("rounded-md border bg-muted", className)}
+        alt={alt || ""}
+        src={src as unknown as string}
+        width={800}
+        height={400}
+        style={{ width: "100%", height: "auto" }}
+        {...props}
+      />
+    );
+  },
   hr: ({ ...props }) => <hr className="my-4 md:my-8" {...props} />,
   table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
     <div className="my-6 w-full overflow-y-auto">

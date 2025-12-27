@@ -17,8 +17,12 @@ import {
   Code,
 } from "lucide-react";
 import { useState, useEffect } from "react";
-import Particles from "@/components/Particles";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const Particles = dynamic(() => import("@/components/Particles"), {
+  ssr: false,
+});
 
 const SecurityPage = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -61,31 +65,31 @@ const SecurityPage = () => {
 
   const particleConfig = isDarkMode
     ? {
-        particleColors: ["#00FFFF", "#FF00FF", "#00BFFF"],
-        particleCount: 400,
-        particleSpread: 8,
-        speed: 0.3,
-        particleBaseSize: 80,
-        moveParticlesOnHover: false,
-        alphaParticles: false,
-        disableRotation: true,
-        particleHoverFactor: 2,
-        sizeRandomness: 1.0,
-        cameraDistance: 20,
-      }
+      particleColors: ["#00FFFF", "#FF00FF", "#00BFFF"],
+      particleCount: 400,
+      particleSpread: 8,
+      speed: 0.3,
+      particleBaseSize: 80,
+      moveParticlesOnHover: false,
+      alphaParticles: false,
+      disableRotation: true,
+      particleHoverFactor: 2,
+      sizeRandomness: 1.0,
+      cameraDistance: 20,
+    }
     : {
-        particleColors: ["#1E3A8A", "#4B0082", "#4a4a4a"],
-        particleCount: 400,
-        particleSpread: 8,
-        speed: 0.3,
-        particleBaseSize: 80,
-        moveParticlesOnHover: false,
-        alphaParticles: false,
-        disableRotation: true,
-        particleHoverFactor: 1.5,
-        sizeRandomness: 1.0,
-        cameraDistance: 18,
-      };
+      particleColors: ["#1E3A8A", "#4B0082", "#4a4a4a"],
+      particleCount: 400,
+      particleSpread: 8,
+      speed: 0.3,
+      particleBaseSize: 80,
+      moveParticlesOnHover: false,
+      alphaParticles: false,
+      disableRotation: true,
+      particleHoverFactor: 1.5,
+      sizeRandomness: 1.0,
+      cameraDistance: 18,
+    };
 
   // Animation variants
   const containerVariants = {
@@ -246,9 +250,8 @@ const SecurityPage = () => {
           </motion.p>
 
           <motion.div
-            className={`mt-8 text-sm ${
-              isDarkMode ? "text-neutral-400" : "text-neutral-500"
-            } space-y-1 transition-colors duration-300`}
+            className={`mt-8 text-sm ${isDarkMode ? "text-neutral-400" : "text-neutral-500"
+              } space-y-1 transition-colors duration-300`}
             variants={itemVariants}
           >
             <p>
@@ -276,11 +279,10 @@ const SecurityPage = () => {
                 <motion.button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center rounded-t-lg px-4 py-3 font-medium transition-all duration-200 ${
-                    activeTab === tab.id
+                  className={`flex items-center rounded-t-lg px-4 py-3 font-medium transition-all duration-200 ${activeTab === tab.id
                       ? "border-b-2 border-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400"
                       : "text-neutral-600 hover:bg-neutral-50 hover:text-blue-600 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-blue-400"
-                  }`}
+                    }`}
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -718,11 +720,10 @@ const SecurityPage = () => {
           viewport={{ once: true, amount: 0.1 }}
         >
           <motion.div
-            className={`mx-auto max-w-4xl rounded-3xl ${
-              isDarkMode
+            className={`mx-auto max-w-4xl rounded-3xl ${isDarkMode
                 ? "border border-indigo-400/30 bg-gradient-to-br from-indigo-900 to-purple-700"
                 : "border border-indigo-300 bg-gradient-to-br from-indigo-600 to-purple-600"
-            } px-8 py-16 text-center text-white shadow-2xl transition-colors duration-300`}
+              } px-8 py-16 text-center text-white shadow-2xl transition-colors duration-300`}
             variants={itemVariants}
             whileHover={{ scale: 1.02, y: -5 }}
             transition={{ duration: 0.3 }}

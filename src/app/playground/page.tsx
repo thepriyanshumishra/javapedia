@@ -5,7 +5,12 @@ import { baseOptions } from "@/app/layout.config";
 import { Footer } from "@/components/footer";
 import { HomeLayout } from "fumadocs-ui/layouts/home";
 import { JSX } from "react/jsx-runtime";
-import Editor from "@monaco-editor/react";
+import dynamic from "next/dynamic";
+
+const Editor = dynamic(() => import("@monaco-editor/react"), {
+  ssr: false,
+  loading: () => <div className="h-full w-full animate-pulse bg-muted" />,
+});
 import {
   Play,
   RotateCcw,
@@ -58,7 +63,7 @@ public class Main {
 
       const savedFontSize = localStorage.getItem("javapedia_fontSize");
       if (savedFontSize) setFontSize(parseInt(savedFontSize));
-    } catch {}
+    } catch { }
   }, []);
 
   const terminalRef = useRef<HTMLDivElement>(null);
@@ -71,7 +76,7 @@ public class Main {
       if (typeof window !== "undefined") {
         localStorage.setItem("javapedia_code", code);
       }
-    } catch {}
+    } catch { }
   }, [code]);
 
   useEffect(() => {
@@ -104,13 +109,13 @@ public class Main {
         theme:
           theme === "vs-dark"
             ? {
-                background: "#1e1e1e",
-                foreground: "#ffffff",
-              }
+              background: "#1e1e1e",
+              foreground: "#ffffff",
+            }
             : {
-                background: "#ffffff",
-                foreground: "#000000",
-              },
+              background: "#ffffff",
+              foreground: "#000000",
+            },
       });
 
       const fitAddon = new FitAddon();
@@ -176,13 +181,13 @@ public class Main {
       xtermRef.current.options.theme =
         theme === "vs-dark"
           ? {
-              background: "#1e1e1e",
-              foreground: "#ffffff",
-            }
+            background: "#1e1e1e",
+            foreground: "#ffffff",
+          }
           : {
-              background: "#ffffff",
-              foreground: "#000000",
-            };
+            background: "#ffffff",
+            foreground: "#000000",
+          };
     }
   }, [theme]);
 

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function LicensePage(): React.ReactElement {
   return (
     <main className="container max-w-4xl pt-20 max-sm:px-0 md:pb-12">
@@ -31,10 +33,13 @@ export default function LicensePage(): React.ReactElement {
             MIT License
           </h3>
           <div className="mb-4 flex items-center gap-4">
-            <img
+            <Image
               src="https://img.shields.io/badge/License-MIT-yellow.svg"
               alt="MIT License"
-              className="h-6"
+              className="h-6 w-auto"
+              width={100}
+              height={24}
+              unoptimized
             />
             <span className="text-lg font-medium">The MIT License</span>
           </div>
