@@ -1,0 +1,9 @@
+{
+    "title": "Collections",
+    "pages": [
+        "arraylist-example",
+        "linkedlist-example",
+        "hashset-example",
+        "hashmap-example"
+    ]
+}

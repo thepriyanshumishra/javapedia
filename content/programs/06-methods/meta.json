@@ -1,0 +1,11 @@
+{
+    "title": "Methods",
+    "pages": [
+        "prime-numbers-using-function",
+        "sum-natural-numbers-recursion",
+        "factorial-recursion",
+        "gcd-recursion",
+        "binary-to-decimal",
+        "decimal-to-binary"
+    ]
+}

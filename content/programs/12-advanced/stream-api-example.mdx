@@ -1,0 +1,45 @@
+---
+title: Java Program to Demonstrate Stream API
+description: A Java program to demonstrate the usage of Stream API.
+---
+
+## Problem Description
+
+Write a Java program to demonstrate the usage of Stream API for filtering and collecting data.
+
+## Code
+
+```java title="StreamExample.java"
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamExample {
+    public static void main(String[] args) {
+        List<String> names = new ArrayList<>();
+        names.add("John");
+        names.add("Jane");
+        names.add("Jack");
+        names.add("Doe");
+
+        // Filter names starting with 'J'
+        List<String> jNames = names.stream()
+                .filter(name -> name.startsWith("J"))
+                .collect(Collectors.toList());
+
+        System.out.println("Names starting with J: " + jNames);
+    }
+}
+```
+
+## Output
+
+```bash
+Names starting with J: [John, Jane, Jack]
+```
+
+## Explanation
+
+1.  **Stream API**: Used to process collections of objects.
+2.  **`filter()`**: Filters elements based on a condition.
+3.  **`collect()`**: Collects the results into a collection (e.g., List).

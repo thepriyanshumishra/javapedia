@@ -1,0 +1,38 @@
+---
+title: Java Program to Create Thread by Implementing Runnable Interface
+description: A Java program to create a thread by implementing the Runnable interface.
+---
+
+## Problem Description
+
+Write a Java program to create a thread by implementing the `Runnable` interface.
+
+## Code
+
+```java title="ImplementRunnable.java"
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("Thread is running...");
+    }
+}
+
+public class ImplementRunnable {
+    public static void main(String[] args) {
+        MyRunnable m1 = new MyRunnable();
+        Thread t1 = new Thread(m1);
+        t1.start();
+    }
+}
+```
+
+## Output
+
+```bash
+Thread is running...
+```
+
+## Explanation
+
+1.  **`implements Runnable`**: Implement the Runnable interface.
+2.  **`Thread` Constructor**: Pass the Runnable instance to the Thread constructor.
+3.  **Flexibility**: Preferred over extending Thread class as it allows extending another class.

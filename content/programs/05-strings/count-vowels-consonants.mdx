@@ -1,0 +1,57 @@
+---
+title: Java Program to Count Vowels and Consonants
+description: A Java program to count the number of vowels and consonants in a string.
+---
+
+## Problem Description
+
+Write a Java program to count the number of vowels and consonants in a given string.
+
+## Code
+
+```java title="VowelsConsonants.java"
+public class VowelsConsonants {
+    public static void main(String[] args) {
+        String line = "This website is aw3some.";
+        int vowels = 0, consonants = 0, digits = 0, spaces = 0;
+
+        line = line.toLowerCase();
+
+        for (int i = 0; i < line.length(); ++i) {
+            char ch = line.charAt(i);
+
+            if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+                ++vowels;
+            }
+            else if ((ch >= 'a' && ch <= 'z')) {
+                ++consonants;
+            }
+            else if (ch >= '0' && ch <= '9') {
+                ++digits;
+            }
+            else if (ch == ' ') {
+                ++spaces;
+            }
+        }
+
+        System.out.println("Vowels: " + vowels);
+        System.out.println("Consonants: " + consonants);
+        System.out.println("Digits: " + digits);
+        System.out.println("White spaces: " + spaces);
+    }
+}
+```
+
+## Output
+
+```bash
+Vowels: 7
+Consonants: 11
+Digits: 1
+White spaces: 3
+```
+
+## Explanation
+
+1.  **Checks**: Check if the character is a vowel, consonant, digit, or space.
+2.  **Counters**: Increment respective counters.

@@ -1,0 +1,41 @@
+---
+title: Java Program to Demonstrate Interface
+description: A Java program to demonstrate the usage of interfaces.
+---
+
+## Problem Description
+
+Write a Java program to demonstrate the concept of interfaces.
+
+## Code
+
+```java title="InterfaceExample.java"
+interface Polygon {
+    void getArea(int length, int breadth);
+}
+
+class Rectangle implements Polygon {
+    public void getArea(int length, int breadth) {
+        System.out.println("The area of the rectangle is " + (length * breadth));
+    }
+}
+
+public class InterfaceExample {
+    public static void main(String[] args) {
+        Rectangle r1 = new Rectangle();
+        r1.getArea(5, 6);
+    }
+}
+```
+
+## Output
+
+```bash
+The area of the rectangle is 30
+```
+
+## Explanation
+
+1.  **Interface**: A completely abstract class. All methods are public and abstract by default.
+2.  **`implements`**: Used by a class to inherit from an interface.
+3.  **Multiple Inheritance**: Java supports multiple inheritance through interfaces.

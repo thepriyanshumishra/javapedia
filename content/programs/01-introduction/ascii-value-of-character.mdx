@@ -1,0 +1,37 @@
+---
+title: Java Program to Find ASCII Value of a Character
+description: A Java program to find and print the ASCII value of a character.
+---
+
+## Problem Description
+
+Write a Java program that takes a character as input (or uses a hardcoded character) and prints its ASCII value.
+
+## Code
+
+```java title="AsciiValue.java"
+public class AsciiValue {
+    public static void main(String[] args) {
+        char ch = 'a';
+        int ascii = ch;
+        // You can also cast char to int
+        int castAscii = (int) ch;
+
+        System.out.println("The ASCII value of " + ch + " is: " + ascii);
+        System.out.println("The ASCII value of " + ch + " is: " + castAscii);
+    }
+}
+```
+
+## Output
+
+```bash
+The ASCII value of a is: 97
+The ASCII value of a is: 97
+```
+
+## Explanation
+
+1.  **`char ch = 'a';`**: Declares a character variable `ch` and assigns it the value 'a'.
+2.  **`int ascii = ch;`**: Assigns the character value to an integer variable. Java automatically promotes `char` to `int`, which results in the ASCII value.
+3.  **`(int) ch`**: Explicitly casts the character to an integer, which also yields the ASCII value.

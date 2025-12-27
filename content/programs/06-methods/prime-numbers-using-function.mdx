@@ -1,0 +1,49 @@
+---
+title: Java Program to Display Prime Numbers Between Intervals Using Function
+description: A Java program to display prime numbers between two intervals using a user-defined function.
+---
+
+## Problem Description
+
+Write a Java program to display all prime numbers between two given intervals using a function.
+
+## Code
+
+```java title="PrimeIntervals.java"
+public class PrimeIntervals {
+    public static void main(String[] args) {
+        int low = 20, high = 50;
+
+        while (low < high) {
+            if(checkPrime(low))
+                System.out.print(low + " ");
+
+            ++low;
+        }
+    }
+
+    public static boolean checkPrime(int num) {
+        boolean flag = true;
+
+        for(int i = 2; i <= num/2; ++i) {
+            if(num % i == 0) {
+                flag = false;
+                break;
+            }
+        }
+
+        return flag;
+    }
+}
+```
+
+## Output
+
+```bash
+23 29 31 37 41 43 47 
+```
+
+## Explanation
+
+1.  **`checkPrime()`**: A separate method to check if a number is prime.
+2.  **Loop**: Iterates from `low` to `high` and calls `checkPrime` for each number.

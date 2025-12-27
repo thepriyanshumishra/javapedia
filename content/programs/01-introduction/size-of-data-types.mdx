@@ -1,0 +1,42 @@
+---
+title: Java Program to Display Size of Different Data Types
+description: A Java program to display the size (in bits and bytes) of primitive data types.
+---
+
+## Problem Description
+
+Write a Java program to display the size of various primitive data types like `int`, `float`, `double`, `char`, etc.
+
+## Code
+
+```java title="DataTypeSizes.java"
+public class DataTypeSizes {
+    public static void main(String[] args) {
+        System.out.println("Size of int: " + (Integer.SIZE / 8) + " bytes.");
+        System.out.println("Size of long: " + (Long.SIZE / 8) + " bytes.");
+        System.out.println("Size of char: " + (Character.SIZE / 8) + " bytes.");
+        System.out.println("Size of float: " + (Float.SIZE / 8) + " bytes.");
+        System.out.println("Size of double: " + (Double.SIZE / 8) + " bytes.");
+        System.out.println("Size of short: " + (Short.SIZE / 8) + " bytes.");
+        System.out.println("Size of byte: " + (Byte.SIZE / 8) + " bytes.");
+    }
+}
+```
+
+## Output
+
+```bash
+Size of int: 4 bytes.
+Size of long: 8 bytes.
+Size of char: 2 bytes.
+Size of float: 4 bytes.
+Size of double: 8 bytes.
+Size of short: 2 bytes.
+Size of byte: 1 bytes.
+```
+
+## Explanation
+
+1.  **Wrapper Classes**: Java provides wrapper classes for primitive types (e.g., `Integer` for `int`, `Double` for `double`).
+2.  **`SIZE` Constant**: These wrapper classes have a constant `SIZE` which holds the size of the type in bits.
+3.  **Calculation**: Dividing the size in bits by 8 gives the size in bytes.

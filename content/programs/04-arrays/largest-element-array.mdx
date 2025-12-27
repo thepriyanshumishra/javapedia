@@ -1,0 +1,38 @@
+---
+title: Java Program to Find Largest Element of an Array
+description: A Java program to find the largest element in an array.
+---
+
+## Problem Description
+
+Write a Java program to find the largest element in an array.
+
+## Code
+
+```java title="LargestElement.java"
+public class LargestElement {
+    public static void main(String[] args) {
+        double[] numArray = { 23.4, -34.5, 50.0, 33.5, 55.5, 43.7, 5.7, -66.5 };
+        double largest = numArray[0];
+
+        for (double num : numArray) {
+            if (largest < num)
+                largest = num;
+        }
+
+        System.out.format("Largest element = %.2f", largest);
+    }
+}
+```
+
+## Output
+
+```bash
+Largest element = 55.50
+```
+
+## Explanation
+
+1.  **Initialize**: Assume the first element is the largest.
+2.  **Compare**: Iterate through the array and compare each element with the current largest.
+3.  **Update**: If an element is larger, update the `largest` variable.

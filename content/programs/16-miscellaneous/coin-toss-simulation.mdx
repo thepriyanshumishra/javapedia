@@ -1,0 +1,33 @@
+---
+title: Java Program to Simulate Coin Toss
+description: A Java program to simulate a coin toss.
+---
+
+## Problem Description
+
+Write a Java program to simulate a coin toss.
+
+## Code
+
+```java title="CoinToss.java"
+public class CoinToss {
+    public static void main(String[] args) {
+        if (Math.random() < 0.5) {
+            System.out.println("Heads");
+        } else {
+            System.out.println("Tails");
+        }
+    }
+}
+```
+
+## Output
+
+```bash
+Heads
+```
+
+## Explanation
+
+1.  **Logic**: Use `Math.random()` to get a value between 0 and 1.
+2.  **Threshold**: If less than 0.5, it's Heads, otherwise Tails.

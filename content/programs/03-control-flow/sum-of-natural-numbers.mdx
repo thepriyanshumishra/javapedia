@@ -1,0 +1,37 @@
+---
+title: Java Program to Calculate Sum of Natural Numbers
+description: A Java program to calculate the sum of natural numbers up to a given number.
+---
+
+## Problem Description
+
+Write a Java program to calculate the sum of natural numbers from 1 to `n`.
+
+## Code
+
+```java title="SumNatural.java"
+public class SumNatural {
+    public static void main(String[] args) {
+        int num = 100, sum = 0;
+
+        for(int i = 1; i <= num; ++i)
+        {
+            // sum = sum + i;
+            sum += i;
+        }
+
+        System.out.println("Sum = " + sum);
+    }
+}
+```
+
+## Output
+
+```bash
+Sum = 5050
+```
+
+## Explanation
+
+1.  **Loop**: Iterates from 1 to `num`.
+2.  **Accumulator**: Adds the current value of `i` to `sum` in each iteration.

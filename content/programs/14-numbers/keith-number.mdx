@@ -1,0 +1,56 @@
+---
+title: Java Program to Check Keith Number
+description: A Java program to check if a number is a Keith number.
+---
+
+## Problem Description
+
+Write a Java program to check if a number is a Keith number. A n-digit number N is called a Keith number if it appears in a sequence generated using its digits. The sequence starts with the digits of N, and each subsequent term is the sum of the previous n terms.
+
+## Code
+
+```java title="KeithNumber.java"
+import java.util.*;
+
+public class KeithNumber {
+    public static void main(String[] args) {
+        int num = 197;
+        ArrayList<Integer> terms = new ArrayList<>();
+        int temp = num;
+        int n = 0; // number of digits
+
+        while (temp > 0) {
+            terms.add(0, temp % 10);
+            temp /= 10;
+            n++;
+        }
+
+        int nextTerm = 0;
+        while (nextTerm < num) {
+            nextTerm = 0;
+            for (int i = terms.size() - n; i < terms.size(); i++) {
+                nextTerm += terms.get(i);
+            }
+            terms.add(nextTerm);
+            if (nextTerm == num) {
+                System.out.println(num + " is a Keith Number.");
+                return;
+            }
+        }
+        System.out.println(num + " is not a Keith Number.");
+    }
+}
+```
+
+## Output
+
+```bash
+197 is a Keith Number.
+```
+
+## Explanation
+
+1.  **Sequence**: 1, 9, 7.
+2.  **Next Term**: 1+9+7 = 17. Sequence: 1, 9, 7, 17.
+3.  **Next Term**: 9+7+17 = 33. Sequence: 1, 9, 7, 17, 33.
+4.  **...**: Eventually reaches 197.

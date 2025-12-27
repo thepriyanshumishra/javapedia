@@ -1,0 +1,43 @@
+---
+title: Java Program to Print Mirrored Right Triangle Star Pattern
+description: A Java program to print a mirrored right triangle star pattern.
+---
+
+## Problem Description
+
+Write a Java program to print a mirrored right triangle star pattern.
+
+## Code
+
+```java title="MirroredRightTrianglePattern.java"
+public class MirroredRightTrianglePattern {
+    public static void main(String[] args) {
+        int rows = 5;
+
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 1; j <= rows - i; j++) {
+                System.out.print("  ");
+            }
+            for (int k = 1; k <= i; k++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+## Output
+
+```bash
+        * 
+      * * 
+    * * * 
+  * * * * 
+* * * * * 
+```
+
+## Explanation
+
+1.  **Spaces**: Print spaces `rows - i` times.
+2.  **Stars**: Print stars `i` times.

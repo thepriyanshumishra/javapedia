@@ -1,0 +1,50 @@
+---
+title: Java Program to Demonstrate HashMap
+description: A Java program to demonstrate the usage of HashMap.
+---
+
+## Problem Description
+
+Write a Java program to demonstrate basic operations on a HashMap.
+
+## Code
+
+```java title="HashMapExample.java"
+import java.util.HashMap;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        HashMap<Integer, String> languages = new HashMap<>();
+
+        // Add elements
+        languages.put(1, "Java");
+        languages.put(2, "Python");
+        languages.put(3, "JavaScript");
+        System.out.println("HashMap: " + languages);
+
+        // Access element
+        String value = languages.get(1);
+        System.out.println("Value at index 1: " + value);
+
+        // Remove element
+        languages.remove(2);
+        System.out.println("Removed value at index 2");
+        System.out.println("Updated HashMap: " + languages);
+    }
+}
+```
+
+## Output
+
+```bash
+HashMap: {1=Java, 2=Python, 3=JavaScript}
+Value at index 1: Java
+Removed value at index 2
+Updated HashMap: {1=Java, 3=JavaScript}
+```
+
+## Explanation
+
+1.  **HashMap**: Implements the Map interface.
+2.  **Key-Value Pairs**: Stores data as key-value pairs.
+3.  **Unique Keys**: Keys must be unique, values can be duplicated.

@@ -1,0 +1,58 @@
+---
+title: Java Program to Demonstrate ArrayList
+description: A Java program to demonstrate the usage of ArrayList.
+---
+
+## Problem Description
+
+Write a Java program to demonstrate basic operations on an ArrayList (add, access, remove, iterate).
+
+## Code
+
+```java title="ArrayListExample.java"
+import java.util.ArrayList;
+
+public class ArrayListExample {
+    public static void main(String[] args) {
+        ArrayList<String> animals = new ArrayList<>();
+
+        // Add elements
+        animals.add("Dog");
+        animals.add("Cat");
+        animals.add("Horse");
+
+        System.out.println("ArrayList: " + animals);
+
+        // Access element
+        String str = animals.get(1);
+        System.out.println("Element at index 1: " + str);
+
+        // Change element
+        animals.set(2, "Zebra");
+        System.out.println("Modified ArrayList: " + animals);
+
+        // Remove element
+        String str2 = animals.remove(1);
+        System.out.println("Removed Element: " + str2);
+        System.out.println("Final ArrayList: " + animals);
+    }
+}
+```
+
+## Output
+
+```bash
+ArrayList: [Dog, Cat, Horse]
+Element at index 1: Cat
+Modified ArrayList: [Dog, Cat, Zebra]
+Removed Element: Cat
+Final ArrayList: [Dog, Zebra]
+```
+
+## Explanation
+
+1.  **ArrayList**: Resizable array implementation of the List interface.
+2.  **`add()`**: Adds an element.
+3.  **`get()`**: Accesses an element.
+4.  **`set()`**: Modifies an element.
+5.  **`remove()`**: Removes an element.

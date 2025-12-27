@@ -1,0 +1,42 @@
+---
+title: Java Program to Check Neon Number
+description: A Java program to check if a number is a Neon number.
+---
+
+## Problem Description
+
+Write a Java program to check if a number is a Neon number. A number is said to be a Neon number if the sum of digits of the square of the number is equal to the number itself.
+
+## Code
+
+```java title="NeonNumber.java"
+public class NeonNumber {
+    public static void main(String[] args) {
+        int num = 9;
+        int square = num * num;
+        int sum = 0;
+
+        while (square > 0) {
+            sum += square % 10;
+            square /= 10;
+        }
+
+        if (sum == num)
+            System.out.println(num + " is a Neon Number.");
+        else
+            System.out.println(num + " is not a Neon Number.");
+    }
+}
+```
+
+## Output
+
+```bash
+9 is a Neon Number.
+```
+
+## Explanation
+
+1.  **Square**: 9 * 9 = 81.
+2.  **Sum**: 8 + 1 = 9.
+3.  **Check**: 9 == 9.

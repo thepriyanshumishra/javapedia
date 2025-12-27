@@ -1,0 +1,43 @@
+---
+title: Java Program to Validate IP Address
+description: A Java program to validate an IP Address using Regex.
+---
+
+## Problem Description
+
+Write a Java program to validate an IP Address using Regular Expressions.
+
+## Code
+
+```java title="IPValidation.java"
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.Scanner;
+
+public class IPValidation {
+    public static void main(String[] args) {
+        String ip = "192.168.0.1";
+        String zeroTo255 = "(\\d{1,2}|(0|1)\\d{2}|2[0-4]\\d|25[0-5])";
+        String regex = zeroTo255 + "\\." + zeroTo255 + "\\." + zeroTo255 + "\\." + zeroTo255;
+
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(ip);
+
+        if (m.matches())
+            System.out.println(ip + " is a valid IP address.");
+        else
+            System.out.println(ip + " is not a valid IP address.");
+    }
+}
+```
+
+## Output
+
+```bash
+192.168.0.1 is a valid IP address.
+```
+
+## Explanation
+
+1.  **Regex**: Pattern to match numbers from 0 to 255.
+2.  **Matcher**: Checks if the IP string matches the pattern.

@@ -1,0 +1,37 @@
+---
+title: Java Program to Demonstrate Ternary Operator
+description: A Java program to demonstrate the usage of the ternary operator.
+---
+
+## Problem Description
+
+Write a Java program to find the minimum of two numbers using the ternary operator.
+
+## Code
+
+```java title="TernaryOperator.java"
+public class TernaryOperator {
+    public static void main(String[] args) {
+        int a = 10;
+        int b = 20;
+        int min;
+
+        // Syntax: variable = (condition) ? expressionTrue : expressionFalse;
+        min = (a < b) ? a : b;
+
+        System.out.println("Minimum Value: " + min);
+    }
+}
+```
+
+## Output
+
+```bash
+Minimum Value: 10
+```
+
+## Explanation
+
+1.  **Ternary Operator (`? :`)**: It is a shorthand for `if-else` statement.
+2.  **Syntax**: `condition ? value_if_true : value_if_false`.
+3.  If `a < b` is true, `a` is assigned to `min`, otherwise `b` is assigned.

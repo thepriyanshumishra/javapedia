@@ -1,0 +1,35 @@
+---
+title: Java Program to Convert Char to String
+description: A Java program to convert a Char to a String.
+---
+
+## Problem Description
+
+Write a Java program to convert a Char to a String.
+
+## Code
+
+```java title="CharToString.java"
+public class CharToString {
+    public static void main(String[] args) {
+        char c = 'S';
+        String s = String.valueOf(c);
+        String s2 = Character.toString(c);
+
+        System.out.println("String is: " + s);
+        System.out.println("String is: " + s2);
+    }
+}
+```
+
+## Output
+
+```bash
+String is: S
+String is: S
+```
+
+## Explanation
+
+1.  **`String.valueOf(char)`**: Returns string representation of the char argument.
+2.  **`Character.toString(char)`**: Returns a String object representing the specified char.

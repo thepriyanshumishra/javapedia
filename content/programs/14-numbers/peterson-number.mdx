@@ -1,0 +1,49 @@
+---
+title: Java Program to Check Peterson Number
+description: A Java program to check if a number is a Peterson number.
+---
+
+## Problem Description
+
+Write a Java program to check if a number is a Peterson number (sum of factorials of each digit equals the number itself).
+
+## Code
+
+```java title="PetersonNumber.java"
+public class PetersonNumber {
+    public static void main(String[] args) {
+        int num = 145;
+        int temp = num;
+        int sum = 0;
+
+        while (temp > 0) {
+            int digit = temp % 10;
+            sum += factorial(digit);
+            temp /= 10;
+        }
+
+        if (sum == num)
+            System.out.println(num + " is a Peterson Number.");
+        else
+            System.out.println(num + " is not a Peterson Number.");
+    }
+
+    static int factorial(int n) {
+        int fact = 1;
+        for (int i = 1; i <= n; i++)
+            fact *= i;
+        return fact;
+    }
+}
+```
+
+## Output
+
+```bash
+145 is a Peterson Number.
+```
+
+## Explanation
+
+1.  **Factorial**: Calculate factorial of each digit.
+2.  **Sum**: Add the factorials and compare with the original number.

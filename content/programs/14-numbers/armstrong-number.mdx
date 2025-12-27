@@ -1,0 +1,42 @@
+---
+title: Java Program to Check Armstrong Number
+description: A Java program to check if a number is an Armstrong number.
+---
+
+## Problem Description
+
+Write a Java program to check if a given number is an Armstrong number (sum of cubes of digits equals the number itself for 3-digit numbers).
+
+## Code
+
+```java title="ArmstrongNumber.java"
+public class ArmstrongNumber {
+    public static void main(String[] args) {
+        int number = 371, originalNumber, remainder, result = 0;
+
+        originalNumber = number;
+
+        while (originalNumber != 0) {
+            remainder = originalNumber % 10;
+            result += Math.pow(remainder, 3);
+            originalNumber /= 10;
+        }
+
+        if(result == number)
+            System.out.println(number + " is an Armstrong number.");
+        else
+            System.out.println(number + " is not an Armstrong number.");
+    }
+}
+```
+
+## Output
+
+```bash
+371 is an Armstrong number.
+```
+
+## Explanation
+
+1.  **Logic**: Sum of digits raised to the power of number of digits.
+2.  **Example**: 3^3 + 7^3 + 1^3 = 27 + 343 + 1 = 371.

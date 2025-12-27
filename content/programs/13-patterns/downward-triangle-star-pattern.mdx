@@ -1,0 +1,40 @@
+---
+title: Java Program to Print Downward Triangle Star Pattern
+description: A Java program to print a downward triangle star pattern.
+---
+
+## Problem Description
+
+Write a Java program to print a downward triangle star pattern.
+
+## Code
+
+```java title="DownwardTrianglePattern.java"
+public class DownwardTrianglePattern {
+    public static void main(String[] args) {
+        int rows = 5;
+
+        for (int i = rows; i >= 1; --i) {
+            for (int j = 1; j <= i; ++j) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+## Output
+
+```bash
+* * * * * 
+* * * * 
+* * * 
+* * 
+* 
+```
+
+## Explanation
+
+1.  **Outer Loop**: Starts from `rows` and decrements.
+2.  **Inner Loop**: Prints stars equal to the current row count.

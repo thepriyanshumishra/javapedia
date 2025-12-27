@@ -1,0 +1,57 @@
+---
+title: Java Program to Demonstrate Encapsulation
+description: A Java program to demonstrate the concept of encapsulation.
+---
+
+## Problem Description
+
+Write a Java program to demonstrate encapsulation using private variables and public getter/setter methods.
+
+## Code
+
+```java title="EncapsulationExample.java"
+class Person {
+    private String name;
+    private int age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+public class EncapsulationExample {
+    public static void main(String[] args) {
+        Person p1 = new Person();
+        p1.setName("John");
+        p1.setAge(30);
+
+        System.out.println("Name: " + p1.getName());
+        System.out.println("Age: " + p1.getAge());
+    }
+}
+```
+
+## Output
+
+```bash
+Name: John
+Age: 30
+```
+
+## Explanation
+
+1.  **Encapsulation**: Wrapping data (variables) and code (methods) together as a single unit.
+2.  **Data Hiding**: Variables are declared `private` so they cannot be accessed directly from outside the class.
+3.  **Getters and Setters**: Public methods provided to access and update private variables.

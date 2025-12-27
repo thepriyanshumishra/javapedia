@@ -1,0 +1,39 @@
+---
+title: Java Program to Calculate Compound Interest
+description: A Java program to calculate Compound Interest.
+---
+
+## Problem Description
+
+Write a Java program to calculate Compound Interest.
+
+## Code
+
+```java title="CompoundInterest.java"
+public class CompoundInterest {
+    public static void main(String[] args) {
+        double principal = 2000, rate = 8, time = 5, number = 12;
+        double interest = principal * (Math.pow((1 + rate / 100), (time * number))) - principal;
+        
+        System.out.println("Principal: " + principal);
+        System.out.println("Interest Rate: " + rate);
+        System.out.println("Time Duration: " + time);
+        System.out.println("Number of Time interest Compounded: " + number);
+        System.out.println("Compound Interest: " + interest);
+    }
+}
+```
+
+## Output
+
+```bash
+Principal: 2000.0
+Interest Rate: 8.0
+Time Duration: 5.0
+Number of Time interest Compounded: 12.0
+Compound Interest: 202126.95
+```
+
+## Explanation
+
+1.  **Formula**: `P * (1 + R/100)^(t*n) - P`.

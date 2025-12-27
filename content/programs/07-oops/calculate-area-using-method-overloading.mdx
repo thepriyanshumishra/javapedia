@@ -1,0 +1,50 @@
+---
+title: Java Program to Calculate Area Using Method Overloading
+description: A Java program to calculate the area of different shapes using method overloading.
+---
+
+## Problem Description
+
+Write a Java program to calculate the area of a circle, rectangle, and triangle using method overloading.
+
+## Code
+
+```java title="MethodOverloading.java"
+public class MethodOverloading {
+    public static void main(String[] args) {
+        MethodOverloading mo = new MethodOverloading();
+        
+        System.out.println("Area of Circle: " + mo.area(5));
+        System.out.println("Area of Rectangle: " + mo.area(5, 10));
+        System.out.println("Area of Triangle: " + mo.area(10, 20.5));
+    }
+
+    // Area of Circle
+    public double area(double r) {
+        return 3.14 * r * r;
+    }
+
+    // Area of Rectangle
+    public int area(int l, int b) {
+        return l * b;
+    }
+
+    // Area of Triangle
+    public double area(double b, double h) {
+        return 0.5 * b * h;
+    }
+}
+```
+
+## Output
+
+```bash
+Area of Circle: 78.5
+Area of Rectangle: 50
+Area of Triangle: 102.5
+```
+
+## Explanation
+
+1.  **Method Overloading**: Multiple methods with the same name but different parameters (type or number).
+2.  **Compile-time Polymorphism**: The compiler decides which method to call based on the arguments passed.

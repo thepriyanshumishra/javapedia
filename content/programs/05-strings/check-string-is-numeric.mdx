@@ -1,0 +1,42 @@
+---
+title: Java Program to Check if String is Numeric
+description: A Java program to check if a string contains only numeric characters.
+---
+
+## Problem Description
+
+Write a Java program to check if a given string is numeric (contains a valid number).
+
+## Code
+
+```java title="CheckNumeric.java"
+public class CheckNumeric {
+    public static void main(String[] args) {
+        String string = "12345.15";
+        boolean numeric = true;
+
+        try {
+            Double num = Double.parseDouble(string);
+        } catch (NumberFormatException e) {
+            numeric = false;
+        }
+
+        if(numeric)
+            System.out.println(string + " is a number");
+        else
+            System.out.println(string + " is not a number");
+    }
+}
+```
+
+## Output
+
+```bash
+12345.15 is a number
+```
+
+## Explanation
+
+1.  **`Double.parseDouble()`**: Attempts to convert the string to a double.
+2.  **`NumberFormatException`**: Thrown if the string is not a valid number.
+3.  **Try-Catch**: Used to handle the exception and determine validity.

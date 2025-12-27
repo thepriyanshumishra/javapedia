@@ -1,0 +1,45 @@
+---
+title: Java Program to Convert Decimal to Binary
+description: A Java program to convert a decimal number to a binary number.
+---
+
+## Problem Description
+
+Write a Java program to convert a decimal number to a binary number.
+
+## Code
+
+```java title="DecimalToBinary.java"
+public class DecimalToBinary {
+    public static void main(String[] args) {
+        int num = 19;
+        long binary = convertDecimalToBinary(num);
+        System.out.println(num + " in decimal = " + binary + " in binary.");
+    }
+
+    public static long convertDecimalToBinary(int n) {
+        long binaryNumber = 0;
+        int remainder, i = 1, step = 1;
+
+        while (n != 0) {
+            remainder = n % 2;
+            n /= 2;
+            binaryNumber += remainder * i;
+            i *= 10;
+        }
+
+        return binaryNumber;
+    }
+}
+```
+
+## Output
+
+```bash
+19 in decimal = 10011 in binary.
+```
+
+## Explanation
+
+1.  **Algorithm**: Repeatedly divide by 2 and store remainders.
+2.  **Construction**: Construct the binary number by placing remainders in correct positions (using `i *= 10`).

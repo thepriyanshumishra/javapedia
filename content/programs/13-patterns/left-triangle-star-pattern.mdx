@@ -1,0 +1,43 @@
+---
+title: Java Program to Print Left Triangle Star Pattern
+description: A Java program to print a left triangle star pattern.
+---
+
+## Problem Description
+
+Write a Java program to print a left triangle star pattern.
+
+## Code
+
+```java title="LeftTrianglePattern.java"
+public class LeftTrianglePattern {
+    public static void main(String[] args) {
+        int rows = 5;
+
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 2 * (rows - i); j >= 0; j--) {
+                System.out.print(" ");
+            }
+            for (int j = 1; j <= i; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+## Output
+
+```bash
+        * 
+      * * 
+    * * * 
+  * * * * 
+* * * * * 
+```
+
+## Explanation
+
+1.  **Spaces**: Print spaces before printing stars to align to the right.
+2.  **Stars**: Print stars after the spaces.

@@ -1,0 +1,15 @@
+{
+    "title": "Patterns",
+    "pages": [
+        "right-triangle-star-pattern",
+        "left-triangle-star-pattern",
+        "pyramid-star-pattern",
+        "diamond-shape-pattern",
+        "downward-triangle-star-pattern",
+        "mirrored-right-triangle-star-pattern",
+        "pascals-triangle",
+        "floyds-triangle",
+        "number-pattern",
+        "character-pattern"
+    ]
+}

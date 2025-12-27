@@ -1,0 +1,12 @@
+{
+    "title": "Arrays",
+    "pages": [
+        "array-operations-examples",
+        "average-using-arrays",
+        "largest-element-array",
+        "add-two-matrices",
+        "multiply-two-matrices",
+        "transpose-matrix",
+        "standard-deviation"
+    ]
+}

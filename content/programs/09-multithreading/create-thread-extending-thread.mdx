@@ -1,0 +1,37 @@
+---
+title: Java Program to Create Thread by Extending Thread Class
+description: A Java program to create a thread by extending the Thread class.
+---
+
+## Problem Description
+
+Write a Java program to create a thread by extending the `Thread` class.
+
+## Code
+
+```java title="ExtendThread.java"
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread is running...");
+    }
+}
+
+public class ExtendThread {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start();
+    }
+}
+```
+
+## Output
+
+```bash
+Thread is running...
+```
+
+## Explanation
+
+1.  **`extends Thread`**: Inherit from the Thread class.
+2.  **`run()`**: Override the run method to define the thread's action.
+3.  **`start()`**: Call start method to begin execution of the thread.

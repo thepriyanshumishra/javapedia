@@ -1,0 +1,40 @@
+---
+title: Java Program to Demonstrate Lambda Expressions
+description: A Java program to demonstrate the usage of Lambda Expressions.
+---
+
+## Problem Description
+
+Write a Java program to demonstrate the usage of Lambda Expressions (introduced in Java 8).
+
+## Code
+
+```java title="LambdaExample.java"
+interface MyInterface {
+    double getPiValue();
+}
+
+public class LambdaExample {
+    public static void main(String[] args) {
+        // declare a reference to MyInterface
+        MyInterface ref;
+
+        // lambda expression
+        ref = () -> 3.1415;
+
+        System.out.println("Value of Pi = " + ref.getPiValue());
+    }
+}
+```
+
+## Output
+
+```bash
+Value of Pi = 3.1415
+```
+
+## Explanation
+
+1.  **Lambda Expression**: A concise way to represent an anonymous function that can be passed around.
+2.  **Syntax**: `(parameters) -> expression` or `(parameters) -> { statements; }`.
+3.  **Functional Interface**: An interface with only one abstract method.

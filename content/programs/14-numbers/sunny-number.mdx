@@ -1,0 +1,35 @@
+---
+title: Java Program to Check Sunny Number
+description: A Java program to check if a number is a Sunny number.
+---
+
+## Problem Description
+
+Write a Java program to check if a number is a Sunny number (a number N is sunny if N+1 is a perfect square).
+
+## Code
+
+```java title="SunnyNumber.java"
+public class SunnyNumber {
+    public static void main(String[] args) {
+        int num = 80;
+        double root = Math.sqrt(num + 1);
+
+        if (root % 1 == 0)
+            System.out.println(num + " is a Sunny Number.");
+        else
+            System.out.println(num + " is not a Sunny Number.");
+    }
+}
+```
+
+## Output
+
+```bash
+80 is a Sunny Number.
+```
+
+## Explanation
+
+1.  **Condition**: Check if `num + 1` is a perfect square.
+2.  **Math.sqrt**: Returns the square root. Check if it's an integer.

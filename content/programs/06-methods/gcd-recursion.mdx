@@ -1,0 +1,39 @@
+---
+title: Java Program to Find GCD Using Recursion
+description: A Java program to find the Greatest Common Divisor (GCD) of two numbers using recursion.
+---
+
+## Problem Description
+
+Write a Java program to find the GCD (HCF) of two numbers using recursion.
+
+## Code
+
+```java title="GCDRecursion.java"
+public class GCDRecursion {
+    public static void main(String[] args) {
+        int n1 = 366, n2 = 60;
+        int hcf = hcf(n1, n2);
+
+        System.out.printf("G.C.D of %d and %d is %d.", n1, n2, hcf);
+    }
+
+    public static int hcf(int n1, int n2) {
+        if (n2 != 0)
+            return hcf(n2, n1 % n2);
+        else
+            return n1;
+    }
+}
+```
+
+## Output
+
+```bash
+G.C.D of 366 and 60 is 6.
+```
+
+## Explanation
+
+1.  **Euclidean Algorithm**: Efficient method for computing GCD.
+2.  **Recursion**: `hcf(n2, n1 % n2)` until `n2` becomes 0.

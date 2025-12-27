@@ -1,0 +1,38 @@
+---
+title: Java Program to Check Automorphic Number
+description: A Java program to check if a number is an Automorphic number.
+---
+
+## Problem Description
+
+Write a Java program to check if a number is an Automorphic number (a number whose square ends in the same digits as the number itself).
+
+## Code
+
+```java title="AutomorphicNumber.java"
+public class AutomorphicNumber {
+    public static void main(String[] args) {
+        int num = 76;
+        int square = num * num;
+
+        String sNum = String.valueOf(num);
+        String sSquare = String.valueOf(square);
+
+        if (sSquare.endsWith(sNum))
+            System.out.println(num + " is an Automorphic Number.");
+        else
+            System.out.println(num + " is not an Automorphic Number.");
+    }
+}
+```
+
+## Output
+
+```bash
+76 is an Automorphic Number.
+```
+
+## Explanation
+
+1.  **Square**: Calculate the square of the number.
+2.  **Comparison**: Check if the string representation of the square ends with the string representation of the number.

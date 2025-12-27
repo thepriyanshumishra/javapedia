@@ -1,0 +1,52 @@
+---
+title: Java Program to Check Fascinating Number
+description: A Java program to check if a number is a Fascinating number.
+---
+
+## Problem Description
+
+Write a Java program to check if a number is a Fascinating number. When a number(3 digits or more) is multiplied by 2 and 3, and when both these products are concatenated with the original number, then it results in all digits from 1 to 9 present exactly once.
+
+## Code
+
+```java title="FascinatingNumber.java"
+public class FascinatingNumber {
+    public static void main(String[] args) {
+        int num = 192;
+        int num2 = num * 2;
+        int num3 = num * 3;
+
+        String str = "" + num + num2 + num3;
+        boolean flag = true;
+
+        for (char c = '1'; c <= '9'; c++) {
+            int count = 0;
+            for (int i = 0; i < str.length(); i++) {
+                char ch = str.charAt(i);
+                if (ch == c)
+                    count++;
+            }
+            if (count != 1) {
+                flag = false;
+                break;
+            }
+        }
+
+        if (flag)
+            System.out.println(num + " is a Fascinating Number.");
+        else
+            System.out.println(num + " is not a Fascinating Number.");
+    }
+}
+```
+
+## Output
+
+```bash
+192 is a Fascinating Number.
+```
+
+## Explanation
+
+1.  **Concatenate**: `num` + `num*2` + `num*3`.
+2.  **Verify**: Check if the result contains all digits from 1 to 9 exactly once.

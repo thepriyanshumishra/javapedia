@@ -1,0 +1,39 @@
+---
+title: Java Program to Find Sum of Natural Numbers using Recursion
+description: A Java program to find the sum of natural numbers using recursion.
+---
+
+## Problem Description
+
+Write a Java program to find the sum of natural numbers using recursion.
+
+## Code
+
+```java title="SumRecursion.java"
+public class SumRecursion {
+    public static void main(String[] args) {
+        int number = 20;
+        int sum = addNumbers(number);
+        System.out.println("Sum = " + sum);
+    }
+
+    public static int addNumbers(int num) {
+        if (num != 0)
+            return num + addNumbers(num - 1);
+        else
+            return num;
+    }
+}
+```
+
+## Output
+
+```bash
+Sum = 210
+```
+
+## Explanation
+
+1.  **Recursion**: The function `addNumbers` calls itself.
+2.  **Base Case**: When `num` becomes 0, the recursion stops.
+3.  **Recursive Step**: `num + addNumbers(num - 1)`.

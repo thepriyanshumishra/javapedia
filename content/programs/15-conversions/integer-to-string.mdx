@@ -1,0 +1,35 @@
+---
+title: Java Program to Convert Integer to String
+description: A Java program to convert an Integer to a String.
+---
+
+## Problem Description
+
+Write a Java program to convert an Integer to a String.
+
+## Code
+
+```java title="IntegerToString.java"
+public class IntegerToString {
+    public static void main(String[] args) {
+        int num = 1234;
+        String str1 = String.valueOf(num);
+        String str2 = Integer.toString(num);
+
+        System.out.println("Using String.valueOf(): " + str1);
+        System.out.println("Using Integer.toString(): " + str2);
+    }
+}
+```
+
+## Output
+
+```bash
+Using String.valueOf(): 1234
+Using Integer.toString(): 1234
+```
+
+## Explanation
+
+1.  **`String.valueOf()`**: Returns string representation of the int argument.
+2.  **`Integer.toString()`**: Returns a String object representing the specified integer.

@@ -1,0 +1,46 @@
+---
+title: Java Program to Print Pyramid Star Pattern
+description: A Java program to print a pyramid star pattern.
+---
+
+## Problem Description
+
+Write a Java program to print a pyramid star pattern.
+
+## Code
+
+```java title="PyramidPattern.java"
+public class PyramidPattern {
+    public static void main(String[] args) {
+        int rows = 5, k = 0;
+
+        for (int i = 1; i <= rows; ++i, k = 0) {
+            for (int space = 1; space <= rows - i; ++space) {
+                System.out.print("  ");
+            }
+
+            while (k != 2 * i - 1) {
+                System.out.print("* ");
+                ++k;
+            }
+
+            System.out.println();
+        }
+    }
+}
+```
+
+## Output
+
+```bash
+        * 
+      * * * 
+    * * * * * 
+  * * * * * * * 
+* * * * * * * * * 
+```
+
+## Explanation
+
+1.  **Spaces**: Calculate spaces based on the row number.
+2.  **Stars**: Print `2 * i - 1` stars for each row `i`.

@@ -1,0 +1,14 @@
+{
+    "title": "Operators",
+    "pages": [
+        "arithmetic-operators",
+        "relational-operators",
+        "logical-operators",
+        "bitwise-operators",
+        "assignment-operators",
+        "ternary-operator",
+        "unary-operators",
+        "find-quotient-and-reminder",
+        "java-program-to-add-two-binary-numbers"
+    ]
+}

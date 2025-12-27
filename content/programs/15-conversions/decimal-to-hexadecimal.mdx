@@ -1,0 +1,33 @@
+---
+title: Java Program to Convert Decimal to Hexadecimal
+description: A Java program to convert Decimal to Hexadecimal.
+---
+
+## Problem Description
+
+Write a Java program to convert a Decimal number to a Hexadecimal number.
+
+## Code
+
+```java title="DecimalToHex.java"
+public class DecimalToHex {
+    public static void main(String[] args) {
+        int decimal = 2545;
+        String hex = Integer.toHexString(decimal);
+        
+        System.out.println("Decimal: " + decimal);
+        System.out.println("Hexadecimal: " + hex);
+    }
+}
+```
+
+## Output
+
+```bash
+Decimal: 2545
+Hexadecimal: 9f1
+```
+
+## Explanation
+
+1.  **`Integer.toHexString(decimal)`**: Returns a string representation of the integer argument as an unsigned integer in base 16.

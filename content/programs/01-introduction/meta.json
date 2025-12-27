@@ -1,0 +1,14 @@
+{
+    "title": "Introduction",
+    "pages": [
+        "hello-world",
+        "print-an-integer",
+        "add-two-integers",
+        "swap-two-numbers",
+        "multiply-two-numbers",
+        "ascii-value-of-character",
+        "size-of-data-types",
+        "calculate-simple-interest",
+        "calculate-compound-interest"
+    ]
+}

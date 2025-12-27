@@ -1,0 +1,35 @@
+---
+title: Java Program to Convert String to Integer
+description: A Java program to convert a String to an Integer.
+---
+
+## Problem Description
+
+Write a Java program to convert a String to an Integer.
+
+## Code
+
+```java title="StringToInteger.java"
+public class StringToInteger {
+    public static void main(String[] args) {
+        String str = "1234";
+        int num = Integer.parseInt(str);
+        int num2 = Integer.valueOf(str);
+
+        System.out.println("Using Integer.parseInt(): " + num);
+        System.out.println("Using Integer.valueOf(): " + num2);
+    }
+}
+```
+
+## Output
+
+```bash
+Using Integer.parseInt(): 1234
+Using Integer.valueOf(): 1234
+```
+
+## Explanation
+
+1.  **`Integer.parseInt()`**: Returns primitive `int`.
+2.  **`Integer.valueOf()`**: Returns `Integer` object.

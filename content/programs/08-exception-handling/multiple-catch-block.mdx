@@ -1,0 +1,40 @@
+---
+title: Java Program to Demonstrate Multiple Catch Blocks
+description: A Java program to demonstrate the usage of multiple catch blocks.
+---
+
+## Problem Description
+
+Write a Java program to demonstrate how to handle multiple exceptions using multiple catch blocks.
+
+## Code
+
+```java title="MultipleCatch.java"
+public class MultipleCatch {
+    public static void main(String[] args) {
+        try {
+            int[] a = new int[5];
+            a[5] = 30 / 0;
+        } catch (ArithmeticException e) {
+            System.out.println("Arithmetic Exception occurs");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("ArrayIndexOutOfBounds Exception occurs");
+        } catch (Exception e) {
+            System.out.println("Parent Exception occurs");
+        }
+        System.out.println("Rest of the code");
+    }
+}
+```
+
+## Output
+
+```bash
+Arithmetic Exception occurs
+Rest of the code
+```
+
+## Explanation
+
+1.  **Multiple Catch**: Allows handling different types of exceptions differently.
+2.  **Order**: Catch blocks must be ordered from most specific to most general.

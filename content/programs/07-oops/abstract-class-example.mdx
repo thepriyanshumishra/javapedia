@@ -1,0 +1,46 @@
+---
+title: Java Program to Demonstrate Abstract Class
+description: A Java program to demonstrate the usage of abstract classes and methods.
+---
+
+## Problem Description
+
+Write a Java program to demonstrate the concept of abstract classes and abstract methods.
+
+## Code
+
+```java title="AbstractClass.java"
+abstract class Animal {
+    abstract void makeSound();
+
+    public void eat() {
+        System.out.println("I can eat.");
+    }
+}
+
+class Dog extends Animal {
+    public void makeSound() {
+        System.out.println("Bark bark");
+    }
+}
+
+public class AbstractClass {
+    public static void main(String[] args) {
+        Dog d1 = new Dog();
+        d1.makeSound();
+        d1.eat();
+    }
+}
+```
+
+## Output
+
+```bash
+Bark bark
+I can eat.
+```
+
+## Explanation
+
+1.  **`abstract` Class**: Cannot be instantiated. Can contain both abstract and non-abstract methods.
+2.  **`abstract` Method**: Has no body. Must be implemented by the subclass.

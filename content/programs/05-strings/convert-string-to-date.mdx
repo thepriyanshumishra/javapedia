@@ -1,0 +1,36 @@
+---
+title: Java Program to Convert String to Date
+description: A Java program to convert a string to a date object.
+---
+
+## Problem Description
+
+Write a Java program to convert a string representation of a date into a `Date` or `LocalDate` object.
+
+## Code
+
+```java title="StringToDate.java"
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class StringToDate {
+    public static void main(String[] args) {
+        String string = "2023-10-25";
+        LocalDate date = LocalDate.parse(string, DateTimeFormatter.ISO_DATE);
+
+        System.out.println(date);
+    }
+}
+```
+
+## Output
+
+```bash
+2023-10-25
+```
+
+## Explanation
+
+1.  **`LocalDate`**: Represents a date without time-zone.
+2.  **`parse()`**: Parses the text string using a specific formatter.
+3.  **`DateTimeFormatter.ISO_DATE`**: Standard formatter for ISO date format (YYYY-MM-DD).

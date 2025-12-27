@@ -1,0 +1,38 @@
+---
+title: Java Program to Display Fibonacci Series
+description: A Java program to display the Fibonacci series.
+---
+
+## Problem Description
+
+Write a Java program to display the Fibonacci series up to a given number of terms.
+
+## Code
+
+```java title="FibonacciSeries.java"
+public class FibonacciSeries {
+    public static void main(String[] args) {
+        int n = 10, firstTerm = 0, secondTerm = 1;
+        System.out.println("Fibonacci Series till " + n + " terms:");
+
+        for (int i = 1; i <= n; ++i) {
+            System.out.print(firstTerm + ", ");
+
+            int nextTerm = firstTerm + secondTerm;
+            firstTerm = secondTerm;
+            secondTerm = nextTerm;
+        }
+    }
+}
+```
+
+## Output
+
+```bash
+Fibonacci Series till 10 terms:
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 
+```
+
+## Explanation
+
+1.  **Fibonacci**: Each number is the sum of the two preceding ones, starting from 0 and 1.

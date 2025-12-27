@@ -1,0 +1,20 @@
+{
+    "title": "Number Programs",
+    "pages": [
+        "reverse-a-number",
+        "palindrome-number",
+        "armstrong-number",
+        "fibonacci-series",
+        "prime-number-check",
+        "automorphic-number",
+        "peterson-number",
+        "sunny-number",
+        "tech-number",
+        "fascinating-number",
+        "keith-number",
+        "neon-number",
+        "spy-number",
+        "atm-program",
+        "number-to-word"
+    ]
+}

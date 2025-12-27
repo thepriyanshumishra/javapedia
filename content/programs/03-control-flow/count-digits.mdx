@@ -1,0 +1,38 @@
+---
+title: Java Program to Count Number of Digits in an Integer
+description: A Java program to count the number of digits in an integer.
+---
+
+## Problem Description
+
+Write a Java program to count the number of digits in an integer entered by the user.
+
+## Code
+
+```java title="CountDigits.java"
+public class CountDigits {
+    public static void main(String[] args) {
+        int count = 0, num = 3452;
+
+        while (num != 0) {
+            // num = num/10
+            num /= 10;
+            ++count;
+        }
+
+        System.out.println("Number of digits: " + count);
+    }
+}
+```
+
+## Output
+
+```bash
+Number of digits: 4
+```
+
+## Explanation
+
+1.  **Loop**: Runs while `num` is not 0.
+2.  **Division**: Divides `num` by 10 in each iteration to remove the last digit.
+3.  **Counter**: Increments `count` in each iteration.

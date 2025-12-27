@@ -1,0 +1,39 @@
+---
+title: Java Program to Demonstrate Logical Operators
+description: A Java program to demonstrate the usage of logical operators.
+---
+
+## Problem Description
+
+Write a Java program to demonstrate the usage of logical operators: AND (`&&`), OR (`||`), and NOT (`!`).
+
+## Code
+
+```java title="LogicalOperators.java"
+public class LogicalOperators {
+    public static void main(String[] args) {
+        boolean a = true;
+        boolean b = false;
+
+        System.out.println("a && b: " + (a && b));
+        System.out.println("a || b: " + (a || b));
+        System.out.println("!a: " + (!a));
+        System.out.println("!b: " + (!b));
+    }
+}
+```
+
+## Output
+
+```bash
+a && b: false
+a || b: true
+!a: false
+!b: true
+```
+
+## Explanation
+
+1.  **`&&` (Logical AND)**: Returns true if both operands are true.
+2.  **`||` (Logical OR)**: Returns true if at least one operand is true.
+3.  **`!` (Logical NOT)**: Reverses the boolean value of the operand.

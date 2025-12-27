@@ -1,0 +1,37 @@
+---
+title: Java Program to Calculate Average Using Arrays
+description: A Java program to calculate the average of numbers using an array.
+---
+
+## Problem Description
+
+Write a Java program to calculate the average of numbers using an array.
+
+## Code
+
+```java title="AverageUsingArray.java"
+public class AverageUsingArray {
+    public static void main(String[] args) {
+        double[] numArray = { 45.3, 67.5, -45.6, 20.34, 33.0, 45.6 };
+        double sum = 0.0;
+
+        for (double num : numArray) {
+            sum += num;
+        }
+
+        double average = sum / numArray.length;
+        System.out.format("The average is: %.2f", average);
+    }
+}
+```
+
+## Output
+
+```bash
+The average is: 27.69
+```
+
+## Explanation
+
+1.  **Sum**: Iterate through the array and calculate the sum.
+2.  **Average**: Divide sum by the length of the array.

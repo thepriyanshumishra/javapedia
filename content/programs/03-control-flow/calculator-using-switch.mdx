@@ -1,0 +1,82 @@
+---
+title: Java Program to Make a Simple Calculator Using Switch Case
+description: A Java program to create a simple calculator using the switch statement.
+---
+
+## Problem Description
+
+Write a Java program to perform basic arithmetic operations (addition, subtraction, multiplication, division) based on user input using a `switch` statement.
+
+## Code
+
+```java title="Calculator.java"
+import java.util.Scanner;
+
+public class Calculator {
+    public static void main(String[] args) {
+        char operator;
+        Double number1, number2, result;
+
+        // create an object of Scanner class
+        Scanner input = new Scanner(System.in);
+
+        // ask users to enter operator
+        System.out.println("Choose an operator: +, -, *, or /");
+        operator = input.next().charAt(0);
+
+        // ask users to enter numbers
+        System.out.println("Enter first number");
+        number1 = input.nextDouble();
+
+        System.out.println("Enter second number");
+        number2 = input.nextDouble();
+
+        switch (operator) {
+            case '+':
+                result = number1 + number2;
+                System.out.println(number1 + " + " + number2 + " = " + result);
+                break;
+
+            case '-':
+                result = number1 - number2;
+                System.out.println(number1 + " - " + number2 + " = " + result);
+                break;
+
+            case '*':
+                result = number1 * number2;
+                System.out.println(number1 + " * " + number2 + " = " + result);
+                break;
+
+            case '/':
+                result = number1 / number2;
+                System.out.println(number1 + " / " + number2 + " = " + result);
+                break;
+
+            default:
+                System.out.println("Invalid operator!");
+                break;
+        }
+
+        input.close();
+    }
+}
+```
+
+## Output
+
+```bash
+Choose an operator: +, -, *, or /
+*
+Enter first number
+3
+Enter second number
+9
+3.0 * 9.0 = 27.0
+```
+
+## Explanation
+
+1.  **`Scanner`**: Used to take input from the user.
+2.  **`switch`**: Selects one of many code blocks to be executed based on the value of `operator`.
+3.  **`case`**: Each case corresponds to an operator.
+4.  **`break`**: Terminates the switch block.

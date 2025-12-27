@@ -1,0 +1,42 @@
+---
+title: Java Program to Compare Two Strings
+description: A Java program to compare two strings.
+---
+
+## Problem Description
+
+Write a Java program to compare two strings for equality.
+
+## Code
+
+```java title="CompareStrings.java"
+public class CompareStrings {
+    public static void main(String[] args) {
+        String style = "Bold";
+        String style2 = "Bold";
+
+        if(style == style2)
+            System.out.println("Equal");
+        else
+            System.out.println("Not Equal");
+            
+        // Using equals()
+        if(style.equals(style2))
+             System.out.println("Equal");
+        else
+            System.out.println("Not Equal");
+    }
+}
+```
+
+## Output
+
+```bash
+Equal
+Equal
+```
+
+## Explanation
+
+1.  **`==`**: Compares references (memory addresses).
+2.  **`equals()`**: Compares the actual content of the strings. Always use `equals()` for string content comparison.

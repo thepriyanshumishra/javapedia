@@ -1,0 +1,40 @@
+---
+title: Java Program to Find Largest of Three Numbers
+description: A Java program to find the largest among three numbers.
+---
+
+## Problem Description
+
+Write a Java program to find the largest number among three given numbers.
+
+## Code
+
+```java title="LargestNumber.java"
+public class LargestNumber {
+    public static void main(String[] args) {
+        double n1 = -4.5, n2 = 3.9, n3 = 2.5;
+
+        if( n1 >= n2 && n1 >= n3)
+            System.out.println(n1 + " is the largest number.");
+
+        else if (n2 >= n1 && n2 >= n3)
+            System.out.println(n2 + " is the largest number.");
+
+        else
+            System.out.println(n3 + " is the largest number.");
+    }
+}
+```
+
+## Output
+
+```bash
+3.9 is the largest number.
+```
+
+## Explanation
+
+1.  **`if-else if-else` Ladder**: Checks conditions sequentially.
+2.  **`n1 >= n2 && n1 >= n3`**: Checks if `n1` is greater than or equal to both `n2` and `n3`.
+3.  **`n2 >= n1 && n2 >= n3`**: Checks if `n2` is greater than or equal to both `n1` and `n3`.
+4.  If neither is true, `n3` must be the largest.

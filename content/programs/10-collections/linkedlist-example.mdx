@@ -1,0 +1,43 @@
+---
+title: Java Program to Demonstrate LinkedList
+description: A Java program to demonstrate the usage of LinkedList.
+---
+
+## Problem Description
+
+Write a Java program to demonstrate basic operations on a LinkedList.
+
+## Code
+
+```java title="LinkedListExample.java"
+import java.util.LinkedList;
+
+public class LinkedListExample {
+    public static void main(String[] args) {
+        LinkedList<String> animals = new LinkedList<>();
+
+        // Add elements
+        animals.add("Dog");
+        animals.add("Cat");
+        animals.add("Cow");
+
+        System.out.println("LinkedList: " + animals);
+
+        // Add element at specific index
+        animals.add(1, "Horse");
+        System.out.println("Updated LinkedList: " + animals);
+    }
+}
+```
+
+## Output
+
+```bash
+LinkedList: [Dog, Cat, Cow]
+Updated LinkedList: [Dog, Horse, Cat, Cow]
+```
+
+## Explanation
+
+1.  **LinkedList**: Doubly-linked list implementation of the List and Deque interfaces.
+2.  **Performance**: Better for frequent insertions and deletions compared to ArrayList.

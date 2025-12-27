@@ -1,0 +1,47 @@
+---
+title: Java Program to Check Prime Number
+description: A Java program to check if a number is prime.
+---
+
+## Problem Description
+
+Write a Java program to check if a given number is a prime number.
+
+## Code
+
+```java title="PrimeCheck.java"
+public class PrimeCheck {
+    public static void main(String[] args) {
+        int num = 29;
+        boolean flag = false;
+        
+        if (num == 0 || num == 1) {
+            flag = true;
+        }
+
+        for (int i = 2; i <= num / 2; ++i) {
+            // condition for nonprime number
+            if (num % i == 0) {
+                flag = true;
+                break;
+            }
+        }
+
+        if (!flag)
+            System.out.println(num + " is a prime number.");
+        else
+            System.out.println(num + " is not a prime number.");
+    }
+}
+```
+
+## Output
+
+```bash
+29 is a prime number.
+```
+
+## Explanation
+
+1.  **Prime**: A number greater than 1 that has no positive divisors other than 1 and itself.
+2.  **Optimization**: Loop runs up to `num / 2`.

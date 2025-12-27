@@ -1,0 +1,62 @@
+---
+title: Java Program to Demonstrate Assignment Operators
+description: A Java program to demonstrate the usage of assignment operators.
+---
+
+## Problem Description
+
+Write a Java program to demonstrate the usage of assignment operators (`=`, `+=`, `-=`, `*=`, `/=`, `%=`).
+
+## Code
+
+```java title="AssignmentOperators.java"
+public class AssignmentOperators {
+    public static void main(String[] args) {
+        int a = 10;
+        int b = 20;
+        int c = 0;
+
+        c = a + b;
+        System.out.println("c = a + b = " + c);
+
+        c += a; // c = c + a
+        System.out.println("c += a = " + c);
+
+        c -= a; // c = c - a
+        System.out.println("c -= a = " + c);
+
+        c *= a; // c = c * a
+        System.out.println("c *= a = " + c);
+
+        a = 10;
+        c = 15;
+        c /= a; // c = c / a
+        System.out.println("c /= a = " + c);
+
+        a = 10;
+        c = 15;
+        c %= a; // c = c % a
+        System.out.println("c %= a = " + c);
+    }
+}
+```
+
+## Output
+
+```bash
+c = a + b = 30
+c += a = 40
+c -= a = 30
+c *= a = 300
+c /= a = 1
+c %= a = 5
+```
+
+## Explanation
+
+1.  **`=`**: Simple assignment.
+2.  **`+=`**: Add and assign.
+3.  **`-=`**: Subtract and assign.
+4.  **`*=`**: Multiply and assign.
+5.  **`/=`**: Divide and assign.
+6.  **`%=`**: Modulus and assign.

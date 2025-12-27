@@ -1,0 +1,15 @@
+{
+    "title": "Miscellaneous",
+    "pages": [
+        "calculate-average",
+        "calculate-cgpa",
+        "compound-interest",
+        "simple-interest",
+        "area-of-circle",
+        "area-of-rectangle",
+        "area-of-triangle",
+        "ip-address-validation",
+        "generate-random-number",
+        "coin-toss-simulation"
+    ]
+}

@@ -1,0 +1,51 @@
+---
+title: Java Program to Calculate Standard Deviation
+description: A Java program to calculate the standard deviation of a series of numbers.
+---
+
+## Problem Description
+
+Write a Java program to calculate the standard deviation of a given set of numbers.
+
+## Code
+
+```java title="StandardDeviation.java"
+public class StandardDeviation {
+    public static void main(String[] args) {
+        double[] numArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        double SD = calculateSD(numArray);
+
+        System.out.format("Standard Deviation = %.6f", SD);
+    }
+
+    public static double calculateSD(double numArray[])
+    {
+        double sum = 0.0, standardDeviation = 0.0;
+        int length = numArray.length;
+
+        for(double num : numArray) {
+            sum += num;
+        }
+
+        double mean = sum / length;
+
+        for(double num: numArray) {
+            standardDeviation += Math.pow(num - mean, 2);
+        }
+
+        return Math.sqrt(standardDeviation / length);
+    }
+}
+```
+
+## Output
+
+```bash
+Standard Deviation = 2.872281
+```
+
+## Explanation
+
+1.  **Mean**: Calculate the average of the numbers.
+2.  **Variance**: Calculate the average of the squared differences from the Mean.
+3.  **Standard Deviation**: Square root of the Variance.

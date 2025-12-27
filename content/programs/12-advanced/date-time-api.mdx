@@ -1,0 +1,50 @@
+---
+title: Java Program to Demonstrate Date and Time API
+description: A Java program to demonstrate the usage of Java 8 Date and Time API.
+---
+
+## Problem Description
+
+Write a Java program to demonstrate the usage of `LocalDate`, `LocalTime`, and `LocalDateTime`.
+
+## Code
+
+```java title="DateTimeExample.java"
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class DateTimeExample {
+    public static void main(String[] args) {
+        LocalDate date = LocalDate.now();
+        System.out.println("Current Date: " + date);
+
+        LocalTime time = LocalTime.now();
+        System.out.println("Current Time: " + time);
+
+        LocalDateTime current = LocalDateTime.now();
+        System.out.println("Current Date and Time: " + current);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formatted = current.format(formatter);
+        System.out.println("Formatted Date and Time: " + formatted);
+    }
+}
+```
+
+## Output
+
+```bash
+Current Date: 2023-10-27
+Current Time: 10:15:30.123456
+Current Date and Time: 2023-10-27T10:15:30.123456
+Formatted Date and Time: 2023-10-27 10:15:30
+```
+
+## Explanation
+
+1.  **`java.time` Package**: Introduced in Java 8 to handle date and time.
+2.  **`LocalDate`**: Represents a date (year, month, day).
+3.  **`LocalTime`**: Represents a time (hour, minute, second, nanosecond).
+4.  **`LocalDateTime`**: Represents both date and time.

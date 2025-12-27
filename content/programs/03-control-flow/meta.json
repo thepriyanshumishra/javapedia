@@ -1,0 +1,26 @@
+{
+    "title": "Control Flow",
+    "pages": [
+        "check-even-or-odd",
+        "largest-of-three-numbers",
+        "roots-of-quadratic-equation",
+        "calculator-using-switch",
+        "sum-of-natural-numbers",
+        "multiplication-table",
+        "display-alphabets",
+        "count-digits",
+        "calculate-power-of-a-number",
+        "factorial-in-java",
+        "java-program-to-check-Leap-year",
+        "java-program-to-check-divisbility",
+        "java-program-to-check-whether-input-character-is-vowel-or-consonant",
+        "java-program-to-find-gcd-and-lcm",
+        "java-program-to-find-nth-fibonacci-number",
+        "java-program-to-reverse-a-number",
+        "java-program-to-check-palindrome-number",
+        "java-program-to-check-armstrong-number",
+        "java-program-to-check-perfect-number",
+        "java-program-to-check-prime-number",
+        "java-pattern-printing-programs"
+    ]
+}

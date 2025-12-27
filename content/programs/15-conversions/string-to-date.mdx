@@ -1,0 +1,34 @@
+---
+title: Java Program to Convert String to Date
+description: A Java program to convert a String to a Date.
+---
+
+## Problem Description
+
+Write a Java program to convert a String to a Date.
+
+## Code
+
+```java title="StringToDate.java"
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class StringToDate {
+    public static void main(String[] args) throws Exception {
+        String sDate1 = "31/12/1998";
+        Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+        System.out.println(sDate1 + "\t" + date1);
+    }
+}
+```
+
+## Output
+
+```bash
+31/12/1998	Thu Dec 31 00:00:00 IST 1998
+```
+
+## Explanation
+
+1.  **`SimpleDateFormat`**: Used for formatting and parsing dates.
+2.  **`parse()`**: Parses text from the beginning of the given string to produce a date.

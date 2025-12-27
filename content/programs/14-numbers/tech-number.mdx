@@ -1,0 +1,43 @@
+---
+title: Java Program to Check Tech Number
+description: A Java program to check if a number is a Tech number.
+---
+
+## Problem Description
+
+Write a Java program to check if a number is a Tech number. A number is a Tech number if the given number has an even number of digits and the number can be divided exactly into two parts from the middle. After equally dividing the number, sum up the numbers and find the square of the sum. If we get the number itself as square, the number is a Tech number.
+
+## Code
+
+```java title="TechNumber.java"
+public class TechNumber {
+    public static void main(String[] args) {
+        int num = 2025;
+        int digits = (int) Math.log10(num) + 1;
+
+        if (digits % 2 == 0) {
+            int firstHalf = num / (int) Math.pow(10, digits / 2);
+            int secondHalf = num % (int) Math.pow(10, digits / 2);
+            int sum = firstHalf + secondHalf;
+            if (num == sum * sum)
+                System.out.println(num + " is a Tech Number.");
+            else
+                System.out.println(num + " is not a Tech Number.");
+        } else {
+            System.out.println(num + " is not a Tech Number.");
+        }
+    }
+}
+```
+
+## Output
+
+```bash
+2025 is a Tech Number.
+```
+
+## Explanation
+
+1.  **Digits**: Count digits. Must be even.
+2.  **Split**: Split into two halves.
+3.  **Check**: `(firstHalf + secondHalf)^2 == num`.

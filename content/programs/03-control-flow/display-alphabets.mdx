@@ -1,0 +1,32 @@
+---
+title: Java Program to Display Alphabets (A to Z) using Loop
+description: A Java program to display alphabets from A to Z using a loop.
+---
+
+## Problem Description
+
+Write a Java program to display alphabets from A to Z using a loop.
+
+## Code
+
+```java title="Alphabets.java"
+public class Alphabets {
+    public static void main(String[] args) {
+        char c;
+
+        for(c = 'A'; c <= 'Z'; ++c)
+            System.out.print(c + " ");
+    }
+}
+```
+
+## Output
+
+```bash
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
+```
+
+## Explanation
+
+1.  **Char Loop**: Characters in Java are stored as ASCII values, so you can iterate through them like integers.
+2.  **`++c`**: Increments the ASCII value to the next character.

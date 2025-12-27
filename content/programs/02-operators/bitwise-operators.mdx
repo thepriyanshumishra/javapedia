@@ -1,0 +1,49 @@
+---
+title: Java Program to Demonstrate Bitwise Operators
+description: A Java program to demonstrate the usage of bitwise operators.
+---
+
+## Problem Description
+
+Write a Java program to demonstrate the usage of bitwise operators: AND (`&`), OR (`|`), XOR (`^`), Complement (`~`), Left Shift (`<<`), Right Shift (`>>`), and Unsigned Right Shift (`>>>`).
+
+## Code
+
+```java title="BitwiseOperators.java"
+public class BitwiseOperators {
+    public static void main(String[] args) {
+        int a = 5;  // 0101 in binary
+        int b = 3;  // 0011 in binary
+
+        System.out.println("a & b: " + (a & b));   // 0001 = 1
+        System.out.println("a | b: " + (a | b));   // 0111 = 7
+        System.out.println("a ^ b: " + (a ^ b));   // 0110 = 6
+        System.out.println("~a: " + (~a));         // 1010 = -6 (in 2's complement)
+        System.out.println("a << 1: " + (a << 1)); // 1010 = 10
+        System.out.println("a >> 1: " + (a >> 1)); // 0010 = 2
+        System.out.println("a >>> 1: " + (a >>> 1)); // 0010 = 2
+    }
+}
+```
+
+## Output
+
+```bash
+a & b: 1
+a | b: 7
+a ^ b: 6
+~a: -6
+a << 1: 10
+a >> 1: 2
+a >>> 1: 2
+```
+
+## Explanation
+
+1.  **`&` (Bitwise AND)**: Performs AND on each bit.
+2.  **`|` (Bitwise OR)**: Performs OR on each bit.
+3.  **`^` (Bitwise XOR)**: Performs XOR on each bit.
+4.  **`~` (Bitwise Complement)**: Inverts all bits.
+5.  **`<<` (Left Shift)**: Shifts bits to the left, filling with 0.
+6.  **`>>` (Right Shift)**: Shifts bits to the right, preserving sign.
+7.  **`>>>` (Unsigned Right Shift)**: Shifts bits to the right, filling with 0.

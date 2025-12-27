@@ -1,0 +1,39 @@
+---
+title: Java Program to Concatenate Two Strings
+description: A Java program to concatenate two strings.
+---
+
+## Problem Description
+
+Write a Java program to concatenate (join) two strings.
+
+## Code
+
+```java title="ConcatenateStrings.java"
+public class ConcatenateStrings {
+    public static void main(String[] args) {
+        String str1 = "Java";
+        String str2 = "Programming";
+
+        // Using + operator
+        String result1 = str1 + " " + str2;
+        System.out.println("Using + operator: " + result1);
+
+        // Using concat() method
+        String result2 = str1.concat(" ").concat(str2);
+        System.out.println("Using concat(): " + result2);
+    }
+}
+```
+
+## Output
+
+```bash
+Using + operator: Java Programming
+Using concat(): Java Programming
+```
+
+## Explanation
+
+1.  **`+` Operator**: The easiest way to join strings.
+2.  **`concat()`**: A method of the String class to append one string to another.
