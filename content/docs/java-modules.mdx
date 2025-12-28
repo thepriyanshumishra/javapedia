@@ -1,0 +1,93 @@
+---
+title: Java Modules (JPMS)
+description: Learn about the Java Platform Module System (JPMS). Understand module-info.java, exports, requires, and the benefits of modularity.
+icon: Box
+---
+
+Introduced in Java 9, the Java Platform Module System (JPMS) allows you to group related packages and resources into a **module**.
+
+A module is a named, self-describing collection of code and data.
+
+---
+
+## Why Modules?
+
+1.  **Strong Encapsulation**: You can hide internal packages from other modules.
+2.  **Reliable Configuration**: Explicit dependencies (requires) ensure all needed modules are present at startup.
+3.  **Smaller Runtime**: You can create custom JREs containing only the modules your app needs (using `jlink`).
+
+---
+
+## Defining a Module
+
+A module is defined in a file named `module-info.java` at the root of the source directory.
+
+**Structure:**
+
+```java
+module com.mycompany.mymodule {
+    // Directives
+}
+```
+
+---
+
+## Key Directives
+
+### 1. `requires`
+Specifies that this module depends on another module.
+
+```java
+module com.mycompany.app {
+    requires java.sql;
+    requires com.mycompany.utils;
+}
+```
+
+### 2. `exports`
+Specifies that the packages in this module are accessible to other modules.
+
+```java
+module com.mycompany.utils {
+    exports com.mycompany.utils.math; // Only this package is visible
+    // com.mycompany.utils.internal is HIDDEN
+}
+```
+
+### 3. `requires transitive`
+If module A requires transitive module B, then any module reading A also implicitly reads B.
+
+```java
+module com.mycompany.api {
+    requires transitive java.logging;
+}
+```
+
+---
+
+## Example Project Structure
+
+```text
+src/
+  com.hello/
+    module-info.java
+    com/
+      hello/
+        HelloWorld.java
+```
+
+**module-info.java**:
+```java
+module com.hello {
+    // No dependencies (implicitly requires java.base)
+}
+```
+
+---
+
+## Key Takeaways
+
+*   **Encapsulation**: Modules control which packages are public.
+*   **Dependencies**: `module-info.java` clearly defines what your code needs.
+*   **Java 9+**: Modules are a core part of modern Java.
+*   **Migration**: You can still use the classpath (unnamed module) for legacy apps.

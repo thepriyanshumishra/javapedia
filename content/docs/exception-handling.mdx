@@ -302,6 +302,24 @@ Withdrawal successful. New balance: $500.0
 Transaction failed: Insufficient funds. Available: $500.0, Requested: $600.0
 ```
 
+### Custom Unchecked Exception
+
+You can also create unchecked exceptions by extending `RuntimeException`.
+
+```java
+class InvalidAgeException extends RuntimeException {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+// Usage:
+// throw new InvalidAgeException("Age cannot be negative");
+// No need to declare 'throws' in method signature.
+```
+
+---
+
 ## Common Exception Types
 
 ### 1. NullPointerException

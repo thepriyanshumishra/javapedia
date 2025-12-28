@@ -400,6 +400,35 @@ class DefaultMethodExample {
 }
 ```
 
+## Marker Interfaces
+
+A **Marker Interface** is an interface that has no methods or constants. It is used to "mark" or "tag" a class so that the JVM or a framework can treat it specially.
+
+Examples:
+*   `Serializable`: Marks a class as serializable.
+*   `Cloneable`: Marks a class as cloneable.
+*   `Remote`: Marks a class as a remote object.
+
+```java
+interface SafeToDelete {
+    // No methods - just a marker
+}
+
+class TempFile implements SafeToDelete {
+    // implementation
+}
+
+class FileCleaner {
+    void clean(Object obj) {
+        if (obj instanceof SafeToDelete) {
+            System.out.println("Deleting file...");
+        }
+    }
+}
+```
+
+---
+
 ## Static Methods in Interfaces (Java 8+)
 
 Interfaces can also have static methods that belong to the interface itself.

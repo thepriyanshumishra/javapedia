@@ -18,17 +18,14 @@ for(dataType item : array) {
 
 Here,
 
-- **array** - an array or a collection
-- **item** - each item of array/collection is assigned to this variable
-- **dataType** - the data type of the array/collection
+*   **array** - an array or a collection
+*   **item** - each item of array/collection is assigned to this variable
+*   **dataType** - the data type of the array/collection
 
 ### Example 1: Print Array Elements
 
-#### Input
-
 ```java
 // print array elements
-
 class Main {
   public static void main(String[] args) {
 
@@ -43,13 +40,7 @@ class Main {
 }
 ```
 
-<Quiz
-  question="The enhanced for loop is mainly used with which data structure?"
-  options={["Strings", "Arrays and Collections", "Integers", "Booleans"]}
-  correctAnswerIndex={1}
-/>
-
-#### Output
+**Output:**
 
 ```plaintext
 3
@@ -58,119 +49,64 @@ class Main {
 -5
 ```
 
-Here, we have used the **for-each loop** to print each element of the numbers array one by one.
+---
 
-- In the first iteration, the item will be 3.
-- In the second iteration, the item will be 9.
-- In the third iteration, the item will be 5.
-- In the fourth iteration, the item will be -5.
+## 2. Iterating over Collections
 
-### Example 2: Sum of Array Elements
-
-#### Input
+The enhanced for loop is perfect for iterating over collections like `ArrayList`.
 
 ```java
-// Calculate the sum of all elements of an array
+import java.util.ArrayList;
 
 class Main {
- public static void main(String[] args) {
+    public static void main(String[] args) {
+        ArrayList<String> animals = new ArrayList<>();
+        animals.add("Dog");
+        animals.add("Cat");
+        animals.add("Horse");
 
-   // an array of numbers
-   int[] numbers = {3, 4, 5, -5, 0, 12};
-   int sum = 0;
-
-   // iterating through each element of the array
-   for (int number: numbers) {
-     sum += number;
-   }
-
-   System.out.println("Sum = " + sum);
- }
+        for (String animal : animals) {
+            System.out.println(animal);
+        }
+    }
 }
 ```
 
-#### Output:
+**Output:**
 
 ```plaintext
-Sum = 19
+Dog
+Cat
+Horse
 ```
 
-In the above program, the execution of the for-each loop looks as:
+---
 
-| Iteration | Variables                           |
-| --------- | ----------------------------------- |
-| 1         | `number` = 3 `sum` = 0 + 3 = 3      |
-| 2         | `number` = 4 `sum` = 3 + 4 = 7      |
-| 3         | `number` = 5 `sum` = 7 + 5 = 12     |
-| 4         | `number` = -5 `sum` = 12 + (-5) = 7 |
-| 5         | `number` = 0 `sum` = 7 + 0 = 7      |
-| 6         | `number` = 12 `sum` = 7 + 12 = 19   |
-
-As we can see, we have added each element of the `numbers` array to the `sum` variable in each iteration of the loop.
-
-## for loop Vs for-each loop
+## 3. for loop Vs for-each loop
 
 Let's see how a for-each loop is different from a regular [Java for loop](/docs/for-loop).
 
 ### 1. Using for loop
 
-#### Input
-
 ```java
-class Main {
- public static void main(String[] args) {
+char[] vowels = {'a', 'e', 'i', 'o', 'u'};
 
-   char[] vowels = {'a', 'e', 'i', 'o', 'u'};
-
-   // iterating through an array using a for loop
-   for (int i = 0; i < vowels.length; ++ i) {
-     System.out.println(vowels[i]);
-   }
- }
+for (int i = 0; i < vowels.length; ++ i) {
+  System.out.println(vowels[i]);
 }
-```
-
-#### Output:
-
-```plaintext
-a
-e
-i
-o
-u
 ```
 
 ### 2. Using for-each Loop
 
-#### Input
-
 ```java
-class Main {
- public static void main(String[] args) {
+char[] vowels = {'a', 'e', 'i', 'o', 'u'};
 
-   char[] vowels = {'a', 'e', 'i', 'o', 'u'};
-
-   // iterating through an array using the for-each loop
-   for (char item: vowels) {
-     System.out.println(item);
-   }
- }
+for (char item: vowels) {
+  System.out.println(item);
 }
 ```
 
-#### Output:
-
-```plaintext
-a
-e
-i
-o
-u
-```
-
 Here, the output of both programs is the same. However, the **for-each** loop is easier to write and understand.
-
-This is why the **for-each** loop is preferred over the **for** loop when working with arrays and collections.
 
 <Quiz
   question="Can you use a for-each loop to modify elements in the original array?"
@@ -189,11 +125,20 @@ This is why the **for-each** loop is preferred over the **for** loop when workin
 
 </Callout>
 
-<div className="mt-8" />
+---
+
+## Key Takeaways
+
+*   **Syntax**: `for (Type item : collection)`.
+*   **Read-Only**: You cannot modify the array/collection structure (add/remove) while iterating.
+*   **Simplicity**: No need to manage index variables `i`.
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Modification**: Trying to modify the collection (e.g., `list.remove(item)`) inside a for-each loop will throw a `ConcurrentModificationException`. Use an `Iterator` instead.
 
 ## Challenge
-
-Complete this chapter to unlock the next one.
 
 <Challenge
   id="enhanced-for-loop"

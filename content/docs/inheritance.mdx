@@ -71,6 +71,35 @@ classDiagram
 
 </Callout>
 
+## IS-A vs HAS-A Relationship
+
+*   **IS-A Relationship (Inheritance)**: Represents a hierarchy.
+    *   Example: `Car` IS-A `Vehicle`.
+    *   Implemented using `extends`.
+*   **HAS-A Relationship (Association/Aggregation)**: Represents usage.
+    *   Example: `Car` HAS-A `Engine`.
+    *   Implemented by creating an instance of a class inside another class.
+
+```java
+class Engine {
+    void start() {
+        System.out.println("Engine started");
+    }
+}
+
+class Car {
+    // HAS-A relationship
+    Engine engine = new Engine();
+
+    void startCar() {
+        engine.start();
+        System.out.println("Car is moving");
+    }
+}
+```
+
+---
+
 ## The extends Keyword
 
 The `extends` keyword is used to establish inheritance between classes. The child class extends the parent class.

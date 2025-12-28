@@ -1,0 +1,142 @@
+---
+title: Java Math Class
+description: Explore the Java Math class. Learn how to perform basic numeric operations like min, max, sqrt, abs, and random numbers.
+icon: Calculator
+---
+
+The Java `Math` class contains methods for performing basic numeric operations such as the elementary exponential, logarithm, square root, and trigonometric functions.
+
+It is located in the `java.lang` package, so no import is needed. All methods in the `Math` class are **static**.
+
+---
+
+## Basic Math Methods
+
+### 1. `Math.max(x, y)`
+Returns the number with the highest value.
+
+```java
+System.out.println(Math.max(5, 10)); // Outputs 10
+```
+
+### 2. `Math.min(x, y)`
+Returns the number with the lowest value.
+
+```java
+System.out.println(Math.min(5, 10)); // Outputs 5
+```
+
+### 3. `Math.sqrt(x)`
+Returns the square root of `x`.
+
+```java
+System.out.println(Math.sqrt(64)); // Outputs 8.0
+```
+
+### 4. `Math.abs(x)`
+Returns the absolute (positive) value of `x`.
+
+```java
+System.out.println(Math.abs(-4.7)); // Outputs 4.7
+```
+
+### 5. `Math.random()`
+Returns a random number between 0.0 (inclusive), and 1.0 (exclusive).
+
+```java
+System.out.println(Math.random());
+```
+
+To get a random number between 0 and 100:
+
+```java
+int randomNum = (int)(Math.random() * 101);  // 0 to 100
+System.out.println(randomNum);
+```
+
+---
+
+## Rounding Methods
+
+### `Math.round()`
+Rounds to the nearest integer.
+
+```java
+System.out.println(Math.round(24.5)); // 25
+System.out.println(Math.round(24.4)); // 24
+```
+
+### `Math.ceil()`
+Rounds **up** to the nearest integer (returned as double).
+
+```java
+System.out.println(Math.ceil(24.1)); // 25.0
+```
+
+### `Math.floor()`
+Rounds **down** to the nearest integer (returned as double).
+
+```java
+System.out.println(Math.floor(24.9)); // 24.0
+```
+
+---
+
+## Exponential and Logarithmic Methods
+
+### `Math.pow(base, exponent)`
+Returns the value of the first argument raised to the power of the second argument.
+
+```java
+System.out.println(Math.pow(2, 3)); // 2^3 = 8.0
+```
+
+### `Math.exp(x)`
+Returns Euler's number *e* raised to the power of `x`.
+
+### `Math.log(x)`
+Returns the natural logarithm (base *e*) of `x`.
+
+### `Math.log10(x)`
+Returns the base 10 logarithm of `x`.
+
+---
+
+## Trigonometric Methods
+
+Angles are measured in **radians**.
+
+*   `Math.sin(angle)`
+*   `Math.cos(angle)`
+*   `Math.tan(angle)`
+*   `Math.toDegrees(radians)`
+*   `Math.toRadians(degrees)`
+
+```java
+double angle = 45;
+double radians = Math.toRadians(angle);
+System.out.println(Math.sin(radians));
+```
+
+---
+
+## Constants
+
+The `Math` class provides two useful constants:
+
+1.  **`Math.PI`**: The ratio of the circumference of a circle to its diameter (approx 3.14159).
+2.  **`Math.E`**: The base of the natural logarithms (approx 2.71828).
+
+```java
+System.out.println(Math.PI);
+System.out.println(Math.E);
+```
+
+---
+
+## Key Takeaways
+
+*   **Static Methods**: You call them directly on the class, e.g., `Math.max()`.
+*   **Precision**: Most methods return `double` for precision.
+*   **Random**: `Math.random()` is useful for generating simple random numbers.
+*   **Constants**: Use `Math.PI` and `Math.E` for high-precision constants.

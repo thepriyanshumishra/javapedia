@@ -35,7 +35,25 @@ The `pom.xml` file is the core of a Maven project. It contains configuration inf
     </dependency>
   </dependencies>
 </project>
+</project>
 ```
+
+## Dependency Scopes
+
+*   **compile**: Default scope. Available in all classpaths.
+*   **provided**: Expects JDK or container to provide it (e.g., Servlet API).
+*   **runtime**: Required for execution, not compilation (e.g., JDBC driver).
+*   **test**: Only required for compiling and running tests (e.g., JUnit).
+
+## Maven Lifecycle
+
+1.  **validate**: Validate the project is correct.
+2.  **compile**: Compile the source code.
+3.  **test**: Test the compiled source code.
+4.  **package**: Take the compiled code and package it (JAR/WAR).
+5.  **verify**: Run checks on results of integration tests.
+6.  **install**: Install the package into the local repository.
+7.  **deploy**: Copies the final package to the remote repository.
 
 <Callout type="info" title="Tip 💡">
   Maven repositories like Maven Central host millions of libraries that you can

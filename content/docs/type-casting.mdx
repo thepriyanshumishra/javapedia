@@ -1,0 +1,123 @@
+---
+title: Java Type Casting
+description: Learn about Type Casting in Java with examples. Understand Widening Casting (Implicit) and Narrowing Casting (Explicit).
+icon: Scale
+---
+
+Type casting is when you assign a value of one primitive data type to another type.
+
+In Java, there are two types of casting:
+
+1.  **Widening Casting** (automatically) - converting a smaller type to a larger type size
+    `byte` -> `short` -> `char` -> `int` -> `long` -> `float` -> `double`
+2.  **Narrowing Casting** (manually) - converting a larger type to a smaller size type
+    `double` -> `float` -> `long` -> `int` -> `char` -> `short` -> `byte`
+
+---
+
+## 1. Widening Casting
+
+Widening casting takes place when passing a smaller size type to a larger size type. This is done automatically by the compiler.
+
+**Key Points:**
+*   **Automatic**: No special syntax required.
+*   **Safe**: No data loss occurs because the target type is larger than the source type.
+*   **Order**: `byte` -> `short` -> `char` -> `int` -> `long` -> `float` -> `double`
+
+### Example: Widening Casting
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int myInt = 9;
+    double myDouble = myInt; // Automatic casting: int to double
+
+    System.out.println(myInt);      // Outputs 9
+    System.out.println(myDouble);   // Outputs 9.0
+  }
+}
+```
+
+In the example above, we created an `int` variable named `myInt` with the value 9. Then, we created a `double` variable named `myDouble` and assigned the value of `myInt` to it. The Java compiler automatically casts the `int` to a `double`.
+
+---
+
+## 2. Narrowing Casting
+
+Narrowing casting must be done manually by placing the type in parentheses `()` in front of the value.
+
+**Key Points:**
+*   **Manual**: Requires explicit casting syntax `(targetType) value`.
+*   **Potential Data Loss**: Since you are converting from a larger type to a smaller type, you might lose precision or data.
+*   **Order**: `double` -> `float` -> `long` -> `int` -> `char` -> `short` -> `byte`
+
+### Example: Narrowing Casting
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    double myDouble = 9.78d;
+    int myInt = (int) myDouble; // Manual casting: double to int
+
+    System.out.println(myDouble);   // Outputs 9.78
+    System.out.println(myInt);      // Outputs 9
+  }
+}
+```
+
+In this example, we explicitly cast the `double` value `9.78` to an `int`. The fractional part `.78` is lost, and the result is `9`.
+
+---
+
+## Type Conversion in Expressions
+
+When evaluating expressions, Java automatically promotes smaller data types to larger ones to ensure precision.
+
+**Rules:**
+1.  If one operand is `double`, the result is `double`.
+2.  If one operand is `float`, the result is `float`.
+3.  If one operand is `long`, the result is `long`.
+4.  Otherwise, the result is `int`.
+
+### Example: Expression Promotion
+
+```java
+byte b = 42;
+char c = 'a';
+short s = 1024;
+int i = 50000;
+float f = 5.67f;
+double d = .1234;
+
+// The expression: (f * b) + (i / c) - (d * s)
+double result = (f * b) + (i / c) - (d * s);
+
+System.out.println("result = " + result);
+```
+
+---
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Data Loss**: Be very careful with narrowing casting. Converting a large integer to a byte will result in modulo arithmetic behavior (overflow/underflow), not just truncation.
+
+### Example: Overflow in Narrowing
+
+```java
+int largeValue = 130;
+byte byteValue = (byte) largeValue; // byte range is -128 to 127
+
+System.out.println(byteValue); // Outputs -126 (Unexpected!)
+```
+
+**Explanation**: 130 in binary is `00000000 00000000 00000000 10000010`. Casting to byte takes the last 8 bits: `10000010`. In two's complement, this represents -126.
+
+---
+
+## Key Takeaways
+
+*   **Widening** is automatic and safe.
+*   **Narrowing** is manual and risky (potential data loss).
+*   Always be aware of the range of the target data type when casting.
+*   Expression evaluation promotes types to the largest operand's type.

@@ -1,0 +1,162 @@
+---
+title: Java Nested Classes
+description: Learn about Java Nested Classes. Understand Static Nested Classes, Inner Classes, Local Inner Classes, and Anonymous Inner Classes.
+icon: Layers
+---
+
+In Java, it is possible to define a class within another class. These are called **Nested Classes**.
+
+The scope of a nested class is bounded by the scope of its enclosing class.
+
+**Syntax:**
+
+```java
+class OuterClass {
+    // ...
+    class NestedClass {
+        // ...
+    }
+}
+```
+
+Nested classes are divided into two categories:
+
+1.  **Static Nested Classes**: Nested classes that are declared `static`.
+2.  **Inner Classes**: Nested classes that are non-static.
+
+---
+
+## 1. Static Nested Classes
+
+A static nested class is associated with its outer class. And like static class methods, a static nested class cannot refer directly to instance variables or methods defined in its enclosing class: it can use them only through an object reference.
+
+**Key Points:**
+*   Accessed using the enclosing class name: `OuterClass.StaticNestedClass`.
+*   Cannot access non-static members of the outer class.
+
+### Example
+
+```java
+class OuterClass {
+    static int outerStatic = 10;
+    int outerInstance = 20;
+
+    static class StaticNestedClass {
+        void display() {
+            System.out.println("Outer static: " + outerStatic);
+            // System.out.println("Outer instance: " + outerInstance); // Error
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass();
+        nestedObject.display();
+    }
+}
+```
+
+---
+
+## 2. Inner Classes (Non-Static)
+
+Inner classes are associated with an instance of their enclosing class and have direct access to that object's methods and fields.
+
+**Key Points:**
+*   To instantiate an inner class, you must first instantiate the outer class.
+*   Can access all members (static and non-static) of the outer class.
+
+### Example
+
+```java
+class OuterClass {
+    int x = 10;
+
+    class InnerClass {
+        public int myInnerMethod() {
+            return x;
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        OuterClass myOuter = new OuterClass();
+        OuterClass.InnerClass myInner = myOuter.new InnerClass();
+        System.out.println(myInner.myInnerMethod());
+    }
+}
+```
+
+---
+
+## 3. Local Inner Classes
+
+Local inner classes are classes defined inside a block, which is a group of zero or more statements balanced with braces. You typically find local inner classes defined in the body of a method.
+
+**Key Points:**
+*   Scope is restricted to the block where it is defined.
+*   Can access final or effectively final local variables.
+
+### Example
+
+```java
+public class Main {
+    void myMethod() {
+        int num = 23;
+
+        class MethodInner_Demo {
+            public void print() {
+                System.out.println("This is method inner class " + num);
+            }
+        }
+
+        MethodInner_Demo inner = new MethodInner_Demo();
+        inner.print();
+    }
+
+    public static void main(String args[]) {
+        Main outer = new Main();
+        outer.myMethod();
+    }
+}
+```
+
+---
+
+## 4. Anonymous Inner Classes
+
+Anonymous inner classes are inner classes without a name. They are used to instantiate objects with certain "extras" such as method overriding, without having to actually subclass a class.
+
+**Key Points:**
+*   Useful when you need to use a class only once.
+*   Often used for event handling (listeners).
+
+### Example
+
+```java
+abstract class Person {
+    abstract void eat();
+}
+
+public class Main {
+    public static void main(String args[]) {
+        Person p = new Person() {
+            void eat() {
+                System.out.println("Nice fruits");
+            }
+        };
+        p.eat();
+    }
+}
+```
+
+---
+
+## Key Takeaways
+
+*   **Logical Grouping**: Use nested classes to logically group classes that are only used in one place.
+*   **Encapsulation**: Increases encapsulation (inner classes can access private members of outer class).
+*   **Readability**: Can lead to more readable and maintainable code if used correctly.
+*   **Static vs Non-Static**: Remember that static nested classes behave like top-level classes, while inner classes are tied to an instance.

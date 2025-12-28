@@ -20,6 +20,18 @@ Think of a **Treasure Hunt Chain** 🔗.
 | **Adding/Removing**    | Slow (Must shift elements) | Fast (Just change the pointers) |
 | **Memory**             | Less memory                | More memory (Stores pointers)   |
 
+### Time Complexity (Big O)
+
+| Operation | ArrayList | LinkedList |
+| :--- | :--- | :--- |
+| Access (get) | O(1) | O(n) |
+| Insert (add) | O(1)* | O(1) |
+| Insert (middle) | O(n) | O(1)** |
+| Remove | O(n) | O(1)** |
+
+*\*Amortized O(1), O(n) when resizing.*
+*\*\*O(1) if you have the iterator/pointer, otherwise O(n) to find the node.*
+
 ## When to use which?
 
 - Use **ArrayList** when you want to access random items frequently.

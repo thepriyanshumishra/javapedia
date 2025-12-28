@@ -6,9 +6,9 @@ icon: Lock
 
 In Java, the `final` keyword is used to define constants and can be applied to variables, methods, and classes. Declaring an entity as `final` ensures it is only assigned once, meaning:
 
-- A `final` variable cannot be reassigned.
-- A `final` method cannot be overridden.
-- A `final` class cannot be subclassed.
+*   A `final` variable cannot be reassigned.
+*   A `final` method cannot be overridden.
+*   A `final` class cannot be subclassed.
 
 <Callout>
 
@@ -53,6 +53,30 @@ cannot assign a value to final variable AGE
   The `final` keyword is often used to define constants in Java, which are
   typically named in uppercase letters.
 </Callout>
+
+### Blank Final Variable
+
+A final variable that is not initialized at the time of declaration is known as a blank final variable.
+
+If you declare a blank final variable, you must initialize it in the constructor.
+
+```java
+class Main {
+
+    // blank final variable
+    final int CAPACITY;
+
+    // constructor
+    Main() {
+        CAPACITY = 10;
+    }
+
+    public static void main(String[] args) {
+        Main obj = new Main();
+        System.out.println(obj.CAPACITY);
+    }
+}
+```
 
 ## 2. final Method in Java
 
@@ -143,22 +167,23 @@ Config c = new Config();
 System.out.println(c.APP_NAME);
 }
 }`}
-defaultCode={``}
+  defaultCode={``}
 />
 
 <div className="mt-8" />
 
 ## Key Takeaways
 
-- **Variable**: Value cannot be changed (Constant).
-- **Method**: Cannot be overridden by subclasses.
-- **Class**: Cannot be inherited (extended).
+*   **Variable**: Value cannot be changed (Constant).
+*   **Method**: Cannot be overridden by subclasses.
+*   **Class**: Cannot be inherited (extended).
 
 ## Common Pitfalls
 
 > [!WARNING]
 > **Reassignment**: Trying to assign a value to a `final` variable twice will cause a compile error.
->
+
+> [!WARNING]
 > **Confusion**: Don't confuse `final` (constant) with `finally` (try-catch block) or `finalize` (garbage collection).
 
 ## What's Next?

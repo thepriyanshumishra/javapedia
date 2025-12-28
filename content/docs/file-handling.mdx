@@ -96,6 +96,40 @@ public class Main {
 }
 ```
 
+## 5. Modern File Handling (Java NIO)
+
+The `java.nio.file.Files` class (introduced in Java 7) offers a more modern and versatile way to handle files.
+
+```java
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.IOException;
+import java.util.List;
+
+public class NioExample {
+    public static void main(String[] args) {
+        Path path = Paths.get("filename.txt");
+
+        try {
+            // Writing to a file
+            String content = "Hello from Java NIO!";
+            Files.write(path, content.getBytes());
+
+            // Reading from a file
+            List<String> lines = Files.readAllLines(path);
+            for (String line : lines) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+---
+
 <Callout>
 
 **Tip 💡:** Always close your file writers and readers! If you don't, the file might remain "locked" and other programs (or even your own) won't be able to use it. `myWriter.close()` is your friend.

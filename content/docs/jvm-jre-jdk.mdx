@@ -4,15 +4,36 @@ description: Complete guide to JDK, JRE and JVM in Java. Learn the differences, 
 icon: Cpu
 ---
 
-In this tutorial, you will learn about [JDK](#what-is-jdk), [JRE](#what-is-jre), and [JVM](#what-is-jvm). You will also learn the key differences between them.
+In the world of Java, you will frequently hear three acronyms: **JDK**, **JRE**, and **JVM**. Understanding the difference between them is crucial for every Java developer.
 
-## What is JVM?
+*   **JVM**: The engine that drives the Java code.
+*   **JRE**: The environment where Java code runs.
+*   **JDK**: The kit to develop Java applications.
 
-**JVM (Java Virtual Machine)** is an abstract machine that enables your computer to run a Java program.
+---
 
-When you run the Java program, Java compiler first compiles your Java code to bytecode. Then, the JVM translates bytecode into native machine code (set of instructions that a computer's CPU executes directly).
+## 1. JVM (Java Virtual Machine)
 
-Java is a **platform-independent language**. It's because when you write Java code, it's ultimately written for the JVM, not your physical machine (computer). Since the JVM executes the Java bytecode, which is platform-independent, Java is platform-independent.
+**JVM** is an abstract machine. It is a specification that provides a runtime environment in which Java bytecode can be executed.
+
+### What does JVM do?
+1.  **Loads Code**: The ClassLoader loads the `.class` files.
+2.  **Verifies Code**: The Bytecode Verifier checks for security and validity.
+3.  **Executes Code**: The Execution Engine executes the bytecode.
+4.  **Provides Runtime Environment**: Allocates memory in the Heap, Stack, etc.
+
+### JVM Architecture Components
+*   **Class Loader**: Loads class files.
+*   **Memory Area**:
+    *   **Method Area**: Stores class structures.
+    *   **Heap**: Stores objects.
+    *   **Stack**: Stores local variables and method calls.
+    *   **PC Register**: Stores the address of the current instruction.
+    *   **Native Method Stack**: Stores native method information.
+*   **Execution Engine**:
+    *   **Interpreter**: Reads bytecode stream then executes the instructions.
+    *   **JIT Compiler**: Improves performance by compiling bytecode to native machine code at runtime.
+    *   **Garbage Collector**: Removes unreferenced objects.
 
 <div className="text-center">
   ![Working of a Java Program](/img/docs/jvm-jre-jdk/1.svg)
@@ -21,13 +42,15 @@ Java is a **platform-independent language**. It's because when you write Java co
   </div>
 </div>
 
-If you are interested in learning about JVM Architecture, visit [The JVM Architecture Explained](https://dzone.com/articles/jvm-architecture-explained).
+---
 
-## What is JRE?
+## 2. JRE (Java Runtime Environment)
 
-**JRE (Java Runtime Environment)** is a software package that provides Java class libraries, **Java Virtual Machine (JVM)**, and other components that are required to run Java applications.
+**JRE** is the implementation of the JVM. It contains the JVM + Libraries + Other components required to run a Java application.
 
-JRE is the superset of JVM.
+*   It physically exists.
+*   It contains libraries like `rt.jar` (runtime jar) which contains standard classes like `java.lang.String`, `java.util.ArrayList`, etc.
+*   It does **not** contain development tools like compiler (`javac`) or debugger.
 
 <div className="text-center">
   ![Java Runtime Environment](/img/docs/jvm-jre-jdk/2.svg)
@@ -36,37 +59,39 @@ JRE is the superset of JVM.
   </div>
 </div>
 
-If you need to run Java programs, but not develop them, JRE is what you need. You can download JRE from [Java SE Runtime Environment 8 Downloads page](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html).
+---
 
-## What is JDK?
+## 3. JDK (Java Development Kit)
 
-**JDK (Java Development Kit)** is a software development kit required to develop applications in Java. When you download JDK, JRE is also downloaded with it.
+**JDK** is a software development environment used for developing Java applications and applets. It includes the JRE + development tools.
 
-In addition to JRE, JDK also contains a number of development tools (compilers, JavaDoc, Java Debugger, etc).
+*   **javac**: The Java Compiler.
+*   **java**: The Java Launcher.
+*   **javadoc**: Documentation generator.
+*   **jdb**: Java Debugger.
 
 <div className="text-center lg:px-36">
-
-![Java Development Kit](/img/docs/jvm-jre-jdk/3.svg)
-
-<div className="text-center text-sm font-medium text-neutral-500">
-  Java Development Kit
+  ![Java Development Kit](/img/docs/jvm-jre-jdk/3.svg)
+  <div className="text-center text-sm font-medium text-neutral-500">
+    Java Development Kit
+  </div>
 </div>
 
-</div>
-
-If you want to develop Java applications, [download JDK](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html).
+---
 
 ## Relationship between JVM, JRE, and JDK
 
+The relationship can be visualized as nested containers:
+
+*   **JDK** = JRE + Development Tools
+*   **JRE** = JVM + Library Classes
+
 <div className="mt-8" />
 <div className="text-center lg:px-36">
-
-![Relationship between JVM, JRE, and JDK](/img/docs/jvm-jre-jdk/4.svg)
-
-<div className="text-center text-sm font-medium text-neutral-500">
-  Relationship between JVM, JRE, and JDK
-</div>
-
+  ![Relationship between JVM, JRE, and JDK](/img/docs/jvm-jre-jdk/4.svg)
+  <div className="text-center text-sm font-medium text-neutral-500">
+    Relationship between JVM, JRE, and JDK
+  </div>
 </div>
 
 <Quiz
@@ -77,22 +102,24 @@ If you want to develop Java applications, [download JDK](http://www.oracle.com/t
 
 <Callout>
 
-**Tip 💡:** Think of it like this: **JDK** is the factory (tools to build), **JRE** is the environment (where it lives), and **JVM** is the worker (who runs it).
+**Tip 💡:**
+*   If you want to **RUN** Java programs -> Install **JRE**.
+*   If you want to **DEVELOP** Java programs -> Install **JDK**.
 
 </Callout>
 
-<div className="mt-8" />
+---
 
 ## Key Takeaways
 
-- **JDK (Java Development Kit)**: The full kit for developers. Contains the compiler (`javac`) and tools + JRE.
-- **JRE (Java Runtime Environment)**: The environment to _run_ Java programs. Contains libraries + JVM.
-- **JVM (Java Virtual Machine)**: The engine that executes the code. It translates bytecode to machine code.
+*   **JVM**: The abstract machine that runs bytecode. Platform independent.
+*   **JRE**: The runtime environment. JVM + Libraries.
+*   **JDK**: The full development kit. JRE + Tools (Compiler, Debugger).
 
 ## Common Pitfalls
 
 > [!WARNING]
-> **Installing the Wrong Package**: Beginners often install just the JRE and wonder why `javac` (the compiler) isn't working. **Always install the JDK** if you want to write code!
+> **"javac is not recognized"**: This error happens if you have JRE installed but not JDK, or if your Path variable is not set to the JDK's `bin` folder.
 
 ## What's Next?
 

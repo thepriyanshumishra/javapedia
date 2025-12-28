@@ -4,14 +4,14 @@ description: In this tutorial, we will learn how to implement methods (or functi
 icon: SquareFunction
 ---
 
-## What is a Method in Java?
+## 1. What is a Method in Java?
 
 In Java, a method is a collection of statements designed to perform specific tasks and, optionally, return a result to the caller. A Java method can also execute a task without returning any value. Methods enable code reuse by eliminating the need to rewrite code. Importantly, in Java, every method must belong to a class.
 
-## Types of Methods in Java
+## 2. Types of Methods in Java
 
-- `User-defined Methods`: Custom methods created by the programmer based on specific requirements.
-- `Standard Library Methods`: Built-in methods provided by Java, ready for immediate use.
+*   `User-defined Methods`: Custom methods created by the programmer based on specific requirements.
+*   `Standard Library Methods`: Built-in methods provided by Java, ready for immediate use.
 
 <Quiz
   question="What is the return type of a method that does not return any value?"
@@ -19,7 +19,9 @@ In Java, a method is a collection of statements designed to perform specific tas
   correctAnswerIndex={2}
 />
 
-## Declaring a Java Method
+---
+
+## 3. Declaring a Java Method
 
 The basic syntax for a method declaration is:
 
@@ -29,9 +31,9 @@ returnType methodName() {
 }
 ```
 
-1. **returnType**: Specifies the type of value returned by the method. If it doesn’t return a value, the return type is `void`.
-2. **methodName**: The identifier used to call the method.
-3. **method body**: Code inside `{ }` that defines the task to be performed.
+1.  **returnType**: Specifies the type of value returned by the method. If it doesn’t return a value, the return type is `void`.
+2.  **methodName**: The identifier used to call the method.
+3.  **method body**: Code inside `{ }` that defines the task to be performed.
 
 <Callout>
 
@@ -57,15 +59,17 @@ modifier static returnType methodName(parameter1, parameter2, ...) {
 }
 ```
 
-1. **modifier:** Defines access type (e.g., public, private).
-2. **static:** If included, the method can be called without creating an object.
-3. **parameter1, parameter2, ...parameterN:** Values passed to the method.
+1.  **modifier:** Defines access type (e.g., public, private).
+2.  **static:** If included, the method can be called without creating an object.
+3.  **parameter1, parameter2, ...parameterN:** Values passed to the method.
 
 ### Example 2:
 
 The `sqrt()` method in the Math class is static, so it can be accessed as `Math.sqrt()` without creating an instance of Math.
 
-## Calling a Method in Java
+---
+
+## 4. Calling a Method in Java
 
 To use a method, call it by name followed by parentheses.
 
@@ -86,7 +90,7 @@ class Main {
 }
 ```
 
-### Output
+**Output:**
 
 ```bash
 Sum is: 40
@@ -94,7 +98,9 @@ Sum is: 40
 
 Here, the `addNumbers()` method takes two parameters and returns their sum. Since it is not static, it requires an object to be called.
 
-## Method Return Types
+---
+
+## 5. Method Return Types
 
 A method may or may not return a value. The `return` statement is used to return a value.
 
@@ -115,14 +121,16 @@ public void printSquare(int num) {
 }
 ```
 
-## Method Parameters
+---
+
+## 6. Method Parameters
 
 Methods can accept parameters, which are values passed to the method.
 
 ### Examples
 
-- **With Parameters:** `int addNumbers(int a, int b)`
-- **Without Parameters:** `int addNumbers()`
+*   **With Parameters:** `int addNumbers(int a, int b)`
+*   **Without Parameters:** `int addNumbers()`
 
 When calling a method with parameters, you must provide values for each parameter.
 
@@ -146,7 +154,7 @@ class Main {
 }
 ```
 
-### Output
+**Output:**
 
 ```bash
 Method without parameter
@@ -170,7 +178,38 @@ Method with a single parameter: 24
   correctAnswerIndex={1}
 />
 
-## Standard Library Methods
+---
+
+## 7. Recursion
+
+Recursion occurs when a method calls itself. This is useful for solving problems that can be broken down into smaller, similar problems (like factorial or Fibonacci).
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        int result = sum(10);
+        System.out.println(result);
+    }
+
+    public static int sum(int k) {
+        if (k > 0) {
+            return k + sum(k - 1);
+        } else {
+            return 0;
+        }
+    }
+}
+```
+
+**Output:**
+
+```plaintext
+55
+```
+
+---
+
+## 8. Standard Library Methods
 
 Java includes built-in methods available in the Java Class Library (JCL), which comes with the [JVM and JRE](/docs/jvm-jre-jdk).
 
@@ -184,13 +223,15 @@ public class Main {
 }
 ```
 
-### Output
+**Output:**
 
 ```bash
 Square root of 4 is: 2.0
 ```
 
-## Advantages of Using Methods
+---
+
+## 9. Advantages of Using Methods
 
 ### 1. Code Reusability
 
@@ -207,7 +248,7 @@ public static void main(String[] args) {
 }
 ```
 
-### Output:
+**Output:**
 
 ```bash
 Square of 1 is: 1
@@ -243,16 +284,16 @@ Complete this chapter to unlock the next one.
     }
 
 }`}
-defaultCode={``}
+  defaultCode={``}
 />
 
 <div className="mt-8" />
 
 ## Key Takeaways
 
-- **Reusability**: Write code once, use it everywhere.
-- **Parameters**: Inputs to the method.
-- **Return Type**: The data type the method gives back (`void` if nothing).
+*   **Reusability**: Write code once, use it everywhere.
+*   **Parameters**: Inputs to the method.
+*   **Return Type**: The data type the method gives back (`void` if nothing).
 
 ## Common Pitfalls
 

@@ -8,19 +8,19 @@ In Java, **Access Modifiers** are keywords that set the accessibility (visibilit
 
 Think of your house 🏠.
 
-- **Public**: The street outside (Everyone can see it).
-- **Private**: Your diary (Only you can see it).
-- **Protected**: Your family photos (Only family and relatives can see them).
-- **Default**: Your living room (Only people inside the house can see it).
+*   **Public**: The street outside (Everyone can see it).
+*   **Private**: Your diary (Only you can see it).
+*   **Protected**: Your family photos (Only family and relatives can see them).
+*   **Default**: Your living room (Only people inside the house can see it).
 
 ## Types of Access Modifiers
 
 There are four main access modifiers in Java:
 
-1. **Default** (No keyword required)
-2. **Private**
-3. **Protected**
-4. **Public**
+1.  **Default** (No keyword required)
+2.  **Private**
+3.  **Protected**
+4.  **Public**
 
 <div className="overflow-x-auto">
   <table className="min-w-full text-left text-sm whitespace-nowrap">
@@ -106,6 +106,23 @@ If you try to access `Logger` class from outside the `com.javapedia` package, yo
 
 The **private** modifier is the most restrictive. Methods, variables, and constructors declared as private are accessible **only within the declared class**.
 
+<div className="p-4 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 my-6">
+
+```mermaid
+graph TD
+    A[Private Member] -->|Visible| B(Inside Class)
+    A -->|Hidden| C(Outside Class)
+    style A fill:#f87171,stroke:#333,stroke-width:2px
+    style B fill:#4ade80,stroke:#333,stroke-width:2px
+    style C fill:#94a3b8,stroke:#333,stroke-width:2px
+```
+
+<div className="text-muted-foreground mt-2 text-center text-sm">
+  Private Access Scope
+</div>
+
+</div>
+
 <Callout>
 
 **Tip 💡:** Use `private` for sensitive data like passwords or internal logic that shouldn't be touched by others. This is the core of **Encapsulation**.
@@ -185,10 +202,10 @@ public class Animal {
 
 ## Summary
 
-- **private**: Class only. (Strictly personal)
-- **default**: Package only. (Neighbors)
-- **protected**: Package + Kids. (Family inheritance)
-- **public**: Everyone. (Global)
+*   **private**: Class only. (Strictly personal)
+*   **default**: Package only. (Neighbors)
+*   **protected**: Package + Kids. (Family inheritance)
+*   **public**: Everyone. (Global)
 
 <Callout>
 
@@ -223,23 +240,24 @@ Secret s = new Secret();
 s.reveal();
 }
 }`}
-defaultCode={``}
+  defaultCode={``}
 />
 
 <div className="mt-8" />
 
 ## Key Takeaways
 
-- **Private**: Visible ONLY inside the class.
-- **Default**: Visible inside the package.
-- **Protected**: Visible inside package + subclasses.
-- **Public**: Visible everywhere.
+*   **Private**: Visible ONLY inside the class.
+*   **Default**: Visible inside the package.
+*   **Protected**: Visible inside package + subclasses.
+*   **Public**: Visible everywhere.
 
 ## Common Pitfalls
 
 > [!WARNING]
 > **Over-sharing**: Don't make everything `public`. Start with `private` and open up access only when necessary.
->
+
+> [!WARNING]
 > **Default vs Protected**: Remember, `default` does NOT allow access in subclasses outside the package. `protected` does.
 
 ## What's Next?

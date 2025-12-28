@@ -44,3 +44,34 @@ public class TimeExample {
   The classes in `java.time` are immutable and thread-safe, making them much
   safer to use than the old `java.util.Date`.
 </Callout>
+
+## Formatting Dates
+
+Use `DateTimeFormatter` to format dates.
+
+```java
+import java.time.format.DateTimeFormatter;
+
+LocalDateTime myDateObj = LocalDateTime.now();
+DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+String formattedDate = myDateObj.format(myFormatObj);
+System.out.println("Formatted Date: " + formattedDate);
+```
+
+## Period vs Duration
+
+*   **Period**: Measures time in years, months, days (compatible with `LocalDate`).
+*   **Duration**: Measures time in seconds, nanoseconds (compatible with `LocalTime`, `LocalDateTime`).
+
+```java
+LocalDate d1 = LocalDate.of(2020, 1, 1);
+LocalDate d2 = LocalDate.of(2021, 1, 1);
+Period p = Period.between(d1, d2); // 1 Year
+
+LocalTime t1 = LocalTime.of(10, 0);
+LocalTime t2 = LocalTime.of(12, 0);
+Duration d = Duration.between(t1, t2); // 2 Hours
+```
+
+---

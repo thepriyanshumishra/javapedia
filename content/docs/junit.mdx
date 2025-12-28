@@ -36,6 +36,26 @@ public class CalculatorTest {
 - **`@BeforeAll`**: Executed once before all test methods in the class.
 - **`@AfterAll`**: Executed once after all test methods in the class.
 
+## Common Assertions
+
+*   `assertEquals(expected, actual)`
+*   `assertTrue(condition)`
+*   `assertFalse(condition)`
+*   `assertNull(object)`
+*   `assertNotNull(object)`
+*   `assertThrows(Exception.class, () -> { ... })`
+
+## Exception Testing
+
+```java
+@Test
+void testException() {
+    assertThrows(ArithmeticException.class, () -> {
+        int result = 10 / 0;
+    });
+}
+```
+
 <Callout type="info" title="Tip 💡">
   Write tests that cover both positive cases (expected input) and negative cases
   (invalid input/exceptions).

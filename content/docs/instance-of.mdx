@@ -1,0 +1,178 @@
+---
+title: Java instanceof Operator
+description: Learn how to use the Java instanceof operator to check the type of an object at runtime.
+icon: Scale
+---
+
+The `instanceof` operator in Java is used to test whether an object is an instance of a specified type (class, subclass, or interface). It is also known as the **type comparison operator**.
+
+It returns `true` if the object is an instance of the type; otherwise, it returns `false`.
+
+## 1. Syntax
+
+```java
+object instanceof type
+```
+
+*   `object`: The object reference to check.
+*   `type`: The class or interface to compare against.
+
+## 2. Basic Example
+
+```java
+class Main {
+    public static void main(String[] args) {
+        String name = "Java";
+
+        // check if name is an instance of String
+        boolean result = name instanceof String;
+        System.out.println("Is name an instance of String? " + result);
+    }
+}
+```
+
+**Output:**
+
+```plaintext
+Is name an instance of String? true
+```
+
+## 3. instanceof with Inheritance
+
+The `instanceof` operator returns `true` if the object is an instance of the class OR any of its subclasses.
+
+```java
+class Animal {}
+class Dog extends Animal {}
+
+class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+
+        System.out.println(d instanceof Dog);    // true
+        System.out.println(d instanceof Animal); // true
+    }
+}
+```
+
+Here, `d` is an instance of `Dog`, but since `Dog` inherits from `Animal`, `d` is also considered an instance of `Animal`.
+
+## 4. instanceof with Interfaces
+
+It also works with interfaces. If a class implements an interface, `instanceof` returns `true`.
+
+```java
+interface Printable {}
+class Document implements Printable {}
+
+class Main {
+    public static void main(String[] args) {
+        Document doc = new Document();
+        System.out.println(doc instanceof Printable); // true
+    }
+}
+```
+
+## 5. instanceof with null
+
+If the object reference is `null`, `instanceof` always returns `false`.
+
+```java
+class Main {
+    public static void main(String[] args) {
+        String str = null;
+        System.out.println(str instanceof String); // false
+    }
+}
+```
+
+<Callout>
+
+**Tip 💡:** This is a safe way to check for nulls before casting! `if (obj instanceof String)` implicitly checks if `obj` is not null.
+
+</Callout>
+
+## 6. Downcasting with instanceof
+
+A common use case is to safely downcast an object.
+
+```java
+class Animal {
+    void makeSound() { System.out.println("Generic sound"); }
+}
+
+class Dog extends Animal {
+    void bark() { System.out.println("Woof"); }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Animal a = new Dog(); // Upcasting
+
+        if (a instanceof Dog) {
+            Dog d = (Dog) a; // Safe Downcasting
+            d.bark();
+        }
+    }
+}
+```
+
+**Output:**
+
+```plaintext
+Woof
+```
+
+If we didn't check with `instanceof` and `a` was actually a `Cat` object, checking `(Dog) a` would throw a `ClassCastException`.
+
+## 7. Pattern Matching for instanceof (Java 14+)
+
+In newer versions of Java (14+ preview, 16+ standard), you can combine the check and the cast:
+
+```java
+if (obj instanceof String s) {
+    // 's' is automatically cast to String and available here
+    System.out.println(s.length());
+}
+```
+
+This reduces boilerplate code.
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="instance-of"
+  nextChapterId="inheritance"
+  question="If 'class Cat extends Animal', and you have 'Animal a = new Cat();', what does 'a instanceof Cat' return?"
+  expectedOutput="true"
+  hint="The object is created as a Cat, so it is an instance of Cat."
+  solution={`public class Main {
+    public static void main(String[] args) {
+        System.out.println(true);
+    }
+}`}
+  defaultCode={``}
+/>
+
+<div className="mt-8" />
+
+## Key Takeaways
+
+*   **Type Check**: Used to verify object types at runtime.
+*   **Inheritance**: Returns `true` for parent classes and interfaces.
+*   **Null Safety**: Returns `false` for `null` values.
+*   **Safe Casting**: Always use `instanceof` before downcasting to avoid `ClassCastException`.
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Compilation Error**: You cannot use `instanceof` to check against unrelated types (e.g., `String s = "Hi"; if (s instanceof Integer)` will not compile).
+
+## What's Next?
+
+Let's dive deeper into how classes relate to each other.
+[Master Inheritance →](/docs/inheritance)

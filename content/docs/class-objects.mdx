@@ -8,8 +8,8 @@ Java is an object-oriented programming language. The core concept of the object-
 
 An object is any entity that has a state and behavior. For example, a bicycle is an object. It has
 
-- **States**: idle, first gear, etc
-- **Behaviors**: braking, accelerating, etc.
+*   **States**: idle, first gear, etc
+*   **Behaviors**: braking, accelerating, etc.
 
 <Quiz
   question="A class is a _____ for the object."
@@ -19,13 +19,42 @@ An object is any entity that has a state and behavior. For example, a bicycle is
 
 Before we learn about objects, let's first know about classes in Java.
 
-## Java Class
+---
+
+## 1. Java Class
 
 A class is a blueprint for the object. Before we create an object, we first need to define the class.
 
 We can think of the class as a sketch (prototype) of a house. It contains all the details about the floors, doors, windows, etc. Based on these descriptions we build the house. House is the object.
 
 Since many houses can be made from the same description, we can create many objects from a class.
+
+<div className="p-4 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 my-6">
+
+```mermaid
+classDiagram
+    class Car {
+        +String color
+        +String model
+        +drive()
+        +brake()
+    }
+    note for Car "Class (Blueprint)"
+
+    class MyTesla {
+        color = "Red"
+        model = "Model S"
+    }
+    note for MyTesla "Object (Instance)"
+
+    Car <|-- MyTesla : Instance of
+```
+
+<div className="text-muted-foreground mt-2 text-center text-sm">
+  Class vs Object Relationship
+</div>
+
+</div>
 
 <Callout>
 
@@ -46,8 +75,8 @@ class ClassName {
 
 Here, `fields` [(variables)](/docs/variables-literals) and [methods](/docs/methods) represent the **state** and **behavior** of the object respectively.
 
-- fields are used to store data
-- methods are used to perform some operations
+*   fields are used to store data
+*   methods are used to perform some operations
 
 For our `bicycle` object, we can create the class as
 
@@ -76,11 +105,12 @@ Here, `Bicycle` is a prototype. Now, we can create any number of bicycles using 
 
 ---
 
-## Java Objects
+## 2. Java Objects
 
 An object is called an instance of a class. For example, suppose Bicycle is a class then MountainBicycle, SportsBicycle, TouringBicycle, etc can be considered as objects of the class.
 
-Creating an Object in Java
+### Creating an Object in Java
+
 Here is how we can create an object of a class.
 
 ```java
@@ -106,7 +136,7 @@ As you can see, we have created two objects of the class. We can create multiple
 
 ---
 
-## Access Members of a Class
+## 3. Access Members of a Class
 
 We can use the name of objects along with the `.` operator to access members of a class. For example,
 
@@ -138,8 +168,8 @@ Bicycle sportsBicycle = new Bicycle();
 
 Here, we have created an object of Bicycle named sportsBicycle. We then use the object to access the field and method of the class.
 
-- `sportsBicycle.gear` - access the field gear
-- `sportsBicycle.braking()` - access the method `braking()`
+*   `sportsBicycle.gear` - access the field gear
+*   `sportsBicycle.braking()` - access the method `braking()`
 
 We have mentioned the word **method** quite a few times. You will learn about [Java methods](/docs/methods) in detail in the next chapter.
 
@@ -193,7 +223,7 @@ public class Main {
 }
 ```
 
-#### Output:
+**Output:**
 
 ```plaintext
 Light on? true
@@ -204,8 +234,8 @@ In the above program, we have created a class named `Lamp`. It contains a variab
 
 Inside the `Main` class, we have created two objects: `led` and `halogen` of the `Lamp` class. We then used the objects to call the methods of the class.
 
-- `led.turnOn()` - It sets the isOn variable to true and prints the output.
-- `halogen.turnOff()` - It sets the isOn variable to false and prints the output.
+*   `led.turnOn()` - It sets the isOn variable to true and prints the output.
+*   `halogen.turnOff()` - It sets the isOn variable to false and prints the output.
 
 The variable `isOn` defined inside the class is also called an instance variable. It is because when we create an object of the class, it is called an instance of the class. And, each instance will have its own copy of the variable.
 
@@ -243,7 +273,7 @@ class Lamp {
 }
 ```
 
-#### Output
+**Output:**
 
 ```plaintext
 Light on? true
@@ -275,22 +305,23 @@ Dog d = new Dog();
 d.bark();
 }
 }`}
-defaultCode={``}
+  defaultCode={``}
 />
 
 <div className="mt-8" />
 
 ## Key Takeaways
 
-- **Class**: The blueprint or template (e.g., `Car`).
-- **Object**: The actual instance created from the blueprint (e.g., `myTesla`).
-- **Members**: Fields (state) and Methods (behavior).
+*   **Class**: The blueprint or template (e.g., `Car`).
+*   **Object**: The actual instance created from the blueprint (e.g., `myTesla`).
+*   **Members**: Fields (state) and Methods (behavior).
 
 ## Common Pitfalls
 
 > [!WARNING]
 > **Null Pointer**: If you declare `Dog d;` but don't do `d = new Dog();`, `d` is `null`. Calling `d.bark()` will crash your program with a `NullPointerException`.
->
+
+> [!WARNING]
 > **Class vs Object**: Remember, you can't drive the blueprint of a car. You need to create an object first!
 
 ## What's Next?

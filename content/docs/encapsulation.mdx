@@ -114,6 +114,35 @@ public class Main {
   correctAnswerIndex={1}
 />
 
+/>
+
+---
+
+## Immutable Classes
+
+An **immutable class** is a class whose objects cannot be modified after they are created. `String` and Wrapper classes (like `Integer`, `Double`) are examples of immutable classes.
+
+To create a custom immutable class:
+1.  Declare the class as `final` so it can't be extended.
+2.  Make all fields `private` and `final`.
+3.  Initialize fields via a constructor.
+4.  Provide only getters (no setters).
+
+```java
+final class ImmutablePerson {
+    private final String name;
+    private final int age;
+
+    public ImmutablePerson(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() { return name; }
+    public int getAge() { return age; }
+}
+```
+
 ---
 
 <Callout>

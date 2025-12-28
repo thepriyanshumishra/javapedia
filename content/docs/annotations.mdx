@@ -1,0 +1,106 @@
+---
+title: Java Annotations
+description: Learn about Java Annotations. Understand built-in annotations like @Override, @Deprecated, and how to create Custom Annotations.
+icon: Tag
+---
+
+Annotations provide metadata about the program. They provide data about a program that is not part of the program itself. Annotations have no direct effect on the operation of the code they annotate.
+
+Annotations start with the `@` symbol.
+
+---
+
+## Built-in Annotations
+
+Java defines a set of annotations that are built into the language.
+
+### 1. `@Override`
+Indicates that a method is intended to override a method declaration in a supertype. If the method does not correctly override a method, the compiler generates an error.
+
+```java
+class Parent {
+    public void display() {
+        System.out.println("Parent");
+    }
+}
+
+class Child extends Parent {
+    @Override
+    public void display() {
+        System.out.println("Child");
+    }
+}
+```
+
+### 2. `@Deprecated`
+Indicates that the marked element is deprecated and should no longer be used. The compiler generates a warning whenever a program uses a method, class, or field with this annotation.
+
+```java
+class MyClass {
+    @Deprecated
+    public void oldMethod() {
+        System.out.println("This is old");
+    }
+}
+```
+
+### 3. `@SuppressWarnings`
+Instructs the compiler to suppress specific warnings that it would otherwise generate.
+
+```java
+@SuppressWarnings("unchecked")
+void myMethod() {
+    // code that generates unchecked warnings
+}
+```
+
+### 4. `@FunctionalInterface`
+Indicates that the type declaration is intended to be a functional interface (an interface with exactly one abstract method).
+
+```java
+@FunctionalInterface
+interface MyInterface {
+    void run();
+}
+```
+
+---
+
+## Custom Annotations
+
+You can create your own annotations.
+
+```java
+import java.lang.annotation.*;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@interface MyAnnotation {
+    String value();
+    int count() default 1;
+}
+```
+
+*   `@interface`: Keyword to define an annotation.
+*   `@Retention`: Specifies how the annotation is stored (SOURCE, CLASS, RUNTIME).
+*   `@Target`: Specifies where the annotation can be applied (METHOD, FIELD, TYPE, etc.).
+
+### Using Custom Annotations
+
+```java
+class Test {
+    @MyAnnotation(value = "Hello", count = 5)
+    public void sayHello() {
+        System.out.println("Hello World");
+    }
+}
+```
+
+---
+
+## Key Takeaways
+
+*   **Metadata**: Annotations add metadata to code.
+*   **Compiler Checks**: Use `@Override` to catch errors at compile time.
+*   **Communication**: Use `@Deprecated` to communicate API status to other developers.
+*   **Processing**: Annotations can be processed at compile-time or runtime (using Reflection).

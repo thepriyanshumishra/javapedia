@@ -1,38 +1,107 @@
 ---
 title: Installation
-description: Learn how to get Java up and running in your project.
+description: Step-by-step guide to installing Java JDK on Windows, macOS, and Linux.
 icon: Download
 ---
 
-## Installation
+To start programming in Java, you need to install the **Java Development Kit (JDK)**. The JDK contains the tools you need to build and run Java programs.
 
-Since installation process is slightly different in different devices. So we prefer that you should check the [official installation documentation](https://www.java.com/en/download/help/download_options.html) to install **☕ Java** on your device.
+---
 
-## Code Editors
+## 1. Check if Java is already installed
 
-There are various types of code editors for programming in Java. The popular ones are listed below :
+Open your terminal (Command Prompt on Windows) and type:
 
-|                                                          Bluej                                                           |                                                                  VS Code                                                                  |                                                                     IntelliJ Idea                                                                      |
-| :----------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <div className="flex justify-center">[![BlueJ](/img/docs/installation/bluej.png)](https://bluej.org?ref=javapedia)</div> | <div className="flex justify-center">[![VS Code](/img/docs/installation/vs-code.png)](https://code.visualstudio.com/?ref=javapedia)</div> | <div className="flex justify-center">[![Intellij Idea](/img/docs/installation/intellij-idea.png)](https://www.jetbrains.com/idea/?ref=javapedia)</div> |
-|                                                           Free                                                           |                                                                   Free                                                                    |                                                                       Free, Paid                                                                       |
+```bash
+java -version
+```
 
-You use any of the popular code editors for Java. But <b>BlueJ</b> is best as it is <b>simple</b> and <b>fast</b>.
+If you see a version number (e.g., `java version "17.0.1"`), Java is already installed! If not, follow the steps below.
+
+---
+
+## 2. Install JDK
+
+We recommend installing the **Oracle JDK** or **OpenJDK**.
+
+### Windows
+
+1.  **Download**: Go to the [Oracle Java Downloads](https://www.oracle.com/java/technologies/downloads/) page.
+2.  **Installer**: Download the **x64 Installer** (`.exe` file).
+3.  **Run**: Double-click the downloaded file and follow the installation wizard.
+4.  **Environment Variable**:
+    *   Search for "Environment Variables" in Windows Search.
+    *   Click "Edit the system environment variables".
+    *   Click "Environment Variables".
+    *   Under "System variables", click "New".
+    *   Variable name: `JAVA_HOME`
+    *   Variable value: Path to your JDK installation (e.g., `C:\Program Files\Java\jdk-17`).
+    *   Find the `Path` variable, click "Edit", and add `%JAVA_HOME%\bin`.
+
+### macOS
+
+1.  **Download**: Go to the [Oracle Java Downloads](https://www.oracle.com/java/technologies/downloads/) page.
+2.  **Installer**: Download the **x64 DMG Installer** (or **Arm 64 DMG Installer** for M1/M2/M3 chips).
+3.  **Run**: Open the `.dmg` file and follow the instructions.
+4.  **Verify**: Open a new terminal and run `java -version`.
+
+### Linux (Ubuntu/Debian)
+
+Open your terminal and run:
+
+```bash
+sudo apt update
+sudo apt install default-jdk
+```
+
+Verify the installation:
+
+```bash
+java -version
+```
+
+---
+
+## 3. Choose a Code Editor (IDE)
+
+While you can write Java code in Notepad, an **Integrated Development Environment (IDE)** makes life much easier with features like code completion, debugging, and error highlighting.
+
+| IDE | Best For | Cost |
+| :--- | :--- | :--- |
+| **IntelliJ IDEA** | Professionals & Beginners | Free (Community) / Paid (Ultimate) |
+| **Eclipse** | Enterprise Development | Free (Open Source) |
+| **VS Code** | Lightweight Development | Free |
+| **BlueJ** | Learning / Education | Free |
 
 <Callout>
 
-**Tip 💡:** While BlueJ is great for learning, professionals mostly use **IntelliJ IDEA** or **VS Code**. Don't be afraid to switch once you're comfortable!
+**Recommendation 💡:** We highly recommend **IntelliJ IDEA Community Edition** for beginners. It's powerful, free, and industry-standard.
 
 </Callout>
 
-<Quiz
-  question="Which component is required to DEVELOP Java applications?"
-  options={["JRE", "JVM", "JDK", "IDE"]}
-  correctAnswerIndex={2}
-/>
+---
 
-## Learning
+## 4. Verify Installation
 
-After installing Java and setting up your preferred code editor start [learning](/docs/introduction) from our website.
+Let's make sure everything is set up correctly.
 
-<div className="mt-8" />
+1.  Open your terminal/command prompt.
+2.  Type `javac -version` and press Enter.
+    *   If you see something like `javac 17.0.1`, the **compiler** is ready.
+3.  Type `java -version` and press Enter.
+    *   If you see the version, the **runtime** is ready.
+
+---
+
+## Common Pitfalls
+
+> [!WARNING]
+> **JRE vs JDK**: Installing just the JRE (Java Runtime Environment) allows you to *run* Java programs but not *write* them. You must install the **JDK** to develop.
+
+> [!IMPORTANT]
+> **Path Issues**: If `javac` is not recognized, it usually means your `JAVA_HOME` or `Path` environment variable is not set correctly.
+
+## What's Next?
+
+Now that your environment is ready, let's learn about the core components of Java.
+[Understand JVM, JRE, and JDK →](/docs/jvm-jre-jdk)

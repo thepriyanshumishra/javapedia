@@ -68,6 +68,24 @@ public class Main {
 
 </Callout>
 
+## Method References
+
+Method references (`::`) are a shorthand notation of a lambda expression to call a method.
+
+```java
+// Lambda
+list.forEach(s -> System.out.println(s));
+
+// Method Reference
+list.forEach(System.out::println);
+```
+
+There are four types of method references:
+1.  Static method (`Math::max`)
+2.  Instance method of a particular object (`System.out::println`)
+3.  Instance method of an arbitrary object of a particular type (`String::length`)
+4.  Constructor (`ArrayList::new`)
+
 <Quiz
   question="Which symbol is used for Lambda Expressions?"
   options={["=>", "->", "::", ">>"]}

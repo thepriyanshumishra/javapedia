@@ -20,7 +20,9 @@ Here, the above array cannot store more than 100 names. The number of values in 
   correctAnswerIndex={1}
 />
 
-### How to declare an array in Java?
+---
+
+## 1. How to declare an array in Java?
 
 In Java, here is how we can declare an array.
 
@@ -28,9 +30,10 @@ In Java, here is how we can declare an array.
 dataType[] arrayName;
 ```
 
-- `dataType` - it can be primitive data types like `int`, `char`, `double`, `byte`, etc. or Java objects
-- `arrayName` - it is an identifier
-  For example,
+*   `dataType` - it can be primitive data types like `int`, `char`, `double`, `byte`, etc. or Java objects
+*   `arrayName` - it is an identifier
+
+For example,
 
 ```java
 double[] data;
@@ -64,7 +67,9 @@ double[] data = new double[10];
   correctAnswerIndex={1}
 />
 
-### How to Initialize Arrays in Java?
+---
+
+## 2. How to Initialize Arrays in Java?
 
 In Java, we can initialize arrays during declaration. For example,
 
@@ -90,8 +95,6 @@ age[2] = 5;
 ..
 ```
 
-Elements are stored in the array Java Arrays initialization
-
 <Callout title="Note">
   Array indices always start from **0**. That is, the first element of an array
   is at index **0**. If the size of an array is `n`, then the last element of
@@ -104,11 +107,60 @@ Elements are stored in the array Java Arrays initialization
 
 </Callout>
 
-<div className="mt-8" />
+---
+
+## 3. Array Operations
+
+### Copying Arrays
+
+In Java, you can copy an array using `System.arraycopy()` or `Arrays.copyOf()`.
+
+```java
+import java.util.Arrays;
+
+class Main {
+    public static void main(String[] args) {
+        int[] source = {1, 2, 3, 4, 5};
+        int[] destination = Arrays.copyOf(source, source.length);
+
+        System.out.println("Destination array: " + Arrays.toString(destination));
+    }
+}
+```
+
+### Sorting Arrays
+
+You can sort arrays using `Arrays.sort()`.
+
+```java
+import java.util.Arrays;
+
+class Main {
+    public static void main(String[] args) {
+        int[] numbers = {5, 2, 9, 1, 6};
+        Arrays.sort(numbers);
+        System.out.println("Sorted array: " + Arrays.toString(numbers)); // [1, 2, 5, 6, 9]
+    }
+}
+```
+
+---
+
+## Key Takeaways
+
+*   **Fixed Size**: Once created, you cannot change the size of an array.
+*   **Zero-Indexed**: The first element is at index `0`, not `1`.
+*   **Homogeneous**: All elements must be of the same type (e.g., all `int`).
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Printing Arrays**: `System.out.println(array)` prints a memory address (like `[I@1b6d3586`), not the contents. Use `Arrays.toString(array)` or a loop to print values.
+
+> [!WARNING]
+> **Bounds**: Accessing `array[length]` throws an `ArrayIndexOutOfBoundsException`. The last valid index is `length - 1`.
 
 ## Challenge
-
-Complete this chapter to unlock the next one.
 
 <Challenge
   id="arrays"
@@ -124,22 +176,3 @@ Complete this chapter to unlock the next one.
 }`}
   defaultCode={``}
 />
-<div className="mt-8" />
-
-## Key Takeaways
-
-- **Fixed Size**: Once created, you cannot change the size of an array.
-- **Zero-Indexed**: The first element is at index `0`, not `1`.
-- **Homogeneous**: All elements must be of the same type (e.g., all `int`).
-
-## Common Pitfalls
-
-> [!WARNING]
-> **Printing Arrays**: `System.out.println(array)` prints a memory address (like `[I@1b6d3586`), not the contents. Use `Arrays.toString(array)` or a loop to print values.
->
-> **Bounds**: Accessing `array[length]` throws an `ArrayIndexOutOfBoundsException`. The last valid index is `length - 1`.
-
-## What's Next?
-
-What if we need a grid or a table of data?
-[Learn Multidimensional Arrays →](/docs/multidimensional-arrays)

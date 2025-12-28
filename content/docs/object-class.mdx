@@ -1,0 +1,111 @@
+---
+title: Java Object Class
+description: Understand the Java Object Class. Learn about toString(), equals(), hashCode(), clone(), and getClass() methods.
+icon: Cube
+---
+
+The `Object` class is the root of the class hierarchy. Every class has `Object` as a superclass. All objects, including arrays, implement the methods of this class.
+
+If a class does not explicitly extend any other class, it directly extends `Object`.
+
+```java
+public class MyClass {
+    // implicitly extends Object
+}
+```
+
+---
+
+## Common Methods of Object Class
+
+### 1. `toString()`
+
+Returns a string representation of the object. By default, it returns `ClassName@HashCode`. It is recommended to override this method to provide meaningful output.
+
+```java
+class Student {
+    String name;
+    int age;
+
+    Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{name='" + name + "', age=" + age + "}";
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student("John", 20);
+        System.out.println(s); // Calls toString() automatically
+    }
+}
+```
+
+### 2. `equals(Object obj)`
+
+Indicates whether some other object is "equal to" this one. The default implementation checks for reference equality (`==`). You should override it to check for logical equality (content equality).
+
+```java
+@Override
+public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Student student = (Student) o;
+    return age == student.age && name.equals(student.name);
+}
+```
+
+### 3. `hashCode()`
+
+Returns a hash code value for the object. This method is supported for the benefit of hash tables such as those provided by `HashMap`.
+
+> [!IMPORTANT]
+> If you override `equals()`, you **must** override `hashCode()` as well. Equal objects must have equal hash codes.
+
+```java
+@Override
+public int hashCode() {
+    return Objects.hash(name, age);
+}
+```
+
+### 4. `getClass()`
+
+Returns the runtime class of this `Object`.
+
+```java
+Student s = new Student("John", 20);
+System.out.println(s.getClass().getName()); // Output: Student
+```
+
+### 5. `clone()`
+
+Creates and returns a copy of this object. The class must implement the `Cloneable` interface to use this method, otherwise `CloneNotSupportedException` is thrown.
+
+```java
+class Student implements Cloneable {
+    // ...
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+}
+```
+
+### 6. `finalize()` (Deprecated)
+
+Called by the garbage collector on an object when garbage collection determines that there are no more references to the object.
+> [!WARNING]
+> Deprecated since Java 9. Do not use.
+
+---
+
+## Key Takeaways
+
+*   **Root Class**: `Object` is the parent of all classes in Java.
+*   **Overriding**: Always override `toString()`, `equals()`, and `hashCode()` for your custom data classes.
+*   **Contract**: Respect the contract between `equals()` and `hashCode()`.

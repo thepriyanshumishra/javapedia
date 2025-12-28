@@ -6,35 +6,17 @@ icon: FastForward
 
 While working with loops, sometimes you might want to skip some statements or terminate the loop. In such cases, break and continue statements are used.
 
-To learn about the break statement, visit Java break. Here, we will learn about the continue statement.
+The `continue` statement skips the current iteration of the loop (for, while, do...while, etc).
 
-<Quiz
-  question="What does the continue statement do?"
-  options={[
-    "Terminates the loop",
-    "Skips the current iteration",
-    "Exits the program",
-    "Prints output",
-  ]}
-  correctAnswerIndex={1}
-/>
+---
 
-Here, `continue` is a keyword. It skips the current iteration of the loop. (for, while, do...while, etc).
+## 1. Java continue statement
 
-After the continue statement, the program moves to the end of the loop. And, test expression is evaluated (update statement is evaluated in case of the for loop).
-
-Here's the syntax of the continue statement.
+The syntax of the continue statement is:
 
 ```java
 continue;
 ```
-
-Note: The continue statement is almost always used in decision-making statements (if...else Statement).
-
-## Working of Java continue statement
-
-The working of continue statement with Java while, do...while, and for loop.
-Working of Java continue Statement
 
 ### Example 1: Java continue statement
 
@@ -56,7 +38,7 @@ class Main {
 }
 ```
 
-#### Output:
+**Output:**
 
 ```plaintext
 1
@@ -67,94 +49,44 @@ class Main {
 10
 ```
 
-In the above program, we are using the for loop to print the value of i in each iteration. To know how for loop works, visit Java for loop. Notice the statement,
+---
+
+## 2. Labeled continue Statement
+
+Similar to the labeled break statement, we can use the labeled continue statement to skip the current iteration of the outer loop.
 
 ```java
-if (i > 4 && i < 9) {
-    continue;
-}
-```
-
-Here, the continue statement is executed when the value of i becomes more than 4 and less than 9.
-
-It then skips the print statement for those values. Hence, the output skips the values 5, 6, 7, and 8.
-
-### Example 2: Compute the sum of 5 positive numbers
-
-```java
-import java.util.Scanner;
-
 class Main {
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    Double number, sum = 0.0;
-    // create an object of Scanner
-    Scanner input = new Scanner(System.in);
-
-    for (int i = 1; i < 6; ++i) {
-      System.out.print("Enter number " + i + " : ");
-      // takes input from the user
-      number = input.nextDouble();
-
-      // if number is negative
-      // continue statement is executed
-      if (number <= 0.0) {
-        continue;
-      }
-
-      sum += number;
+        first:
+        for (int i = 1; i < 6; ++i) {
+            for (int j = 1; j < 5; ++j) {
+                if (i == 3 || j == 2)
+                    continue first;
+                System.out.println("i = " + i + "; j = " + j);
+            }
+        }
     }
-    System.out.println("Sum = " + sum);
-    input.close();
-  }
 }
 ```
 
-#### Output:
+Here, the `continue first;` statement skips the current iteration of the loop labeled `first`.
 
-```plaintext
-Enter number 1: 2.2
-Enter number 2: 5.6
-Enter number 3: 0
-Enter number 4: -2.4
-Enter number 5: -3
-Sum = 7.8
-```
+---
 
-In the above example, we have used the for loop to print the sum of 5 positive numbers. Notice the line,
+## Key Takeaways
 
-```java
-if (number < 0.0) {
-    continue;
-}
-```
+*   **Action**: Skips the rest of the _current_ iteration.
+*   **Flow**: Jumps to the next iteration (update step in `for`, condition in `while`).
+*   **Labeled Continue**: Used to skip iteration of an outer loop.
 
-Here, when the user enters a negative number, the continue statement is executed. This skips the current iteration of the loop and takes the program control to the update expression of the loop.
+## Common Pitfalls
 
-Note: To take input from the user, we have used the Scanner object. To learn more, visit Java Scanner.
-
-<Quiz
-  question="What happens to the code after the 'continue' statement in the current iteration?"
-  options={[
-    "It is executed",
-    "It is skipped",
-    "It causes an error",
-    "It is printed",
-  ]}
-  correctAnswerIndex={1}
-/>
-
-<Callout>
-
-**Tip 💡:** `continue` says "I'm done with this round, let's start the next one!" It's perfect for skipping over bad data or specific cases.
-
-</Callout>
-
-<div className="mt-8" />
+> [!WARNING]
+> **Infinite While Loop**: In a `while` loop, if you `continue` _before_ incrementing your counter (e.g., `i++`), the loop will get stuck on the same value forever!
 
 ## Challenge
-
-Complete this chapter to unlock the next one.
 
 <Challenge
   id="continue-statement"
@@ -172,20 +104,3 @@ Complete this chapter to unlock the next one.
 }`}
   defaultCode={``}
 />
-<div className="mt-8" />
-
-## Key Takeaways
-
-- **Action**: Skips the rest of the _current_ iteration.
-- **Flow**: Jumps to the next iteration (update step in `for`, condition in `while`).
-- **Usage**: Great for filtering out invalid data (e.g., skip negative numbers).
-
-## Common Pitfalls
-
-> [!WARNING]
-> **Infinite While Loop**: In a `while` loop, if you `continue` _before_ incrementing your counter (e.g., `i++`), the loop will get stuck on the same value forever!
-
-## What's Next?
-
-We've mastered loops! Now let's learn how to store multiple values in a single variable.
-[Learn Java Arrays →](/docs/arrays)

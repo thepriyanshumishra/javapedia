@@ -85,6 +85,36 @@ public class Main {
 }
 ```
 
+## Bounded Type Parameters
+
+You can restrict the types that can be used as arguments. For example, if you want a method to only accept Numbers (Integer, Double, etc.):
+
+```java
+public class Calculator<T extends Number> {
+    public void square(T num) {
+        System.out.println(num.doubleValue() * num.doubleValue());
+    }
+}
+```
+
+## Wildcards in Generics
+
+The question mark `?` is the wildcard in generics. It represents an unknown type.
+
+*   `<?>`: Unbounded wildcard (Any type).
+*   `<? extends Number>`: Upper bounded wildcard (Number or its subclasses).
+*   `<? super Integer>`: Lower bounded wildcard (Integer or its superclasses).
+
+```java
+public static void printList(List<?> list) {
+    for (Object elem : list) {
+        System.out.println(elem);
+    }
+}
+```
+
+---
+
 <Callout>
 
 **Tip 💡:** Common type parameters:

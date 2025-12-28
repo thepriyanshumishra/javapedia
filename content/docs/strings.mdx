@@ -6,7 +6,7 @@ icon: Type
 
 In Java, strings are objects that represent sequences of characters. The `String` class is one of the most commonly used classes in Java programming.
 
-## What is a String in Java?
+## 1. What is a String in Java?
 
 A string is a sequence of characters. In Java, strings are objects of the `String` class. Unlike primitive data types, strings are reference types.
 
@@ -23,18 +23,18 @@ String type = "Java programming";
 
 Here, we have created a string variable named `type` that holds the value "Hello, World!".
 
-## Creating Strings in Java
+### Creating Strings in Java
 
 There are two main ways to create strings in Java:
 
-### 1. String Literal
+#### 1. String Literal
 
 ```java
 String str1 = "Java Programming";
 String str2 = "Javaistic";
 ```
 
-### 2. Using new Keyword
+#### 2. Using new Keyword
 
 ```java
 String str1 = new String("Java Programming");
@@ -47,7 +47,9 @@ String str2 = new String("Javaistic");
 
 </Callout>
 
-## String Methods
+---
+
+## 2. String Methods
 
 Java provides many useful methods for string manipulation:
 
@@ -119,7 +121,9 @@ class Main {
 }
 ```
 
-## String Comparison
+---
+
+## 3. String Comparison
 
 ### 1. Using equals() Method
 
@@ -174,7 +178,9 @@ class Main {
   correctAnswerIndex={1}
 />
 
-## String Concatenation
+---
+
+## 4. String Concatenation
 
 ### 1. Using + Operator
 
@@ -202,7 +208,9 @@ class Main {
 }
 ```
 
-## StringBuilder and StringBuffer
+---
+
+## 5. StringBuilder and StringBuffer
 
 When you need to perform many string operations, use `StringBuilder` or `StringBuffer` for better performance.
 
@@ -237,7 +245,9 @@ class Main {
 | Performance   | Faster                       | Slower                      |
 | Usage         | Single-threaded applications | Multi-threaded applications |
 
-## String Formatting
+---
+
+## 6. String Formatting
 
 ### 1. Using printf() Method
 
@@ -265,73 +275,23 @@ class Main {
 }
 ```
 
-## Common String Operations Example
+---
 
-```java
-class StringExample {
-    public static void main(String[] args) {
-        String text = "  Java Programming Language  ";
+## Key Takeaways
 
-        // Remove whitespace
-        String trimmed = text.trim();
-        System.out.println("Trimmed: '" + trimmed + "'");
+*   **Immutable**: Strings cannot be changed. Methods like `.toUpperCase()` return a _new_ string.
+*   **Pool**: String literals (`"Hello"`) are stored in a special memory pool for efficiency.
+*   **Comparison**: ALWAYS use `.equals()` to compare values.
 
-        // Split string
-        String[] words = trimmed.split(" ");
-        for (String word : words) {
-            System.out.println("Word: " + word);
-        }
+## Common Pitfalls
 
-        // Replace characters
-        String replaced = trimmed.replace("Java", "Python");
-        System.out.println("Replaced: " + replaced);
+> [!WARNING]
+> **The `==` Trap**: `s1 == s2` checks if they are the _same object in memory_, not if they have the same text. Use `s1.equals(s2)`.
 
-        // Check if string contains substring
-        boolean contains = trimmed.contains("Programming");
-        System.out.println("Contains 'Programming': " + contains);
-
-        // Check if string starts with or ends with
-        boolean startsWith = trimmed.startsWith("Java");
-        boolean endsWith = trimmed.endsWith("Language");
-        System.out.println("Starts with 'Java': " + startsWith);
-        System.out.println("Ends with 'Language': " + endsWith);
-    }
-}
-```
-
-**Output:**
-
-```plaintext
-Trimmed: 'Java Programming Language'
-Word: Java
-Word: Programming
-Word: Language
-Replaced: Python Programming Language
-Contains 'Programming': true
-Starts with 'Java': true
-Ends with 'Language': true
-```
-
-## Key Points to Remember
-
-- Strings in Java are **immutable** - once created, they cannot be changed
-- Use `StringBuilder` for frequent string modifications
-- Always use `.equals()` method to compare string content
-- String literals are stored in the string pool for memory efficiency
-- Use `.trim()` to remove leading and trailing whitespace
-- The `String` class provides many useful methods for manipulation
-
-<Callout>
-
-**Performance Tip:** When concatenating many strings, use `StringBuilder` instead of the `+` operator to avoid creating multiple intermediate string objects.
-
-</Callout>
-
-<div className="mt-8" />
+> [!WARNING]
+> **Concatenation in Loops**: Using `+` in a loop (e.g., `s += "a"`) is very slow because it creates a new String object every time. Use `StringBuilder` instead.
 
 ## Challenge
-
-Complete this chapter to unlock the next one.
 
 <Challenge
   id="strings"
@@ -347,22 +307,3 @@ Complete this chapter to unlock the next one.
 }`}
   defaultCode={``}
 />
-<div className="mt-8" />
-
-## Key Takeaways
-
-- **Immutable**: Strings cannot be changed. Methods like `.toUpperCase()` return a _new_ string.
-- **Pool**: String literals (`"Hello"`) are stored in a special memory pool for efficiency.
-- **Comparison**: ALWAYS use `.equals()` to compare values.
-
-## Common Pitfalls
-
-> [!WARNING]
-> **The `==` Trap**: `s1 == s2` checks if they are the _same object in memory_, not if they have the same text. Use `s1.equals(s2)`.
->
-> **Concatenation in Loops**: Using `+` in a loop (e.g., `s += "a"`) is very slow because it creates a new String object every time. Use `StringBuilder` instead.
-
-## What's Next?
-
-We've covered the basics! Now, let's dive into the heart of Java: Object-Oriented Programming.
-[Start OOP: Classes & Objects →](/docs/class-objects)

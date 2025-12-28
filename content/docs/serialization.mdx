@@ -39,3 +39,20 @@ class Student implements Serializable {
   Always declare a `serialVersionUID` to ensure version compatibility during
   deserialization.
 </Callout>
+
+## The `transient` Keyword
+
+If you don't want to save a specific field (like a password), use the `transient` keyword.
+
+```java
+class User implements Serializable {
+    String username;
+    transient String password; // This will NOT be serialized
+}
+```
+
+## Security Warning ⚠️
+
+Deserialization is a common security vulnerability. **Never deserialize data from untrusted sources.** Attackers can craft malicious byte streams that execute code when deserialized.
+
+---

@@ -32,3 +32,26 @@ Garbage Collection is the process of automatically identifying and discarding ob
   You can request garbage collection using `System.gc()`, but it is not
   guaranteed to run immediately.
 </Callout>
+
+## Common Memory Errors
+
+### 1. StackOverflowError
+
+Occurs when the stack memory is full, usually due to infinite recursion.
+
+```java
+void recursive() {
+    recursive(); // Infinite loop -> StackOverflowError
+}
+```
+
+### 2. OutOfMemoryError (Heap Space)
+
+Occurs when the heap memory is full, usually due to creating too many objects or memory leaks.
+
+```java
+List<String> list = new ArrayList<>();
+while (true) {
+    list.add("Memory Leak"); // Eventually -> OutOfMemoryError
+}
+```

@@ -6,15 +6,17 @@ icon: RotateCw
 
 In computer programming, loops are used to repeat a block of code. For example, if you want to show a message 100 times, then rather than typing the same code 100 times, you can use a loop.
 
-In Java, there are three types of loops.
+In Java, there are three types of loops:
 
-- for loop
-- while loop
-- do...while loop
+*   **for loop**
+*   **while loop**
+*   **do...while loop**
 
-This tutorial focuses on the for loop. You will learn about the other type of loops in the upcoming tutorials.
+This tutorial focuses on the for loop.
 
-## Java for Loop
+---
+
+## 1. Java for Loop
 
 Java `for` loop is used to run a block of code for a certain number of times. The syntax of `for` loop is:
 
@@ -26,12 +28,10 @@ for (initialExpression; testExpression; updateExpression) {
 
 Here,
 
-1. The **initialExpression** initializes and/or declares variables and executes only once.
-2. The **condition** is evaluated. If the **condition** is `true`, the body of the `for` loop is executed.
-3. The **updateExpression** updates the value of **initialExpression**.
-4. The **condition** is evaluated again. The process continues until the **condition** is `false`.
-
-To learn more about the conditions, visit [Java relational](operators#3-java-relational-operators) and [logical operators](operators#4-java-logical-operators).
+1.  The **initialExpression** initializes and/or declares variables and executes only once.
+2.  The **condition** is evaluated. If the **condition** is `true`, the body of the `for` loop is executed.
+3.  The **updateExpression** updates the value of **initialExpression**.
+4.  The **condition** is evaluated again. The process continues until the **condition** is `false`.
 
 <Quiz
   question="Which part of the for loop runs only once?"
@@ -39,7 +39,7 @@ To learn more about the conditions, visit [Java relational](operators#3-java-rel
   correctAnswerIndex={2}
 />
 
-## Working of for loop in Java with flowchart
+### Working of for loop in Java with flowchart
 
 <div className="p-4 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 my-6">
 
@@ -65,11 +65,8 @@ graph TD
 
 ### Example 1: Display a Text Five Times
 
-#### Input
-
 ```java
 // Program to print a text 5 times
-
 class Main {
   public static void main(String[] args) {
 
@@ -82,7 +79,7 @@ class Main {
 }
 ```
 
-#### Output
+**Output:**
 
 ```plaintext
 Java is fun
@@ -92,62 +89,10 @@ Java is fun
 Java is fun
 ```
 
-Here is how this program works.
-
-| Iteration |     Variable     | Condition: i `<=` n |                       Action                        |
-| :-------: | :--------------: | :-----------------: | :-------------------------------------------------: |
-|    1st    | `i = 1`, `n = 5` |       `true`        | `Java is fun` is printed `i` is increased to **2**. |
-|    2nd    | `i = 2`, `n = 5` |       `true`        | `Java is fun` is printed `i` is increased to **3**. |
-|    3rd    | `i = 3`, `n = 5` |       `true`        | `Java is fun` is printed `i` is increased to **4**. |
-|    4th    | `i = 4`, `n = 5` |       `true`        | `Java is fun` is printed `i` is increased to **5**. |
-|    5th    | `i = 5`, `n = 5` |       `true`        | `Java is fun` is printed `i` is increased to **6**. |
-|    6th    | `i = 6`, `n = 5` |       `false`       |               The loop is terminated.               |
-
-### Example 2: Display numbers from 1 to 5
-
-#### Input
-
-```java
-// Program to print numbers from 1 to 5
-
-class Main {
-  public static void main(String[] args) {
-
-    int n = 5;
-    // for loop
-    for (int i = 1; i <= n; ++i) {
-      System.out.println(i);
-    }
-  }
-}
-```
-
-#### Output
-
-```plaintext
-1
-2
-3
-4
-5
-```
-
-Here is how the program works.
-
-| Iteration |     Variable     | Condition: i `<=` n |                  Action                   |
-| :-------: | :--------------: | :-----------------: | :---------------------------------------: |
-|    1st    | `i = 1`, `n = 5` |       `true`        | `1` is printed `i` is increased to **2**. |
-|    2nd    | `i = 2`, `n = 5` |       `true`        | `2` is printed `i` is increased to **3**. |
-|    3rd    | `i = 3`, `n = 5` |       `true`        | `3` is printed `i` is increased to **4**. |
-|    4th    | `i = 4`, `n = 5` |       `true`        | `4` is printed `i` is increased to **5**. |
-|    5th    | `i = 5`, `n = 5` |       `true`        | `5` is printed `i` is increased to **6**. |
-|    6th    | `i = 6`, `n = 5` |       `false`       |          The loop is terminated.          |
-
-### Example 3: Display Sum of n Natural Numbers
+### Example 2: Display Sum of n Natural Numbers
 
 ```java
 // Program to find the sum of natural numbers from 1 to 1000.
-
 class Main {
   public static void main(String[] args) {
 
@@ -165,98 +110,53 @@ class Main {
 }
 ```
 
-#### Output:
+**Output:**
 
 ```plaintext
 Sum = 500500
 ```
 
-Here, the value of `sum` is **0** initially. Then, the for loop is iterated from `i = 1 to 1000`. In each iteration, `i` is added to `sum`and its value is increased by **1**.
+---
 
-When `i` becomes **1001**, the test condition is `false` and `sum` will be equal to `0 + 1 + 2 + .... + 1000`.
+## 2. Java Nested for Loop
 
-The above program to add the sum of natural numbers can also be written as
+A for loop inside another for loop is called a nested for loop. It is often used to work with multidimensional arrays or print patterns.
 
 ```java
-// Program to find the sum of natural numbers from 1 to 1000.
-
 class Main {
-  public static void main(String[] args) {
-
-    int sum = 0;
-    int n = 1000;
-
-    // for loop
-    for (int i = n; i >= 1; --i) {
-      // body inside for loop
-      sum += i;     // sum = sum + i
+    public static void main(String[] args) {
+        // outer loop
+        for (int i = 1; i <= 3; ++i) {
+            // inner loop
+            for (int j = 1; j <= 3; ++j) {
+                System.out.println(i + " " + j);
+            }
+        }
     }
-
-    System.out.println("Sum = " + sum);
-  }
 }
 ```
 
-The output of this program is the same as the **Example 3**.
-
-## Java for-each Loop
-
-The Java for loop has an alternative syntax that makes it easy to iterate through [arrays](arrays) and collections. For example,
-
-#### Input
-
-```java
-// print array elements
-
-class Main {
-  public static void main(String[] args) {
-
-    // create an array
-    int[] numbers = {3, 7, 5, -5};
-
-    // iterating through the array
-    for (int number: numbers) {
-       System.out.println(number);
-    }
-  }
-}
-```
-
-#### Output
+**Output:**
 
 ```plaintext
-3
-7
-5
--5
+1 1
+1 2
+1 3
+2 1
+...
+3 3
 ```
 
-Here, we have used the **for-each loop** to print each element of the `numbers` array one by one.
+---
 
-In the first iteration of the loop, `number` will be 3, `number` will be 7 in second iteration and so on.
+## 3. Java Infinite for Loop
 
-To learn more, visit [Java for-each Loop](enhanced-for-loop).
-
-<Quiz
-  question="Which loop is best suited for iterating over arrays?"
-  options={["while loop", "do...while loop", "for-each loop", "infinite loop"]}
-  correctAnswerIndex={2}
-/>
-
-## Java Infinite for Loop
-
-If we set the test expression in such a way that it never evaluates to false, the for loop will run forever. This is called infinite for loop. For example,
-
-#### Input
+If we set the test expression in such a way that it never evaluates to false, the for loop will run forever. This is called infinite for loop.
 
 ```java
 // Infinite for Loop
-
 class Infinite {
     public static void main(String[] args) {
-
-        int sum = 0;
-
         for (int i = 1; i <= 10; --i) {
             System.out.println("Hello");
         }
@@ -264,7 +164,7 @@ class Infinite {
 }
 ```
 
-Here, the test expression ,`i <= 10`, is never `false` and Hello is printed repeatedly until the memory runs out.
+Here, the test expression `i <= 10` is never `false` because `i` keeps decreasing.
 
 <Callout>
 
@@ -272,11 +172,23 @@ Here, the test expression ,`i <= 10`, is never `false` and Hello is printed repe
 
 </Callout>
 
-<div className="mt-8" />
+---
+
+## Key Takeaways
+
+*   **Structure**: `for (initialization; condition; update)`.
+*   **Use Case**: Best when you know _exactly_ how many times to loop (e.g., iterating an array).
+*   **Nested Loops**: Use loops inside loops for grids or matrices.
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Off-by-One**: Looping from `0` to `<= length` instead of `< length` is a common error that causes "Index Out of Bounds" exceptions.
+
+> [!WARNING]
+> **Infinite Loops**: If your condition never becomes `false` (e.g., `i` never increments), your program will freeze.
 
 ## Challenge
-
-Complete this chapter to unlock the next one.
 
 <Challenge
   id="for-loop"
@@ -293,22 +205,3 @@ Complete this chapter to unlock the next one.
 }`}
   defaultCode={``}
 />
-<div className="mt-8" />
-
-## Key Takeaways
-
-- **Structure**: `for (initialization; condition; update)`.
-- **Use Case**: Best when you know _exactly_ how many times to loop (e.g., iterating an array).
-- **For-Each**: A cleaner syntax for iterating over arrays/collections: `for (Type var : array)`.
-
-## Common Pitfalls
-
-> [!WARNING]
-> **Off-by-One**: Looping from `0` to `<= length` instead of `< length` is a common error that causes "Index Out of Bounds" exceptions.
->
-> **Infinite Loops**: If your condition never becomes `false` (e.g., `i` never increments), your program will freeze.
-
-## What's Next?
-
-What if we don't know how many times we need to loop?
-[Learn While Loops →](/docs/while-and-do-while-loop)

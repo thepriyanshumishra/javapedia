@@ -4,99 +4,77 @@ description: Complete guide to Java primitive data types with examples. Learn ab
 icon: Database
 ---
 
-## Java Data Types
-
 As the name suggests, data types specify the type of data that can be stored inside [variables in Java](/docs/variables-and-literals).
 
-Java is a statically-typed language. This means that all variables must be declared before they can be used.
+Java is a **statically-typed language**. This means that all variables must be declared before they can be used.
 
 ```java
 int speed;
 ```
 
-Here, `speed` is a variable, and the data type of the variable is `int`.
+Here, `speed` is a variable, and the data type of the variable is `int`. The `int` data type determines that the `speed` variable can only contain integers.
 
-The `int` data type determines that the `speed` variable can only contain integers.
+There are 8 data types predefined in the Java programming language, known as **primitive data types**.
 
-There are 8 data types predefined in the Java programming language, known as primitive data types.
+---
 
-<Callout>
+## Summary of Primitive Data Types
 
-**Note :** In addition to primitive data types, there are also referenced
-types (object type).
+| Type | Size | Default Value | Range | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `byte` | 1 byte | 0 | -128 to 127 | Saves memory in large arrays |
+| `short` | 2 bytes | 0 | -32,768 to 32,767 | Also saves memory |
+| `int` | 4 bytes | 0 | -2^31 to 2^31-1 | Default for whole numbers |
+| `long` | 8 bytes | 0L | -2^63 to 2^63-1 | For very large numbers |
+| `float` | 4 bytes | 0.0f | Unlimited | Single precision floating point |
+| `double` | 8 bytes | 0.0d | Unlimited | Double precision floating point |
+| `boolean` | 1 bit | false | true or false | For flags and logic |
+| `char` | 2 bytes | '\u0000' | 0 to 65,535 | Single Unicode character |
 
-</Callout>
+---
 
-## 8 Primitive Data Types
+## 1. Boolean Type
 
-### 1. boolean type
-
-- The `boolean` data type has two possible values: `true` or `false`.
-- They are usually used for **true/false** conditions.
-- **Default value: `false`**.
-
-#### Example 1: Java `boolean` data type
+The `boolean` data type has two possible values: `true` or `false`. They are usually used for **true/false** conditions.
 
 ```java
-class Main {
-  public static void main(String[] args) {
-    boolean flag = true;
-    System.out.println(flag); // prints true
-  }
-}
+boolean isJavaFun = true;
+boolean isFishTasty = false;
+System.out.println(isJavaFun); // Outputs true
+System.out.println(isFishTasty); // Outputs false
 ```
 
-### 2. byte type
+---
 
-- The `byte` data type can have values from **-128** to **127** (8-bit signed two's complement integer).
-- If it's certain that the value of a variable will be within -128 to 127, then it is used instead of `int` to save memory.
-- **Default value: 0**
+## 2. Byte Type
 
-#### Example 2: Java `byte` data type
+The `byte` data type can have values from **-128** to **127** (8-bit signed two's complement integer). It is used to save memory in large arrays, where the memory savings actually matters.
 
 ```java
-class Main {
-  public static void main(String[] args) {
-    byte range;
-    range = 124;
-    System.out.println(range);    // prints 124
-  }
-}
+byte myByte = 100;
+System.out.println(myByte);
 ```
 
-### 3. short type
+---
 
-- The `short` data type in Java can have values from **-32768** to **32767** (16-bit signed two's complement integer).
-- If it's certain that the value of a variable will be within -32768 and 32767, then it is used instead of other integer data types (`int`, `long`).
-- **Default value: 0**
+## 3. Short Type
 
-#### Example 3: Java `short` data type
+The `short` data type can have values from **-32768** to **32767** (16-bit signed two's complement integer).
 
 ```java
-class Main {
-  public static void main(String[] args) {
-    short temperature;
-    temperature = -200;
-    System.out.println(temperature); // prints -200
-  }
-}
+short myShort = 5000;
+System.out.println(myShort);
 ```
 
-### 4. int type
+---
 
-- The `int` data type can have values from **-2<sup>31</sup>** to **2<sup>31</sup> -1** (32-bit signed two's complement integer).
-- If you are using Java 8 or later, you can use an unsigned 32-bit integer. This will have a minimum value of 0 and a maximum value of 2<sup>32</sup>-1.
-- **Default value: 0**
+## 4. Int Type
 
-#### Example 4: Java `int` data type
+The `int` data type is the default data type for integral values unless there is a problem with memory.
 
 ```java
-class Main {
-  public static void main(String[] args) {
-    int range = -4250000;
-    System.out.println(range); // print -4250000
-  }
-}
+int myInt = 100000;
+System.out.println(myInt);
 ```
 
 <Quiz
@@ -104,138 +82,81 @@ class Main {
   options={["1", "0", "null", "-1"]}
   correctAnswerIndex={1}
 />
-### 5. long type
 
-- The `long` data type can have values from **-2<sup>63</sup>** to **2<sup>63</sup> -1** (64-bit signed two's complement integer).
-- If you are using Java 8 or later, you can use an unsigned 64-bit integer with a minimum value of 0 and a maximum value of 2<sup>64</sup> -1.
-- **Default value: 0L**
+---
 
-#### Example 5: Java `long` data type
+## 5. Long Type
 
-```java
-class LongExample {
-  public static void main(String[] args) {
-    long range = -42332200000L;
-    System.out.println(range); // prints -42332200000
-  }
-}
-```
+The `long` data type is used when you need a range of values wider than those provided by `int`.
 
-Notice the use of `L` at the end of `-42332200000`. This represents that it's an integral literal of the `long` type.
-
-### 6. double type
-
-- The `double` data type is a double-precision 64-bit floating-point.
-- It should never be used for precise values such as currency.
-- **Default value: 0.0d**
-
-#### Example 6: Java `double` data type
+**Note**: You must end the value with an "L".
 
 ```java
-class Main {
-  public static void main(String[] args) {
-    double number = -42.3;
-    System.out.println(number); // prints -42.3
-  }
-}
+long myLong = 15000000000L;
+System.out.println(myLong);
 ```
 
-### 7. float type
+---
 
-- The `float` data type is a single-precision 32-bit floating-point.
-- It should never be used for precise values such as currency.
-- **Default value: 0.0f**
+## 6. Float Type
 
-#### Example 7: Java `float` data type
+The `float` data type is a single-precision 32-bit floating-point. It should never be used for precise values such as currency.
 
-```java highlight=3
-class Main {
-  public static void main(String[] args) {
-    float number = -42.3f;
-    System.out.println(number); // prints -42.3
-  }
-}
-```
-
-Notice that we have used `-42.3f` instead of `-42.3` in the above program. This is because `-42.3` is a `double` literal.
-To tell the compiler to treat `-42.3` as `float` rather than `double`, you need to use `f` or `F`.
-If you want to know about single-precision and double-precision, visit [Java single-precision and double-precision floating-point](http://stackoverflow.com/questions/801117/whats-the-difference-between-a-single-precision-and-double-precision-floating-p).
-
-<Callout>
-
-**Tip 💡:** Don't forget the suffixes! `long` needs an 'L' (`1000000000L`) and `float` needs an 'F' (`3.14F`). Without them, Java gets confused!
-
-</Callout>
-
-### 8. char type
-
-- It's a 16-bit Unicode character.
-- The minimum value of the `char` data type is `'\u0000'` (0) and the maximum value is `'\uffff'`.
-- **Default value: '\u0000'**
-
-#### Example 8: Java `char` data type
+**Note**: You must end the value with an "f".
 
 ```java
-class Main {
-  public static void main(String[] args) {
-    char letter = '\u0051';
-    System.out.println(letter); // prints Q
-  }
-}
+float myFloat = 5.75f;
+System.out.println(myFloat);
 ```
 
-Here, the Unicode value of Q is `\u0051`. Hence, we get Q as the output.
+---
 
-Here is another example:
+## 7. Double Type
+
+The `double` data type is a double-precision 64-bit floating-point. It is the default type for decimal numbers.
 
 ```java
-class Main {
-  public static void main(String[] args) {
-    char letter1 = '9';
-    System.out.println(letter1); // prints 9
-    char letter2 = 65;
-    System.out.println(letter2); // prints A
-  }
-}
+double myDouble = 19.99d;
+System.out.println(myDouble);
 ```
 
-Here, we have assigned '9' as a character (specified by single quotes) to the `letter1` variable. However, the `letter2` variable is assigned 65 as an integer number (no single quotes).
+---
 
-Hence, A is printed to the output. This is because Java treats characters as integral types and the ASCII value of A is 65.
+## 8. Char Type
 
-## String type
-
-Java also provides support for character strings via the `java.lang.String` class. Strings in Java are not primitive types. Instead, they are objects. For example,
+The `char` data type is used to store a single character. The character must be surrounded by single quotes, like 'A' or 'c'.
 
 ```java
-String myString = "Java Programming";
+char myGrade = 'B';
+System.out.println(myGrade);
 ```
 
-Here, `myString` is an object of the `String` class. To learn more, visit [Java Strings](/docs/strings).
+Alternatively, you can use ASCII values to display certain characters:
 
-<div className="mt-8" />
+```java
+char myVar1 = 65, myVar2 = 66, myVar3 = 67;
+System.out.println(myVar1); // A
+System.out.println(myVar2); // B
+System.out.println(myVar3); // C
+```
+
+---
 
 ## Key Takeaways
 
-- **8 Primitives**: `boolean`, `byte`, `short`, `int`, `long`, `float`, `double`, `char`.
-- **Default Types**: `int` is the default for whole numbers, `double` for decimals.
-- **Suffixes**: Use `L` for `long` (e.g., `100L`) and `F` for `float` (e.g., `3.14F`).
+*   **8 Primitives**: `boolean`, `byte`, `short`, `int`, `long`, `float`, `double`, `char`.
+*   **Default Types**: `int` is the default for whole numbers, `double` for decimals.
+*   **Suffixes**: Use `L` for `long` (e.g., `100L`) and `F` for `float` (e.g., `3.14F`).
 
 ## Common Pitfalls
 
 > [!WARNING]
 > **Integer Division**: Dividing two integers results in an integer (e.g., `5 / 2 = 2`). Use `5.0 / 2` to get `2.5`.
->
+
+> [!WARNING]
 > **Overflow**: Storing a value larger than a type can handle (like putting 130 in a `byte`) causes overflow and unexpected negative numbers.
 
-## What's Next?
-
-Now that we have data, let's perform operations on it!
-[Learn Java Operators →](/docs/operators)
-
 ## Challenge
-
-Complete this chapter to unlock the next one.
 
 <Challenge
   id="variables-primitive-data-types"

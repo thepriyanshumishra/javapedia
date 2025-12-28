@@ -33,3 +33,33 @@ Java 8 introduced the `java.util.function` package containing common functional 
   You don't always need to create your own functional interfaces. Check
   `java.util.function` first!
 </Callout>
+
+## Examples
+
+### 1. Predicate (Boolean check)
+
+```java
+Predicate<String> isLong = s -> s.length() > 5;
+System.out.println(isLong.test("Hello World")); // true
+```
+
+### 2. Consumer (Action)
+
+```java
+Consumer<String> printer = s -> System.out.println(s);
+printer.accept("Java is fun");
+```
+
+### 3. Function (Transformation)
+
+```java
+Function<Integer, String> converter = num -> "Number: " + num;
+System.out.println(converter.apply(10)); // "Number: 10"
+```
+
+### 4. Supplier (Factory)
+
+```java
+Supplier<Double> random = () -> Math.random();
+System.out.println(random.get());
+```

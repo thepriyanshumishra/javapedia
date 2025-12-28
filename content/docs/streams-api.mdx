@@ -83,6 +83,30 @@ List<String> result = names.stream()
 
 </Callout>
 
+### 5. Reduce (Aggregate items)
+
+Combine elements into a single result (e.g., sum, max).
+
+```java
+int sum = numbers.stream()
+                 .reduce(0, (a, b) -> a + b);
+```
+
+## Parallel Streams
+
+Parallel streams divide the task into multiple substreams that run on different threads (multi-core).
+
+```java
+list.parallelStream()
+    .forEach(System.out::println);
+```
+
+<Callout>
+
+**Warning ⚠️:** Parallel streams can be faster for huge datasets but might be slower for small ones due to overhead. Also, be careful with thread safety!
+
+</Callout>
+
 <Quiz
   question="Which Stream operation transforms elements?"
   options={["filter", "map", "reduce", "collect"]}

@@ -4,7 +4,7 @@ description: In this tutorial, you will learn about Java comments, why we use th
 icon: MessageSquareText
 ---
 
-In computer programming, comments are a portion of the program that are completely ignored by Java compilers. They are mainly used to help programmers to understand the code. For example,
+In computer programming, comments are a portion of the program that are completely ignored by Java compilers. They are mainly used to help programmers to understand the code.
 
 ```java
 // declare and initialize two variables
@@ -21,50 +21,36 @@ System.out.println("This is output");
   correctAnswerIndex={1}
 />
 
-Here, we have used the following comments,
-
-- declare and initialize two variables
-- print the output
+---
 
 ## Types of Comments in Java
 
-In Java, there are two types of comments:
+In Java, there are three types of comments:
 
-- single-line comment
-- multi-line comment
+1.  **Single-line comment**
+2.  **Multi-line comment**
+3.  **Documentation comment (Javadoc)**
 
-### Single-line Comment
+### 1. Single-line Comment
 
-A single-line comment starts and ends in the same line. To write a single-line comment, we can use the `//` symbol. For example,
+A single-line comment starts and ends in the same line. To write a single-line comment, we can use the `//` symbol.
 
 ```java
 // "Hello, World!" program example
 
 class Main {
     public static void main(String[] args) {
-    {
         // prints "Hello, World!"
         System.out.println("Hello, World!");
     }
 }
 ```
 
-Output:
+The Java compiler ignores everything from `//` to the end of line.
 
-```plaintext
-Hello, World!
-```
+### 2. Multi-line Comment
 
-Here, we have used two single-line comments:
-
-- `"Hello, World!" program example`
-- `prints "Hello World!"`
-
-The Java compiler ignores everything from `//` to the end of line. Hence, it is also known as **End of Line** comment.
-
-### Multi-line Comment
-
-When we want to write comments in multiple lines, we can use the multi-line comment. To write multi-line comments, we can use the `/*....*/` symbol. For example,
+When we want to write comments in multiple lines, we can use the multi-line comment. To write multi-line comments, we can use the `/*....*/` symbol.
 
 ```java
 /* This is an example of  multi-line comment.
@@ -73,44 +59,63 @@ When we want to write comments in multiple lines, we can use the multi-line comm
 
 class HelloWorld {
     public static void main(String[] args) {
-    {
         System.out.println("Hello, World!");
     }
 }
 ```
 
-Output:
+### 3. Documentation Comment (Javadoc)
 
-```plaintext
-Hello, World!
-```
-
-Here, we have used the multi-line comment:
+Documentation comments are used to create API documentation. They start with `/**` and end with `*/`.
 
 ```java
-/* This is an example of multi-line comment.
-* The program prints "Hello, World!" to the standard output.
-*/
+/**
+ * This class represents a Student.
+ * @author Javapedia
+ * @version 1.0
+ */
+public class Student {
+    /**
+     * Calculates the grade based on marks.
+     * @param marks The marks obtained by the student.
+     * @return The grade (A, B, C, etc.)
+     */
+    public char calculateGrade(int marks) {
+        // logic
+        return 'A';
+    }
+}
 ```
 
-This type of comment is also known as **Traditional Comment**. In this type of comment, the Java compiler ignores everything from `/*` to `*/`.
+<Callout>
 
-<Quiz
-  question="Which type of comment can span multiple lines?"
-  options={[
-    "Single-line comment",
-    "Multi-line comment",
-    "Inline comment",
-    "Documentation comment",
-  ]}
-  correctAnswerIndex={1}
-/>
+**Tip 💡:** Javadoc comments are super powerful! Tools can read them and automatically generate professional HTML documentation for your code.
+
+</Callout>
+
+---
 
 ## Use Comments the Right Way
 
 One thing you should always consider that comments shouldn't be the substitute for a way to explain poorly written code in English. You should always write well structured and self explaining code. And, then use comments.
 
-Some believe that code should be self-describing and comments should be rarely used. However, in my personal opinion, there is nothing wrong with using comments. We can use comments to explain complex algorithms, regex or scenarios where we have to choose one technique among different technique to solve problems.
+**Bad Comment:**
+```java
+// This variable stores the age
+int a = 10;
+```
+
+**Good Code (No comment needed):**
+```java
+int age = 10;
+```
+
+**Good Comment:**
+```java
+// We use a binary search here because the list is already sorted
+// and performance is critical for this large dataset.
+int index = binarySearch(list, target);
+```
 
 <Callout>
 
@@ -118,11 +123,24 @@ Some believe that code should be self-describing and comments should be rarely u
 
 </Callout>
 
-<div className="mt-8" />
+---
+
+## Key Takeaways
+
+*   **Single-line**: Starts with `//`. Everything after is ignored.
+*   **Multi-line**: Starts with `/*` and ends with `*/`. Can span multiple lines.
+*   **Javadoc**: Starts with `/**` and ends with `*/`. Used for generating API documentation.
+*   **Purpose**: Use comments to explain _why_ you did something, not _what_ the code is doing (unless it's complex).
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Over-commenting**: Don't comment obvious things like `int a = 5; // declaring integer a`. It clutters the code.
+
+> [!WARNING]
+> **Nesting**: You cannot nest multi-line comments inside other multi-line comments. `/* /* */ */` will cause an error.
 
 ## Challenge
-
-Complete this chapter to unlock the next one.
 
 <Challenge
   id="comments"
@@ -136,24 +154,10 @@ Complete this chapter to unlock the next one.
         System.out.println("Correct");
     }
 }`}
-  defaultCode={``}
+  defaultCode={`public class Main {
+    public static void main(String[] args) {
+        System.out.println("Wrong");
+        System.out.println("Correct");
+    }
+}`}
 />
-<div className="mt-8" />
-
-## Key Takeaways
-
-- **Single-line**: Starts with `//`. Everything after is ignored.
-- **Multi-line**: Starts with `/*` and ends with `*/`. Can span multiple lines.
-- **Purpose**: Use comments to explain _why_ you did something, not _what_ the code is doing (unless it's complex).
-
-## Common Pitfalls
-
-> [!WARNING]
-> **Over-commenting**: Don't comment obvious things like `int a = 5; // declaring integer a`. It clutters the code.
->
-> **Nesting**: You cannot nest multi-line comments inside other multi-line comments. `/* /* */ */` will cause an error.
-
-## What's Next?
-
-Now that we can write readable code, let's learn how to control the flow of our program.
-[Master Flow Control (If-Else) →](/docs/if-else-statement)

@@ -14,9 +14,6 @@ int[][] a = new int[3][4];
 
 Here, we have created a multidimensional array named `a`. It is a 2-dimensional array that can hold a maximum of 12 elements.
 
-[2-dimensional array in Java]
-2-dimensional Array
-
 <Callout>
 
 **Tip 💡:** Think of a 2D array like an Excel sheet or a chessboard. `row` comes first, then `column`. `matrix[row][col]`.
@@ -33,7 +30,9 @@ String[][][] data = new String[3][4][2];
 
 Here, data is a 3d array that can hold a maximum of 24 (3*4*2) elements of type [String](/docs/string).
 
-### How to initialize a 2d array in Java?
+---
+
+## 1. How to initialize a 2d array in Java?
 
 Here is how we can initialize a 2-dimensional array in Java:
 
@@ -52,9 +51,6 @@ int[][] a = {
 />
 
 As we can see, each element of the multidimensional array is an array itself. And also, unlike C/C++, each row of the multidimensional array in Java can be of different lengths.
-
-[2d array example in Java with variable length]
-Initialization of 2-dimensional Array
 
 ### Example: 2-dimensional Array
 
@@ -77,7 +73,7 @@ class MultidimensionalArray {
 }
 ```
 
-#### Output:
+**Output:**
 
 ```plaintext
 Length of row 1: 3
@@ -88,6 +84,10 @@ Length of row 3: 1
 In the above example, we created a multidimensional array named `a`. Since each component of a multidimensional array is also an array, `a[0]`, `a[1]`, and `a[2]` are also arrays.
 
 Here, we are using the `length` attribute to calculate the length of each row.
+
+---
+
+## 2. Iterating through 2D Arrays
 
 ### Example: Print all elements of 2d array Using Loop
 
@@ -110,7 +110,7 @@ class MultidimensionalArray {
 }
 ```
 
-#### Output:
+**Output:**
 
 ```plaintext
 1
@@ -148,7 +148,7 @@ class MultidimensionalArray {
 }
 ```
 
-Output:
+**Output:**
 
 ```plaintext
 1
@@ -169,7 +169,30 @@ In the above example, we created a 2d array named `a`. We then used a `for` loop
   correctAnswerIndex={1}
 />
 
-### How to initialize a 3d array in Java?
+---
+
+## 3. Jagged Arrays
+
+A jagged array is an array of arrays where different rows can have different lengths.
+
+```java
+class Main {
+    public static void main(String[] args) {
+        // Jagged array
+        int[][] jagged = new int[3][];
+        jagged[0] = new int[] {1, 2};
+        jagged[1] = new int[] {3, 4, 5};
+        jagged[2] = new int[] {6};
+
+        System.out.println("Row 1 length: " + jagged[0].length); // 2
+        System.out.println("Row 2 length: " + jagged[1].length); // 3
+    }
+}
+```
+
+---
+
+## 4. How to initialize a 3d array in Java?
 
 Let's see how we can use a 3d array in Java. We can initialize a 3d array similarly to a 2d array. For example,
 
@@ -221,7 +244,7 @@ class ThreeArray {
 }
 ```
 
-#### Output:
+**Output:**
 
 ```plaintext
 1
@@ -239,11 +262,23 @@ class ThreeArray {
 3
 ```
 
-<div className="mt-8" />
+---
+
+## Key Takeaways
+
+*   **Structure**: An array of arrays. `int[][]` is an array where each element is an `int[]`.
+*   **Access**: Use `matrix[row][col]` to access elements.
+*   **Ragged Arrays**: Rows can have different lengths (unlike in C/C++).
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Visualizing**: It's easy to mix up rows and columns. Remember: First index is ROW (down), second is COLUMN (across).
+
+> [!WARNING]
+> **Uninitialized Rows**: If you create `int[][] a = new int[3][]`, the rows are `null` until you initialize them. Accessing them causes a `NullPointerException`.
 
 ## Challenge
-
-Complete this chapter to unlock the next one.
 
 <Challenge
   id="multidimensional-arrays"
@@ -259,22 +294,3 @@ Complete this chapter to unlock the next one.
 }`}
   defaultCode={``}
 />
-<div className="mt-8" />
-
-## Key Takeaways
-
-- **Structure**: An array of arrays. `int[][]` is an array where each element is an `int[]`.
-- **Access**: Use `matrix[row][col]` to access elements.
-- **Ragged Arrays**: Rows can have different lengths (unlike in C/C++).
-
-## Common Pitfalls
-
-> [!WARNING]
-> **Visualizing**: It's easy to mix up rows and columns. Remember: First index is ROW (down), second is COLUMN (across).
->
-> **Uninitialized Rows**: If you create `int[][] a = new int[3][]`, the rows are `null` until you initialize them. Accessing them causes a `NullPointerException`.
-
-## What's Next?
-
-We've handled numbers. Now let's handle text!
-[Master Java Strings →](/docs/strings)

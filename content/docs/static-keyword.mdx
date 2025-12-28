@@ -4,7 +4,7 @@ description: In this tutorial, we will learn how to use the Java static keyword.
 icon: Zap
 ---
 
-## What is a `static` keyword in Java?
+## 1. What is a `static` keyword in Java?
 
 In Java, if we want to access class members, we usually must first create an instance of the class. However, there are situations where we want to access class members without creating an instance.
 In those situations, we declare the class members `static`.
@@ -44,7 +44,7 @@ public class Main {
 }
 ```
 
-### Output:
+**Output:**
 
 ```bash
 Absolute value of -12 = 12
@@ -67,6 +67,38 @@ It is possible because the methods and variables of the Math class are static.
   ]}
   correctAnswerIndex={0}
 />
+
+---
+
+## 2. Static Blocks
+
+Static blocks are used to initialize static variables. They are executed only once when the class is loaded into memory.
+
+```java
+class Main {
+    static int a = 10;
+    static int b;
+
+    // static block
+    static {
+        System.out.println("Static block initialized.");
+        b = a * 4;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Value of a: " + a);
+        System.out.println("Value of b: " + b);
+    }
+}
+```
+
+**Output:**
+
+```plaintext
+Static block initialized.
+Value of a: 10
+Value of b: 40
+```
 
 <div className="mt-8" />
 
@@ -94,22 +126,23 @@ new Counter();
 System.out.println(Counter.count);
 }
 }`}
-defaultCode={``}
+  defaultCode={``}
 />
 
 <div className="mt-8" />
 
 ## Key Takeaways
 
-- **Class Level**: Belongs to the class, not individual objects.
-- **Shared**: All objects share the SAME static variable.
-- **Utility**: Static methods are great for helper functions (like `Math.sqrt()`).
+*   **Class Level**: Belongs to the class, not individual objects.
+*   **Shared**: All objects share the SAME static variable.
+*   **Utility**: Static methods are great for helper functions (like `Math.sqrt()`).
 
 ## Common Pitfalls
 
 > [!WARNING]
 > **Static vs Instance**: You CANNOT access non-static (instance) variables from a static method. The static method doesn't know _which_ object's variable to use!
->
+
+> [!WARNING]
 > **Memory**: Static variables stay in memory for the entire life of the program. Use them wisely.
 
 ## What's Next?

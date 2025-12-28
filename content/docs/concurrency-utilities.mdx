@@ -1,0 +1,119 @@
+---
+title: Java Concurrency Utilities
+description: Learn about Java Concurrency Utilities. Understand ExecutorService, Callable, Future, and CountDownLatch.
+icon: Cpu
+---
+
+The `java.util.concurrent` package provides high-level concurrency utilities that are easier to use and more efficient than low-level threads and locks.
+
+---
+
+## 1. ExecutorService
+
+The `ExecutorService` framework simplifies the execution of tasks in asynchronous mode. It automatically manages a pool of threads.
+
+```java
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class Main {
+    public static void main(String[] args) {
+        // Create a thread pool with 2 threads
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        Runnable task1 = () -> System.out.println("Task 1 executed by " + Thread.currentThread().getName());
+        Runnable task2 = () -> System.out.println("Task 2 executed by " + Thread.currentThread().getName());
+        Runnable task3 = () -> System.out.println("Task 3 executed by " + Thread.currentThread().getName());
+
+        executor.submit(task1);
+        executor.submit(task2);
+        executor.submit(task3);
+
+        executor.shutdown(); // Prevent new tasks from being submitted
+    }
+}
+```
+
+---
+
+## 2. Callable and Future
+
+`Runnable` cannot return a result or throw a checked exception. `Callable` solves this. `Future` holds the result of the computation.
+
+```java
+import java.util.concurrent.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+
+        Callable<Integer> task = () -> {
+            Thread.sleep(1000);
+            return 123;
+        };
+
+        Future<Integer> future = executor.submit(task);
+
+        System.out.println("Doing other work...");
+
+        Integer result = future.get(); // Blocks until result is available
+        System.out.println("Result: " + result);
+
+        executor.shutdown();
+    }
+}
+```
+
+---
+
+## 3. CountDownLatch
+
+A synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes.
+
+```java
+import java.util.concurrent.CountDownLatch;
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        int numberOfTasks = 3;
+        CountDownLatch latch = new CountDownLatch(numberOfTasks);
+
+        for (int i = 0; i < numberOfTasks; i++) {
+            new Thread(() -> {
+                System.out.println(Thread.currentThread().getName() + " finished.");
+                latch.countDown(); // Decrement count
+            }).start();
+        }
+
+        latch.await(); // Wait until count reaches 0
+        System.out.println("All tasks finished. Proceeding...");
+    }
+}
+```
+
+---
+
+## 4. Concurrent Collections
+
+Java provides thread-safe versions of standard collections.
+
+*   `ConcurrentHashMap`: Thread-safe version of HashMap.
+*   `CopyOnWriteArrayList`: Thread-safe version of ArrayList.
+*   `BlockingQueue`: A queue that supports operations that wait for the queue to become non-empty when retrieving an element, and wait for space to become available in the queue when storing an element.
+
+```java
+import java.util.concurrent.ConcurrentHashMap;
+
+ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
+map.put("A", 1);
+map.put("B", 2);
+```
+
+---
+
+## Key Takeaways
+
+*   **High-Level**: Use `java.util.concurrent` instead of manual `Thread` management.
+*   **Executors**: Manage thread pools efficiently.
+*   **Callable/Future**: Return results from threads.
+*   **Thread Safety**: Use Concurrent Collections to avoid synchronization issues.

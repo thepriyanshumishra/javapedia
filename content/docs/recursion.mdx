@@ -1,0 +1,153 @@
+---
+title: Java Recursion
+description: Learn about recursion in Java with examples. Understand how a method calls itself and how to solve problems like factorial and Fibonacci sequence.
+icon: RotateCw
+---
+
+Recursion is a technique in programming where a method calls itself to solve a problem. This method is called a recursive method.
+
+Recursion breaks a complex problem into smaller, similar sub-problems.
+
+## 1. How Recursion Works
+
+In recursion, a method calls itself repeatedly. To stop the recursion, we need a **base condition** (termination condition). Without a base condition, the method will call itself indefinitely, leading to a `StackOverflowError`.
+
+```java
+void recursiveMethod() {
+    if (condition) {
+        // base case: stop recursion
+        return;
+    } else {
+        // recursive call
+        recursiveMethod();
+    }
+}
+```
+
+## 2. Example: Factorial of a Number
+
+The factorial of a number `n` (denoted as `n!`) is the product of all positive integers less than or equal to `n`.
+
+*   `5! = 5 * 4 * 3 * 2 * 1 = 120`
+*   `0! = 1`
+
+```java
+class Factorial {
+    static int factorial(int n) {
+        if (n == 0 || n == 1) {
+            return 1; // Base case
+        } else {
+            return n * factorial(n - 1); // Recursive call
+        }
+    }
+
+    public static void main(String[] args) {
+        int result = factorial(5);
+        System.out.println("Factorial of 5 is: " + result);
+    }
+}
+```
+
+**Output:**
+
+```plaintext
+Factorial of 5 is: 120
+```
+
+### How it works:
+
+1.  `factorial(5)` calls `5 * factorial(4)`
+2.  `factorial(4)` calls `4 * factorial(3)`
+3.  `factorial(3)` calls `3 * factorial(2)`
+4.  `factorial(2)` calls `2 * factorial(1)`
+5.  `factorial(1)` returns `1` (Base case reached)
+
+Then the values are returned back up the chain:
+`1 -> 2 * 1 = 2 -> 3 * 2 = 6 -> 4 * 6 = 24 -> 5 * 24 = 120`.
+
+## 3. Example: Fibonacci Series
+
+The Fibonacci series is a sequence where each number is the sum of the two preceding ones: `0, 1, 1, 2, 3, 5, 8, ...`
+
+```java
+class Fibonacci {
+    static int fibonacci(int n) {
+        if (n <= 1) {
+            return n; // Base case
+        }
+        return fibonacci(n - 1) + fibonacci(n - 2); // Recursive call
+    }
+
+    public static void main(String[] args) {
+        int n = 6;
+        System.out.println("Fibonacci number at position " + n + " is: " + fibonacci(n));
+    }
+}
+```
+
+**Output:**
+
+```plaintext
+Fibonacci number at position 6 is: 8
+```
+
+<Callout>
+
+**Note:** Recursive solutions for Fibonacci can be inefficient for large `n` because they re-calculate the same values multiple times. Iterative solutions or dynamic programming are often better for performance.
+
+</Callout>
+
+## 4. Recursion vs Iteration
+
+| Feature | Recursion | Iteration |
+| :--- | :--- | :--- |
+| **Definition** | Method calls itself. | A loop repeats a block of code. |
+| **Termination** | Base case. | Loop condition fails. |
+| **Memory** | Uses stack memory (can cause StackOverflow). | Uses less memory (CPU registers/heap). |
+| **Speed** | Generally slower due to overhead. | Generally faster. |
+| **Readability** | Often cleaner for tree/graph problems. | Can be more complex for recursive structures. |
+
+<div className="mt-8" />
+
+## Challenge
+
+Complete this chapter to unlock the next one.
+
+<Challenge
+  id="recursion"
+  nextChapterId="instance-of"
+  question="Write a recursive method 'sum(n)' that returns the sum of numbers from 1 to n. What is sum(3)?"
+  expectedOutput="6"
+  hint="sum(n) = n + sum(n-1). Base case: if n == 1 return 1."
+  solution={`public class Main {
+    static int sum(int n) {
+        if (n == 1) return 1;
+        return n + sum(n - 1);
+    }
+    public static void main(String[] args) {
+        System.out.println(sum(3));
+    }
+}`}
+  defaultCode={``}
+/>
+
+<div className="mt-8" />
+
+## Key Takeaways
+
+*   **Base Case**: Essential to stop infinite recursion.
+*   **Stack**: Each recursive call adds a frame to the call stack.
+*   **Use Cases**: Great for tree traversals, sorting (Merge Sort, Quick Sort), and mathematical sequences.
+
+## Common Pitfalls
+
+> [!WARNING]
+> **StackOverflowError**: Occurs if the recursion is too deep or the base case is missing.
+
+> [!WARNING]
+> **Performance**: Be mindful of memory usage and redundant calculations (like in naive Fibonacci).
+
+## What's Next?
+
+Let's check if an object belongs to a specific class.
+[Learn instanceof Operator →](/docs/instance-of)

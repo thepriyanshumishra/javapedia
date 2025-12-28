@@ -1,0 +1,137 @@
+---
+title: Java Reflection
+description: Learn about Java Reflection API. Understand how to inspect classes, interfaces, fields, and methods at runtime.
+icon: Mirror
+---
+
+Reflection is an API that allows a program to inspect and manipulate the internal properties of classes, interfaces, fields, and methods at runtime.
+
+It allows you to:
+*   Inspect classes, interfaces, fields, and methods at runtime.
+*   Instantiate new objects, invoke methods, and get/set field values.
+*   Access private members of a class.
+
+The `java.lang.reflect` package contains the classes required for reflection.
+
+---
+
+## 1. Getting Class Object
+
+The entry point for all reflection operations is the `java.lang.Class` object.
+
+```java
+// 1. Using .class syntax
+Class<?> c1 = String.class;
+
+// 2. Using getClass() method
+String s = "Hello";
+Class<?> c2 = s.getClass();
+
+// 3. Using Class.forName()
+try {
+    Class<?> c3 = Class.forName("java.lang.String");
+} catch (ClassNotFoundException e) {
+    e.printStackTrace();
+}
+```
+
+---
+
+## 2. Inspecting Methods
+
+You can get information about methods declared in a class.
+
+```java
+import java.lang.reflect.Method;
+
+public class Main {
+    public static void main(String[] args) {
+        Class<String> stringClass = String.class;
+        Method[] methods = stringClass.getDeclaredMethods();
+
+        for (Method method : methods) {
+            System.out.println("Method Name: " + method.getName());
+            System.out.println("Return Type: " + method.getReturnType());
+            System.out.println("Parameter Count: " + method.getParameterCount());
+            System.out.println("---");
+        }
+    }
+}
+```
+
+---
+
+## 3. Inspecting Fields
+
+You can access fields, even private ones.
+
+```java
+import java.lang.reflect.Field;
+
+class Person {
+    private String name = "John";
+}
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        Person p = new Person();
+        Class<?> cls = p.getClass();
+
+        Field field = cls.getDeclaredField("name");
+        field.setAccessible(true); // Allow access to private field
+
+        System.out.println("Original Value: " + field.get(p));
+
+        field.set(p, "Doe"); // Change value
+        System.out.println("New Value: " + field.get(p));
+    }
+}
+```
+
+---
+
+## 4. Invoking Methods
+
+You can invoke methods dynamically.
+
+```java
+import java.lang.reflect.Method;
+
+class Calculator {
+    public void add(int a, int b) {
+        System.out.println("Sum: " + (a + b));
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        Calculator calc = new Calculator();
+        Class<?> cls = calc.getClass();
+
+        Method method = cls.getMethod("add", int.class, int.class);
+        method.invoke(calc, 10, 20); // Output: Sum: 30
+    }
+}
+```
+
+---
+
+## Common Pitfalls
+
+> [!WARNING]
+> **Performance Overhead**: Reflection involves dynamic type resolving, which is slower than direct code execution. Avoid using it in performance-critical sections.
+
+> [!CAUTION]
+> **Security Restrictions**: Reflection can break encapsulation (accessing private members). This can lead to security vulnerabilities if not used carefully.
+
+> [!NOTE]
+> **Compile-time Safety**: You lose compile-time type safety. Errors that would normally be caught at compile time might occur at runtime.
+
+---
+
+## Key Takeaways
+
+*   **Runtime Inspection**: Reflection allows code to inspect itself.
+*   **Powerful**: Can access private members and invoke methods dynamically.
+*   **Use Cases**: Frameworks (Spring, Hibernate), JUnit, Dependency Injection containers.
+*   **Trade-offs**: Slower performance and potential security risks.

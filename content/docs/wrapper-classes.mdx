@@ -1,0 +1,151 @@
+---
+title: Java Wrapper Classes
+description: Understand Java Wrapper Classes. Learn about Autoboxing, Unboxing, and how to use Integer, Double, Boolean, etc.
+icon: Package
+---
+
+Wrapper classes provide a way to use primitive data types (`int`, `boolean`, etc.) as objects.
+
+The collection framework (like `ArrayList`, `HashMap`) works with Objects, not primitives. So, we need wrapper classes to store primitives in these collections.
+
+| Primitive Type | Wrapper Class |
+| :--- | :--- |
+| `byte` | `Byte` |
+| `short` | `Short` |
+| `int` | `Integer` |
+| `long` | `Long` |
+| `float` | `Float` |
+| `double` | `Double` |
+| `boolean` | `Boolean` |
+| `char` | `Character` |
+
+---
+
+## Creating Wrapper Objects
+
+You can create wrapper objects using the `valueOf()` method or simply by assigning a primitive value (Autoboxing).
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    Integer myInt = 5; // Autoboxing
+    Double myDouble = 5.99; // Autoboxing
+    Character myChar = 'A'; // Autoboxing
+
+    System.out.println(myInt);
+    System.out.println(myDouble);
+    System.out.println(myChar);
+  }
+}
+```
+
+> [!NOTE]
+> Since Java 9, the constructor `new Integer(5)` is deprecated. Use `Integer.valueOf(5)` or direct assignment instead.
+
+---
+
+## Autoboxing and Unboxing
+
+### Autoboxing
+The automatic conversion of primitive data types into its corresponding Wrapper type is known as autoboxing.
+
+```java
+int a = 20;
+Integer i = a; // Autoboxing: int to Integer
+```
+
+### Unboxing
+The automatic conversion of Wrapper type into its corresponding primitive type is known as unboxing.
+
+```java
+Integer i = new Integer(10);
+int a = i; // Unboxing: Integer to int
+```
+
+---
+
+## Why use Wrapper Classes?
+
+1.  **Collections**: Java Collections (`ArrayList`, `Vector`, etc.) store only objects, not primitives.
+    ```java
+    ArrayList<int> list = new ArrayList<>(); // Error
+    ArrayList<Integer> list = new ArrayList<>(); // Correct
+    ```
+2.  **Utility Methods**: Wrapper classes provide useful static methods for conversion and parsing.
+    ```java
+    String str = "123";
+    int num = Integer.parseInt(str); // Converts String to int
+    ```
+3.  **Null Value**: Wrapper classes can hold `null` values, whereas primitives cannot. This is useful in databases where a field might be missing.
+
+---
+
+## Useful Methods
+
+Wrapper classes contain many helpful methods.
+
+### `toString()`
+Converts the wrapper object to a String.
+
+```java
+Integer myInt = 100;
+String myString = myInt.toString();
+System.out.println(myString.length()); // Outputs 3
+```
+
+### `parseInt()`, `parseDouble()`, etc.
+Parses a string and returns the primitive value.
+
+```java
+String s = "500";
+int n = Integer.parseInt(s);
+System.out.println(n + 100); // Outputs 600
+```
+
+### `compare()`
+Compares two values.
+
+```java
+int result = Integer.compare(10, 20);
+// Returns < 0 if first < second
+// Returns 0 if equal
+// Returns > 0 if first > second
+```
+
+---
+
+## Common Pitfalls
+
+> [!WARNING]
+> **NullPointerException**: Since wrapper classes are objects, they can be `null`. Unboxing a `null` wrapper results in a `NullPointerException`.
+
+```java
+Integer num = null;
+int n = num; // Throws NullPointerException
+```
+
+> [!CAUTION]
+> **Performance**: Autoboxing and unboxing incur a performance overhead compared to using primitives directly. Use primitives for heavy calculations.
+
+> [!NOTE]
+> **Caching**: `Integer.valueOf()` caches values between -128 and 127.
+> ```java
+> Integer a = 100;
+> Integer b = 100;
+> System.out.println(a == b); // true (same object from cache)
+>
+> Integer x = 200;
+> Integer y = 200;
+> System.out.println(x == y); // false (different objects)
+> ```
+> Always use `.equals()` to compare wrapper objects!
+
+---
+
+## Key Takeaways
+
+*   **Wrapper Classes** convert primitives to objects.
+*   **Autoboxing** is automatic conversion from primitive to wrapper.
+*   **Unboxing** is automatic conversion from wrapper to primitive.
+*   Use Wrapper classes for **Collections** and when you need **null** values.
+*   Be careful of **NullPointerException** during unboxing.
