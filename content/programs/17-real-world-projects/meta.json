@@ -1,0 +1,29 @@
+{
+    "title": "Real-World Projects",
+    "pages": [
+        "banking-system",
+        "library-management",
+        "attendance-calculator",
+        "grade-calculator-gpa",
+        "university-timetable",
+        "payroll-system",
+        "shopping-cart",
+        "movie-ticket-booking",
+        "hotel-booking",
+        "contact-manager",
+        "todo-list",
+        "expense-tracker",
+        "scientific-calculator",
+        "tic-tac-toe",
+        "quiz-application",
+        "voting-system",
+        "parking-lot-management",
+        "hospital-management",
+        "restaurant-billing",
+        "atm-simulator",
+        "traffic-light-simulator",
+        "student-report-card",
+        "inventory-management",
+        "bus-reservation"
+    ]
+}

@@ -11,42 +11,80 @@ To understand this example, you should have the knowledge of the following Java 
 - [Java Operators](/docs/operators)
 - [Java Basic Input and Output](/docs/basic-input-output)
 
-## 1. Add Two Integers
+## 1. Add Two Integers (Hardcoded)
 
-A Java program that add two numbers predefined by the user is as follows:
+In this example, we store the numbers directly in the code.
 
-### Example: Program to Add Two Integers
+```java title="AddIntegers.java"
+public class AddIntegers {
+    public static void main(String[] args) {
+        int first = 10;
+        int second = 20;
 
-#### Input
+        System.out.println("First Number: " + first);
+        System.out.println("Second Number: " + second);
 
-```java
-class Main {
-
-  public static void main(String[] args) {
-
-    System.out.println("Enter two numbers");
-    int first = 10;
-    int second = 20;
-
-    System.out.println(first + " " + second);
-
-    // add two numbers
-    int sum = first + second;
-    System.out.println("The sum is: " + sum);
-  }
+        // add two numbers
+        int sum = first + second;
+        System.out.println("The sum is: " + sum);
+    }
 }
 ```
 
-#### Output
+**Output:**
 
 ```plaintext
-Enter two numbers
-10 20
+First Number: 10
+Second Number: 20
 The sum is: 30
 ```
 
-In this program, two integers `10` and `20` are stored in integer variables `first` and `second` respectively.
+## 2. Add Two Integers (User Input)
 
-Then, `first` and `second` are added using the `+` operator, and its result is stored in another variable `sum`.
+Here, we use the `Scanner` class to take input from the user.
 
-Finally, `sum` is printed on the screen using `println()` function.
+```java title="AddInput.java"
+import java.util.Scanner;
+
+public class AddInput {
+    public static void main(String[] args) {
+        // Create a Scanner object
+        Scanner reader = new Scanner(System.in);
+
+        System.out.print("Enter two numbers: ");
+
+        // Read integers
+        int first = reader.nextInt();
+        int second = reader.nextInt();
+
+        int sum = first + second;
+
+        System.out.println("The sum is: " + sum);
+        
+        // Close the scanner
+        reader.close();
+    }
+}
+```
+
+**Output:**
+
+```plaintext
+Enter two numbers: 10 20
+The sum is: 30
+```
+
+## Explanation
+
+1.  **`int first = 10;`**: Declares an integer variable and assigns a value.
+2.  **`Scanner reader = new Scanner(System.in);`**: Creates a `Scanner` object to read input from the standard input (keyboard).
+3.  **`reader.nextInt()`**: Reads the next integer from the input.
+4.  **`first + second`**: The `+` operator adds the two numbers.
+
+## Try Yourself
+
+1.  **Change Values**: Change the hardcoded values to `100` and `200`.
+2.  **Add Three Numbers**: Modify the program to add three integers instead of two.
+3.  **Negative Numbers**: What happens if you enter `-5` and `10`? Try it.
+4.  **String Concatenation**: Try `System.out.println("Sum: " + first + second);` (without parentheses around `first + second`). Does it add or join?
+5.  **Brain Twister**: What happens if you try to add two very large numbers (e.g., `2000000000` + `2000000000`)? *Hint: Integer Overflow.*

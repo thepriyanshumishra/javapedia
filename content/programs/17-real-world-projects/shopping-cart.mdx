@@ -1,0 +1,447 @@
+---
+title: E-Commerce Shopping Cart System  
+shortTitle: Shopping Cart
+description: A complete shopping cart system with product catalog, cart management, discount coupons, order processing, and invoice generation for online shopping applications.
+---
+
+## Problem Description
+
+Create an e-commerce shopping cart that:
+- Manages product catalog with categories
+- Adds/removes items from cart
+- Updates quantities
+- Calculates totals with discounts
+- Applies coupon codes
+- Generates itemized invoices
+- Tracks order history
+
+## Code
+
+```java title="ShoppingCart.java"
+import java.util.*;
+
+class Product {
+    private String productId;
+    private String name;
+    private String category;
+    private double price;
+    private int stock;
+    
+    public Product(String productId, String name, String category, double price, int stock) {
+        this.productId = productId;
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.stock = stock;
+    }
+    
+    public String getProductId() { return productId; }
+    public String getName() { return name; }
+    public String getCategory() { return category; }
+    public double getPrice() { return price; }
+    public int getStock() { return stock; }
+    
+    public boolean reduceStock(int quantity) {
+        if (stock >= quantity) {
+            stock -= quantity;
+            return true;
+        }
+        return false;
+    }
+    
+    public void addStock(int quantity) {
+        stock += quantity;
+    }
+    
+    public void displayProduct() {
+        System.out.printf("%-10s %-30s %-15s ₹%8.2f Stock: %d\n",
+            productId, name, category, price, stock);
+    }
+}
+
+class CartItem {
+    private Product product;
+    private int quantity;
+    
+    public CartItem(Product product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+    
+    public Product getProduct() { return product; }
+    public int getQuantity() { return quantity; }
+    
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
+    public void incrementQuantity(int amount) {
+        this.quantity += amount;
+    }
+    
+    public double getSubtotal() {
+        return product.getPrice() * quantity;
+    }
+}
+
+class Coupon {
+    private String code;
+    private double discountPercentage;
+    private double minPurchase;
+    private boolean isActive;
+    
+    public Coupon(String code, double discountPercentage, double minPurchase) {
+        this.code = code;
+        this.discountPercentage = discountPercentage;
+        this.minPurchase = minPurchase;
+        this.isActive = true;
+    }
+    
+    public String getCode() { return code; }
+    public double getDiscountPercentage() { return discountPercentage; }
+    public double getMinPurchase() { return minPurchase; }
+    public boolean isActive() { return isActive; }
+    
+    public boolean isApplicable(double cartTotal) {
+        return isActive && cartTotal >= minPurchase;
+    }
+}
+
+class ShoppingCart {
+    private HashMap<String, CartItem> items;
+    private Coupon appliedCoupon;
+    
+    public ShoppingCart() {
+        items = new HashMap<>();
+        appliedCoupon = null;
+    }
+    
+    public void addItem(Product product, int quantity) {
+        if (!product.reduceStock(quantity)) {
+            System.out.println("✗ Insufficient stock! Available: " + product.getStock());
+            return;
+        }
+        
+        CartItem existing = items.get(product.getProductId());
+        if (existing != null) {
+            existing.incrementQuantity(quantity);
+            System.out.println("✓ Updated quantity for " + product.getName());
+        } else {
+            items.put(product.getProductId(), new CartItem(product, quantity));
+            System.out.println("✓ Added " + product.getName() + " to cart");
+        }
+    }
+    
+    public void removeItem(String productId) {
+        CartItem item = items.remove(productId);
+        if (item != null) {
+            item.getProduct().addStock(item.getQuantity());
+            System.out.println("✓ Removed from cart");
+        } else {
+            System.out.println("✗ Item not in cart");
+        }
+    }
+    
+    public void updateQuantity(String productId, int newQuantity) {
+        CartItem item = items.get(productId);
+        if (item == null) {
+            System.out.println("✗ Item not in cart");
+            return;
+        }
+        
+        int difference = newQuantity - item.getQuantity();
+        if (difference > 0) {
+            if (!item.getProduct().reduceStock(difference)) {
+                System.out.println("✗ Insufficient stock!");
+                return;
+            }
+        } else if (difference < 0) {
+            item.getProduct().addStock(-difference);
+        }
+        
+        item.setQuantity(newQuantity);
+        System.out.println("✓ Quantity updated");
+    }
+    
+    public double getSubtotal() {
+        double total = 0;
+        for (CartItem item : items.values()) {
+            total += item.getSubtotal();
+        }
+        return total;
+    }
+    
+    public boolean applyCoupon(Coupon coupon) {
+        double subtotal = getSubtotal();
+        if (coupon.isApplicable(subtotal)) {
+            appliedCoupon = coupon;
+            System.out.println("✓ Coupon " + coupon.getCode() + " applied!");
+            return true;
+        } else {
+            System.out.printf("✗ Minimum purchase of ₹%.2f required\n", coupon.getMinPurchase());
+            return false;
+        }
+    }
+    
+    public double getDiscount() {
+        if (appliedCoupon == null) return 0;
+        return getSubtotal() * appliedCoupon.getDiscountPercentage() / 100;
+    }
+    
+    public double getTotal() {
+        return getSubtotal() - getDiscount();
+    }
+    
+    public void displayCart() {
+        if (items.isEmpty()) {
+            System.out.println("\n🛒 Your cart is empty");
+            return;
+        }
+        
+        System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║                    YOUR SHOPPING CART                        ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
+        
+        System.out.printf("\n%-10s %-30s %-8s %-10s %-10s\n",
+            "ID", "Product", "Price", "Qty", "Subtotal");
+        System.out.println("─".repeat(70));
+        
+        for (CartItem item : items.values()) {
+            Product product = item.getProduct();
+            System.out.printf("%-10s %-30s ₹%8.2f %-10d ₹%10.2f\n",
+                product.getProductId(), product.getName(), product.getPrice(),
+                item.getQuantity(), item.getSubtotal());
+        }
+        
+        System.out.println("─".repeat(70));
+        System.out.printf("%-60s ₹%10.2f\n", "Subtotal:", getSubtotal());
+        
+        if (appliedCoupon != null) {
+            System.out.printf("%-60s -₹%10.2f\n",
+                "Discount (" + appliedCoupon.getCode() + " " +
+                appliedCoupon.getDiscountPercentage() + "%):", getDiscount());
+        }
+        
+        System.out.println("═".repeat(70));
+        System.out.printf("%-60s ₹%10.2f\n", "TOTAL:", getTotal());
+        System.out.println("═".repeat(70));
+    }
+    
+    public void checkout() {
+        if (items.isEmpty()) {
+            System.out.println("✗ Cart is empty!");
+            return;
+        }
+        
+        System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║                    ORDER INVOICE                             ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
+        System.out.println("Order Date: " + new Date());
+        System.out.println("Order ID: ORD" + System.currentTimeMillis());
+        
+        displayCart();
+        
+        System.out.println("\n✓ Order placed successfully!");
+        System.out.println("Thank you for shopping with us!");
+        
+        items.clear();
+        appliedCoupon = null;
+    }
+    
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
+}
+
+class Store {
+    private HashMap<String, Product> catalog;
+    private HashMap<String, Coupon> coupons;
+    
+    public Store() {
+        catalog = new HashMap<>();
+        coupons = new HashMap<>();
+        loadSampleData();
+    }
+    
+    private void loadSampleData() {
+        addProduct(new Product("ELEC001", "Laptop", "Electronics", 45000, 10));
+        addProduct(new Product("ELEC002", "Smartphone", "Electronics", 15000, 25));
+        addProduct(new Product("ELEC003", "Headphones", "Electronics", 2000, 50));
+        addProduct(new Product("BOOK001", "Java Programming", "Books", 500, 100));
+        addProduct(new Product("FASH001", "T-Shirt", "Fashion", 300, 200));
+        
+        addCoupon(new Coupon("SAVE10", 10, 1000));
+        addCoupon(new Coupon("SAVE20", 20, 5000));
+        addCoupon(new Coupon("MEGA50", 50, 20000));
+    }
+    
+    public void addProduct(Product product) {
+        catalog.put(product.getProductId(), product);
+    }
+    
+    public void addCoupon(Coupon coupon) {
+        coupons.put(coupon.getCode(), coupon);
+    }
+    
+    public Product getProduct(String productId) {
+        return catalog.get(productId);
+    }
+    
+    public Coupon getCoupon(String code) {
+        return coupons.get(code.toUpperCase());
+    }
+    
+    public void displayCatalog() {
+        System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║                    PRODUCT CATALOG                           ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝\n");
+        
+        System.out.printf("%-10s %-30s %-15s %-10s %-8s\n",
+            "ID", "Name", "Category", "Price", "Stock");
+        System.out.println("─".repeat(80));
+        
+        for (Product product : catalog.values()) {
+            product.displayProduct();
+        }
+    }
+    
+    public void displayCoupons() {
+        System.out.println("\n╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║                    AVAILABLE COUPONS                         ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝\n");
+        
+        for (Coupon coupon : coupons.values()) {
+            System.out.printf("Code: %-10s | %d%% OFF | Min Purchase: ₹%.2f\n",
+                coupon.getCode(), (int)coupon.getDiscountPercentage(), coupon.getMinPurchase());
+        }
+    }
+}
+
+public class ECommerceShoppingCart {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Store store = new Store();
+        ShoppingCart cart = new ShoppingCart();
+        
+        System.out.println("╔═══════════════════════════════════════════════╗");
+        System.out.println("║        WELCOME TO ONLINE STORE                ║");
+        System.out.println("╚═══════════════════════════════════════════════╝\n");
+        
+        boolean running = true;
+        
+        while (running) {
+            System.out.println("\n" + "═".repeat(50));
+            System.out.println("              SHOPPING MENU");
+            System.out.println("═".repeat(50));
+            System.out.println("  1. Browse Products");
+            System.out.println("  2. Add to Cart");
+            System.out.println("  3. View Cart");
+            System.out.println("  4. Update Quantity");
+            System.out.println("  5. Remove from Cart");
+            System.out.println("  6. Apply Coupon");
+            System.out.println("  7. View Coupons");
+            System.out.println("  8. Checkout");
+            System.out.println("  0. Exit");
+            System.out.println("═".repeat(50));
+            System.out.print("Enter choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            
+            switch (choice) {
+                case 1:
+                    store.displayCatalog();
+                    break;
+                    
+                case 2:
+                    store.displayCatalog();
+                    System.out.print("\nEnter Product ID: ");
+                    String pid = scanner.nextLine();
+                    Product product = store.getProduct(pid);
+                    if (product != null) {
+                        System.out.print("Enter quantity: ");
+                        int qty = scanner.nextInt();
+                        cart.addItem(product, qty);
+                    } else {
+                        System.out.println("✗ Product not found!");
+                    }
+                    break;
+                    
+                case 3:
+                    cart.displayCart();
+                    break;
+                    
+                case 4:
+                    System.out.print("\nEnter Product ID: ");
+                    String pid2 = scanner.nextLine();
+                    System.out.print("Enter new quantity: ");
+                    int newQty = scanner.nextInt();
+                    cart.updateQuantity(pid2, newQty);
+                    break;
+                    
+                case 5:
+                    System.out.print("\nEnter Product ID to remove: ");
+                    String pid3 = scanner.nextLine();
+                    cart.removeItem(pid3);
+                    break;
+                    
+                case 6:
+                    store.displayCoupons();
+                    System.out.print("\nEnter Coupon Code: ");
+                    String code = scanner.nextLine();
+                    Coupon coupon = store.getCoupon(code);
+                    if (coupon != null) {
+                        cart.applyCoupon(coupon);
+                    } else {
+                        System.out.println("✗ Invalid coupon code!");
+                    }
+                    break;
+                    
+                case 7:
+                    store.displayCoupons();
+                    break;
+                    
+                case 8:
+                    cart.checkout();
+                    break;
+                    
+                case 0:
+                    System.out.println("\n╔═══════════════════════════════════════════╗");
+                    System.out.println("║   Thank you for shopping with us!         ║");
+                    System.out.println("╚═══════════════════════════════════════════╝\n");
+                    running = false;
+                    break;
+                    
+                default:
+                    System.out.println("\n✗ Invalid choice!");
+            }
+        }
+        
+        scanner.close();
+    }
+}
+```
+
+## Explanation
+
+### Key Features
+
+- **Product Catalog** with categories and stock
+- **Shopping Cart** with add/remove/update
+- **Coupon System** with minimum purchase validation
+- **Stock Management** - prevents overselling
+- **Real-time Calculations** for totals and discounts
+- **Invoice Generation** with order tracking
+
+## Try Yourself
+
+1. **Wishlist**: Add wishlist functionality.
+2. **Product Reviews**: Rating and review system.
+3. **Search & Filter**: Filter by category/price range.
+4. **User Accounts**: Save cart between sessions.
+5. **Order History**: View past orders.
+6. **Payment Methods**: Multiple payment options.
+7. **Shipping**: Calculate shipping based on location.
+8. **Tax**: Add GST/tax calculations.
+9. **Product Images**: Store image URLs.
+10. **Flash Sales**: Time-limited discounts.

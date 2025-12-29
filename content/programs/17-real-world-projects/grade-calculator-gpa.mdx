@@ -1,0 +1,423 @@
+---
+title: Grade Calculator and GPA System
+shortTitle: Grade Calculator & GPA
+description: A comprehensive grade calculation system that computes GPA, CGPA, letter grades, tracks semester performance, and provides academic standing analysis.
+---
+
+## Problem Description
+
+Create a grade management system that:
+- Calculates GPA (Grade Point Average) for a semester
+- Computes CGPA (Cumulative GPA) across multiple semesters
+- Converts marks to letter grades
+- Tracks subject-wise performance
+- Provides academic standing (Distinction, First Class, etc.)
+- Generates detailed grade reports
+
+This demonstrates numerical calculations, grading algorithms, and academic data management.
+
+## Code
+
+```java title="GradeCalculator.java"
+import java.util.*;
+
+class Course {
+    private String courseName;
+    private String courseCode;
+    private int credits;
+    private double marks;
+    private String letterGrade;
+    private double gradePoint;
+    
+    public Course(String courseName, String courseCode, int credits, double marks) {
+        this.courseName = courseName;
+        this.courseCode = courseCode;
+        this.credits = credits;
+        this.marks = marks;
+        calculateGrade();
+    }
+    
+    private void calculateGrade() {
+        if (marks >= 90) {
+            letterGrade = "A+";
+            gradePoint = 10.0;
+        } else if (marks >= 80) {
+            letterGrade = "A";
+            gradePoint = 9.0;
+        } else if (marks >= 70) {
+            letterGrade = "B+";
+            gradePoint = 8.0;
+        } else if (marks >= 60) {
+            letterGrade = "B";
+            gradePoint = 7.0;
+        } else if (marks >= 50) {
+            letterGrade = "C";
+            gradePoint = 6.0;
+        } else if (marks >= 40) {
+            letterGrade = "D";
+            gradePoint = 5.0;
+        } else {
+            letterGrade = "F";
+            gradePoint = 0.0;
+        }
+    }
+    
+    public String getCourseName() { return courseName; }
+    public String getCourseCode() { return courseCode; }
+    public int getCredits() { return credits; }
+    public double getMarks() { return marks; }
+    public String getLetterGrade() { return letterGrade; }
+    public double getGradePoint() { return gradePoint; }
+    
+    public boolean isPassed() {
+        return marks >= 40;
+    }
+    
+    public void displayCourseInfo() {
+        System.out.printf("%-30s %-10s %2d   %6.2f   %3s   %.1f\n",
+            courseName, courseCode, credits, marks, letterGrade, gradePoint);
+    }
+}
+
+class Semester {
+    private int semesterNumber;
+    private ArrayList<Course> courses;
+    private double sgpa; // Semester GPA
+    
+    public Semester(int semesterNumber) {
+        this.semesterNumber = semesterNumber;
+        this.courses = new ArrayList<>();
+        this.sgpa = 0.0;
+    }
+    
+    public void addCourse(Course course) {
+        courses.add(course);
+    }
+    
+    public void calculateSGPA() {
+        double totalCredits = 0;
+        double totalGradePoints = 0;
+        
+        for (Course course : courses) {
+            totalCredits += course.getCredits();
+            totalGradePoints += (course.getGradePoint() * course.getCredits());
+        }
+        
+        if (totalCredits > 0) {
+            sgpa = totalGradePoints / totalCredits;
+        }
+    }
+    
+    public double getSGPA() {
+        return sgpa;
+    }
+    
+    public int getSemesterNumber() {
+        return semesterNumber;
+    }
+    
+    public int getTotalCredits() {
+        int total = 0;
+        for (Course course : courses) {
+            total += course.getCredits();
+        }
+        return total;
+    }
+    
+    public int getPassedCourses() {
+        int count = 0;
+        for (Course course : courses) {
+            if (course.isPassed()) count++;
+        }
+        return count;
+    }
+    
+    public int getFailedCourses() {
+        return courses.size() - getPassedCourses();
+    }
+    
+    public void displaySemesterReport() {
+        System.out.println("\n╔══════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║              SEMESTER " + semesterNumber + " GRADE REPORT                              ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════════════╝");
+        
+        System.out.println("\n┌──────────────────────────────────────────────────────────────────────┐");
+        System.out.printf("%-30s %-10s %-4s %-8s %-5s %-4s\n",
+            "Course Name", "Code", "Cr", "Marks", "Grade", "GP");
+        System.out.println("├──────────────────────────────────────────────────────────────────────┤");
+        
+        for (Course course : courses) {
+            course.displayCourseInfo();
+        }
+        
+        System.out.println("└──────────────────────────────────────────────────────────────────────┘");
+        
+        System.out.println("\n┌─────────── SEMESTER SUMMARY ───────────┐");
+        System.out.println("│ Total Credits    : " + getTotalCredits());
+        System.out.println("│ Courses Passed   : " + getPassedCourses() + "/" + courses.size());
+        System.out.println("│ Courses Failed   : " + getFailedCourses());
+        System.out.printf("│ SGPA             : %.2f\n", sgpa);
+        System.out.println("└────────────────────────────────────────┘");
+    }
+}
+
+class Student {
+    private String studentName;
+    private String rollNumber;
+    private ArrayList<Semester> semesters;
+    
+    public Student(String studentName, String rollNumber) {
+        this.studentName = studentName;
+        this.rollNumber = rollNumber;
+        this.semesters = new ArrayList<>();
+    }
+    
+    public void addSemester(Semester semester) {
+        semester.calculateSGPA();
+        semesters.add(semester);
+    }
+    
+    public double calculateCGPA() {
+        if (semesters.isEmpty()) return 0.0;
+        
+        double totalCredits = 0;
+        double totalGradePoints = 0;
+        
+        for (Semester semester : semesters) {
+            int semCredits = semester.getTotalCredits();
+            totalCredits += semCredits;
+            totalGradePoints += (semester.getSGPA() * semCredits);
+        }
+        
+        return (totalCredits > 0) ? (totalGradePoints / totalCredits) : 0.0;
+    }
+    
+    public String getAcademicStanding(double cgpa) {
+        if (cgpa >= 9.5) return "Outstanding (Distinction)";
+        else if (cgpa >= 8.5) return "Excellent (First Class with Distinction)";
+        else if (cgpa >= 7.5) return "Very Good (First Class)";
+        else if (cgpa >= 6.5) return "Good (Second Class)";
+        else if (cgpa >= 5.5) return "Average (Pass Class)";
+        else return "Poor (At Risk)";
+    }
+    
+    public void displayCompleteTranscript() {
+        System.out.println("\n╔═══════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                    ACADEMIC TRANSCRIPT                                ║");
+        System.out.println("╠═══════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ Student Name : " + studentName);
+        System.out.println("║ Roll Number  : " + rollNumber);
+        System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
+        
+        System.out.println("\n─────────────────── SEMESTER-WISE PERFORMANCE ───────────────────");
+        System.out.printf("%-12s %-12s %-15s %-10s\n", "Semester", "Credits", "SGPA", "Status");
+        System.out.println("─".repeat(70));
+        
+        for (Semester semester : semesters) {
+            String status = semester.getFailedCourses() == 0 ? "✓ Passed" : "✗ Failed (" + semester.getFailedCourses() + ")";
+            System.out.printf("Semester %-4d %-12d %-15.2f %-10s\n",
+                semester.getSemesterNumber(),
+                semester.getTotalCredits(),
+                semester.getSGPA(),
+                status);
+        }
+        
+        System.out.println("─".repeat(70));
+        
+        double cgpa = calculateCGPA();
+        String standing = getAcademicStanding(cgpa);
+        
+        System.out.println("\n╔═══════════════════════════════════════════════╗");
+        System.out.println("║         CUMULATIVE PERFORMANCE                ║");
+        System.out.println("╠═══════════════════════════════════════════════╣");
+        System.out.printf("║ CGPA              : %.2f / 10.00\n", cgpa);
+        System.out.printf("║ Percentage        : %.2f%%\n", cgpa * 9.5);
+        System.out.println("║ Academic Standing : " + standing);
+        System.out.println("╚═══════════════════════════════════════════════╝");
+    }
+}
+
+public class GradeCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("╔═══════════════════════════════════════════════╗");
+        System.out.println("║    STUDENT GRADE & GPA CALCULATOR             ║");
+        System.out.println("╚═══════════════════════════════════════════════╝\n");
+        
+        System.out.print("Enter student name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter roll number: ");
+        String rollNo = scanner.nextLine();
+        
+        Student student = new Student(name, rollNo);
+        
+        boolean addMoreSemesters = true;
+        int semesterCount = 0;
+        
+        while (addMoreSemesters) {
+            semesterCount++;
+            System.out.println("\n" + "═".repeat(50));
+            System.out.println("ENTERING DATA FOR SEMESTER " + semesterCount);
+            System.out.println("═".repeat(50));
+            
+            Semester semester = new Semester(semesterCount);
+            
+            System.out.print("How many courses in this semester? ");
+            int numCourses = scanner.nextInt();
+            scanner.nextLine();
+            
+            for (int i = 1; i <= numCourses; i++) {
+                System.out.println("\n--- Course " + i + " ---");
+                System.out.print("Course name: ");
+                String courseName = scanner.nextLine();
+                System.out.print("Course code: ");
+                String courseCode = scanner.nextLine();
+                System.out.print("Credits: ");
+                int credits = scanner.nextInt();
+                System.out.print("Marks (0-100): ");
+                double marks = scanner.nextDouble();
+                scanner.nextLine();
+                
+                Course course = new Course(courseName, courseCode, credits, marks);
+                semester.addCourse(course);
+            }
+            
+            student.addSemester(semester);
+            semester.displaySemesterReport();
+            
+            System.out.print("\nAdd another semester? (yes/no): ");
+            String response = scanner.nextLine();
+            addMoreSemesters = response.equalsIgnoreCase("yes");
+        }
+        
+        student.displayCompleteTranscript();
+        
+        scanner.close();
+    }
+}
+```
+
+## Explanation
+
+### Grading System
+
+The program uses a **10-point GPA scale**:
+
+| Marks Range | Letter Grade | Grade Point |
+|------------|--------------|-------------|
+| 90-100     | A+           | 10.0        |
+| 80-89      | A            | 9.0         |
+| 70-79      | B+           | 8.0         |
+| 60-69      | B            | 7.0         |
+| 50-59      | C            | 6.0         |
+| 40-49      | D            | 5.0         |
+| 0-39       | F            | 0.0         |
+
+### GPA Calculation Formulas
+
+1. **SGPA (Semester GPA)**:
+   ```
+   SGPA = Σ(Grade Point × Credits) / Σ(Credits)
+   ```
+
+2. **CGPA (Cumulative GPA)**:
+   ```
+   CGPA = Σ(SGPA × Semester Credits) / Σ(Semester Credits)
+   ```
+
+3. **Percentage Conversion**:
+   ```
+   Percentage = CGPA × 9.5
+   ```
+
+### Class Structure
+
+1. **Course Class**:
+   - Stores course details (name, code, credits, marks)
+   - Automatically calculates letter grade and grade point
+   - Tracks pass/fail status
+
+2. **Semester Class**:
+   - Manages multiple courses
+   - Calculates semester GPA (SGPA)
+   - Tracks passed/failed courses
+   - Generates semester report
+
+3. **Student Class**:
+   - Manages multiple semesters
+   - Calculates cumulative GPA (CGPA)
+   - Determines academic standing
+   - Generates complete transcript
+
+### Academic Standing
+
+- **9.5-10.0**: Outstanding (Distinction)
+- **8.5-9.4**: Excellent (First Class with Distinction)
+- **7.5-8.4**: Very Good (First Class)
+- **6.5-7.4**: Good (Second Class)
+- **5.5-6.4**: Average (Pass Class)
+- **Below 5.5**: Poor (At Risk)
+
+## Sample Output
+
+```plaintext
+╔═══════════════════════════════════════════════╗
+║    STUDENT GRADE & GPA CALCULATOR             ║
+╚═══════════════════════════════════════════════╝
+
+Enter student name: John Doe
+Enter roll number: CS2023001
+
+═══════════════════════════════════════════════
+ENTERING DATA FOR SEMESTER 1
+═══════════════════════════════════════════════
+How many courses in this semester? 4
+
+--- Course 1 ---
+Course name: Data Structures
+Course code: CS201
+Credits: 4
+Marks (0-100): 85
+
+╔══════════════════════════════════════════════════════════════════════╗
+║              SEMESTER 1 GRADE REPORT                                 ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────┐
+Course Name                    Code       Cr   Marks   Grade  GP
+├──────────────────────────────────────────────────────────────────────┤
+Data Structures                CS201       4    85.00   A      9.0
+Algorithms                     CS202       4    92.00   A+    10.0
+Database Systems               CS203       3    78.00   B+     8.0
+Web Development                CS204       3    88.00   A      9.0
+└──────────────────────────────────────────────────────────────────────┘
+
+┌─────────── SEMESTER SUMMARY ───────────┐
+│ Total Credits    : 14
+│ Courses Passed   : 4/4
+│ Courses Failed   : 0
+│ SGPA             : 9.07
+└────────────────────────────────────────┘
+
+╔═══════════════════════════════════════════════╗
+║         CUMULATIVE PERFORMANCE                ║
+╠═══════════════════════════════════════════════╣
+║ CGPA              : 9.07 / 10.00
+║ Percentage        : 86.15%
+║ Academic Standing : Excellent (First Class with Distinction)
+╚═══════════════════════════════════════════════╝
+```
+
+## Try Yourself
+
+1. **4-Point Scale**: Modify to use the American 4.0 GPA scale instead of 10-point.
+2. **Weighted GPA**: Add concept of honors/AP courses with bonus points.
+3. **Grade Distribution**: Display percentage of A's, B's, C's etc.
+4. **Trend Analysis**: Show if GPA is improving or declining across semesters.
+5. **Required GPA**: Calculate marks needed in remaining courses to achieve target CGPA.
+6. **Dean's List**: Mark semesters where student qualifies for Dean's List (>8.5).
+7. **Export**: Save transcript to a text file.
+8. **Graphical**: Create ASCII bar chart showing semester-wise SGPA.
+9. **Credits Tracking**: Show total completed vs required credits for graduation.
+10. **Ranking**: Calculate class rank based on CGPA (simulated with multiple students).

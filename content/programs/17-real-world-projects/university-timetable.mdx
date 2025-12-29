@@ -1,0 +1,403 @@
+---
+title: University Lecture Timetable Planner
+shortTitle: University Timetable
+description: An intelligent timetable management system that handles course scheduling, prevents time conflicts, manages classrooms, and generates optimized weekly schedules for students and faculty.
+---
+
+## Problem Description
+
+Create a university timetable system that:
+- Manages courses with timeslots
+- Prevents scheduling conflicts
+- Assigns classrooms to lectures
+- Generates personalized student timetables
+- Handles faculty schedules
+- Supports multiple time slots per day
+- Provides conflict detection and resolution
+
+## Code
+
+```java title="UniversityTimetable.java"
+import java.util.*;
+
+enum DayOfWeek {
+    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+}
+
+enum TimeSlot {
+    SLOT_1("09:00-10:00"),
+    SLOT_2("10:00-11:00"),
+    SLOT_3("11:00-12:00"),
+    SLOT_4("12:00-13:00"),
+    SLOT_5("14:00-15:00"),
+    SLOT_6("15:00-16:00"),
+    SLOT_7("16:00-17:00");
+    
+    private String time;
+    
+    TimeSlot(String time) {
+        this.time = time;
+    }
+    
+    public String getTime() {
+        return time;
+    }
+}
+
+class Lecture {
+    private String courseCode;
+    private String courseName;
+    private String instructor;
+    private String classroom;
+    private DayOfWeek day;
+    private TimeSlot timeSlot;
+    
+    public Lecture(String courseCode, String courseName, String instructor,
+                  String classroom, DayOfWeek day, TimeSlot timeSlot) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+        this.instructor = instructor;
+        this.classroom = classroom;
+        this.day = day;
+        this.timeSlot = timeSlot;
+    }
+    
+    public String getCourseCode() { return courseCode; }
+    public String getCourseName() { return courseName; }
+    public String getInstructor() { return instructor; }
+    public String getClassroom() { return classroom; }
+    public DayOfWeek getDay() { return day; }
+    public TimeSlot getTimeSlot() { return timeSlot; }
+    
+    @Override
+    public String toString() {
+        return String.format("%-10s %-25s %-15s %-8s",
+            courseCode, courseName.substring(0, Math.min(courseName.length(), 25)),
+            instructor, classroom);
+    }
+}
+
+class Timetable {
+    private ArrayList<Lecture> lectures;
+    private String owner; // Student or Faculty name
+    
+    public Timetable(String owner) {
+        this.owner = owner;
+        this.lectures = new ArrayList<>();
+    }
+    
+    public boolean hasConflict(DayOfWeek day, TimeSlot timeSlot) {
+        for (Lecture lecture : lectures) {
+            if (lecture.getDay() == day && lecture.getTimeSlot() == timeSlot) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean addLecture(Lecture lecture) {
+        if (hasConflict(lecture.getDay(), lecture.getTimeSlot())) {
+            System.out.println("✗ Conflict detected! Already have a lecture at " +
+                             lecture.getDay() + " " + lecture.getTimeSlot().getTime());
+            return false;
+        }
+        lectures.add(lecture);
+        System.out.println("✓ Lecture added successfully!");
+        return true;
+    }
+    
+    public void removeLecture(String courseCode) {
+        lectures.removeIf(lecture -> lecture.getCourseCode().equals(courseCode));
+        System.out.println("✓ Lecture removed");
+    }
+    
+    public void displayTimetable() {
+        System.out.println("\n╔════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                    WEEKLY TIMETABLE - " + owner + "                           ");
+        System.out.println("╚════════════════════════════════════════════════════════════════════════════╝");
+        
+        System.out.printf("\n%-12s", "Time");
+        for (DayOfWeek day : DayOfWeek.values()) {
+            System.out.printf("%-15s", day);
+        }
+        System.out.println("\n" + "─".repeat(100));
+        
+        for (TimeSlot slot : TimeSlot.values()) {
+            System.out.printf("%-12s", slot.getTime());
+            
+            for (DayOfWeek day : DayOfWeek.values()) {
+                Lecture lecture = findLecture(day, slot);
+                if (lecture != null) {
+                    System.out.printf("%-15s", lecture.getCourseCode());
+                } else {
+                    System.out.printf("%-15s", "---");
+                }
+            }
+            System.out.println();
+        }
+        
+        System.out.println("\n═══ LECTURE DETAILS ═══");
+        for (Lecture lecture : lectures) {
+            System.out.println(lecture);
+        }
+    }
+    
+    private Lecture findLecture(DayOfWeek day, TimeSlot slot) {
+        for (Lecture lecture : lectures) {
+            if (lecture.getDay() == day && lecture.getTimeSlot() == slot) {
+                return lecture;
+            }
+        }
+        return null;
+    }
+    
+    public void displayDaySchedule(DayOfWeek day) {
+        System.out.println("\n╔════════════════════════════════════════════╗");
+        System.out.println("║   SCHEDULE FOR " + day + "                  ");
+        System.out.println("╚════════════════════════════════════════════╝");
+        
+        boolean hasLectures = false;
+        for (TimeSlot slot : TimeSlot.values()) {
+            Lecture lecture = findLecture(day, slot);
+            if (lecture != null) {
+                System.out.println("\n" + slot.getTime());
+                System.out.println("┌────────────────────────────────────────┐");
+                System.out.println("│ Course     : " + lecture.getCourseCode() + " - " + lecture.getCourseName());
+                System.out.println("│ Instructor : " + lecture.getInstructor());
+                System.out.println("│ Classroom  : " + lecture.getClassroom());
+                System.out.println("└────────────────────────────────────────┘");
+                hasLectures = true;
+            }
+        }
+        
+        if (!hasLectures) {
+            System.out.println("\nNo lectures scheduled for this day!");
+        }
+    }
+    
+    public int getTotalLectures() {
+        return lectures.size();
+    }
+    
+    public ArrayList<Lecture> getLectures() {
+        return lectures;
+    }
+}
+
+class TimetableManager {
+    private HashMap<String, Timetable> studentTimetables;
+    private HashMap<String, Timetable> facultyTimetables;
+    private HashMap<String, ArrayList<Lecture>> courseCatalog;
+    
+    public TimetableManager() {
+        studentTimetables = new HashMap<>();
+        facultyTimetables = new HashMap<>();
+        courseCatalog = new HashMap<>();
+    }
+    
+    public void registerStudent(String studentName) {
+        studentTimetables.put(studentName, new Timetable(studentName));
+        System.out.println("✓ Student registered: " + studentName);
+    }
+    
+    public void registerFaculty(String facultyName) {
+        facultyTimetables.put(facultyName, new Timetable(facultyName));
+        System.out.println("✓ Faculty registered: " + facultyName);
+    }
+    
+    public boolean enrollStudent(String studentName, Lecture lecture) {
+        Timetable timetable = studentTimetables.get(studentName);
+        if (timetable == null) {
+            System.out.println("✗ Student not found!");
+            return false;
+        }
+        return timetable.addLecture(lecture);
+    }
+    
+    public Timetable getStudentTimetable(String studentName) {
+        return studentTimetables.get(studentName);
+    }
+    
+    public Timetable getFacultyTimetable(String facultyName) {
+        return facultyTimetables.get(facultyName);
+    }
+    
+    public void displayAllStudents() {
+        System.out.println("\n═══ REGISTERED STUDENTS ═══");
+        for (String student : studentTimetables.keySet()) {
+            Timetable tt = studentTimetables.get(student);
+            System.out.println("• " + student + " (" + tt.getTotalLectures() + " lectures)");
+        }
+    }
+}
+
+public class UniversityTimetable {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        TimetableManager manager = new TimetableManager();
+        
+        System.out.println("╔═══════════════════════════════════════════════╗");
+        System.out.println("║   UNIVERSITY TIMETABLE MANAGEMENT SYSTEM      ║");
+        System.out.println("╚═══════════════════════════════════════════════╝\n");
+        
+        // Sample data
+        manager.registerStudent("John Doe");
+        manager.registerStudent("Jane Smith");
+        
+        boolean running = true;
+        
+        while (running) {
+            System.out.println("\n" + "═".repeat(50));
+            System.out.println("              MAIN MENU");
+            System.out.println("═".repeat(50));
+            System.out.println("STUDENT MANAGEMENT:");
+            System.out.println("  1. Register Student");
+            System.out.println("  2. Enroll in Course");
+            System.out.println("  3. View Student Timetable");
+            System.out.println("  4. View Day Schedule");
+            System.out.println("  5. List All Students");
+            System.out.println("\n  0. Exit");
+            System.out.println("═".repeat(50));
+            System.out.print("Enter choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            
+            switch (choice) {
+                case 1:
+                    System.out.print("\nEnter student name: ");
+                    String name = scanner.nextLine();
+                    manager.registerStudent(name);
+                    break;
+                    
+                case 2:
+                    System.out.print("\nEnter student name: ");
+                    String studentName = scanner.nextLine();
+                    
+                    System.out.print("Course code: ");
+                    String code = scanner.nextLine();
+                    System.out.print("Course name: ");
+                    String courseName = scanner.nextLine();
+                    System.out.print("Instructor: ");
+                    String instructor = scanner.nextLine();
+                    System.out.print("Classroom: ");
+                    String classroom = scanner.nextLine();
+                    
+                    System.out.println("\nSelect day:");
+                    DayOfWeek[] days = DayOfWeek.values();
+                    for (int i = 0; i < days.length; i++) {
+                        System.out.println((i + 1) + ". " + days[i]);
+                    }
+                    System.out.print("Choice: ");
+                    int dayChoice = scanner.nextInt();
+                    DayOfWeek day = days[dayChoice - 1];
+                    
+                    System.out.println("\nSelect time slot:");
+                    TimeSlot[] slots = TimeSlot.values();
+                    for (int i = 0; i < slots.length; i++) {
+                        System.out.println((i + 1) + ". " + slots[i].getTime());
+                    }
+                    System.out.print("Choice: ");
+                    int slotChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    TimeSlot slot = slots[slotChoice - 1];
+                    
+                    Lecture lecture = new Lecture(code, courseName, instructor, classroom, day, slot);
+                    manager.enrollStudent(studentName, lecture);
+                    break;
+                    
+                case 3:
+                    System.out.print("\nEnter student name: ");
+                    String student = scanner.nextLine();
+                    Timetable tt = manager.getStudentTimetable(student);
+                    if (tt != null) {
+                        tt.displayTimetable();
+                    } else {
+                        System.out.println("✗ Student not found!");
+                    }
+                    break;
+                    
+                case 4:
+                    System.out.print("\nEnter student name: ");
+                    String student2 = scanner.nextLine();
+                    Timetable tt2 = manager.getStudentTimetable(student2);
+                    if (tt2 != null) {
+                        System.out.println("\nSelect day:");
+                        DayOfWeek[] days2 = DayOfWeek.values();
+                        for (int i = 0; i < days2.length; i++) {
+                            System.out.println((i + 1) + ". " + days2[i]);
+                        }
+                        System.out.print("Choice: ");
+                        int dayChoice2 = scanner.nextInt();
+                        scanner.nextLine();
+                        tt2.displayDaySchedule(days2[dayChoice2 - 1]);
+                    } else {
+                        System.out.println("✗ Student not found!");
+                    }
+                    break;
+                    
+                case 5:
+                    manager.displayAllStudents();
+                    break;
+                    
+                case 0:
+                    System.out.println("\n╔═══════════════════════════════════════════╗");
+                    System.out.println("║   Thank you for using Timetable System!   ║");
+                    System.out.println("╚═══════════════════════════════════════════╝\n");
+                    running = false;
+                    break;
+                    
+                default:
+                    System.out.println("\n✗ Invalid choice!");
+            }
+        }
+        
+        scanner.close();
+    }
+}
+```
+
+## Explanation
+
+### Key Components
+
+1. **Enums**:
+   - `DayOfWeek`: Represents days (Monday-Saturday)
+   - `TimeSlot`: Represents 7 time slots from 9 AM to 5 PM
+
+2. **Lecture Class**:
+   - Stores complete lecture information
+   - Links course, instructor, classroom, day, and time
+
+3. **Timetable Class**:
+   - Manages lectures for a student/faculty
+   - Detects and prevents scheduling conflicts
+   - Generates visual weekly and daily schedules
+
+4. **Conflict Detection**:
+   ```java
+   if (hasConflict(day, timeSlot)) {
+       return false; // Cannot add lecture
+   }
+   ```
+
+### Features
+
+- **Conflict Prevention**: Automatically detects time clashes
+- **Grid Display**: Shows weekly schedule in table format
+- **Day View**: Detailed schedule for specific day
+- **Multiple Users**: Separate timetables for students and faculty
+- **Real-time Updates**: Add/remove lectures dynamically
+
+## Try Yourself
+
+1. **Classroom Management**: Track classroom capacity and prevent overrights: booking.
+2. **Break Times**: Add compulsory break slots (lunch, etc.).
+3. **Credit Hours**: Associate credit hours with courses and calculate total.
+4. **Electives**: Allow students to choose from available elective slots.
+5. **Export**: Save timetable to a PDF or text file.
+6. **Optimization**: Suggest optimal schedule to minimize gaps between classes.
+7. **Notifications**: Alert for upcoming lectures (next hour).
+8. **Room Booking**: Prevent double-booking of classrooms.
+9. **Lab Sessions**: Handle 2-3 hour lab sessions spanning multiple slots.
+10. **Semester Planning**: Manage different timetables for different semesters.

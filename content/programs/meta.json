@@ -16,6 +16,11 @@
     "09-multithreading",
     "10-collections",
     "11-file-handling",
-    "12-advanced"
+    "12-advanced",
+    "13-patterns",
+    "14-numbers",
+    "15-conversions",
+    "16-miscellaneous",
+    "17-real-world-projects"
   ]
 }

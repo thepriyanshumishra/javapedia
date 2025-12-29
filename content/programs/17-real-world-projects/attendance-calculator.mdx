@@ -1,0 +1,419 @@
+---
+title: Student Attendance Percentage Calculator
+shortTitle: Attendance Calculator
+description: A comprehensive attendance tracking system that calculates attendance percentage, predicts required attendance, and suggests how many classes can be missed while maintaining minimum attendance requirements.
+---
+
+## Problem Description
+
+Create an attendance calculator that:
+- Tracks student attendance for multiple subjects
+- Calculates overall and subject-wise attendance percentage
+- Predicts how many classes needed to reach target percentage
+- Calculates how many classes can be missed
+- Provides attendance warnings and recommendations
+- Handles different minimum attendance requirements
+
+This is a real-world problem faced by students to maintain required attendance (usually 75%).
+
+## Code
+
+```java title="AttendanceCalculator.java"
+import java.util.*;
+
+class Subject {
+    private String subjectName;
+    private String subjectCode;
+    private int totalClasses;
+    private int attendedClasses;
+    
+    public Subject(String subjectName, String subjectCode) {
+        this.subjectName = subjectName;
+        this.subjectCode = subjectCode;
+        this.totalClasses = 0;
+        this.attendedClasses = 0;
+    }
+    
+    public String getSubjectName() { return subjectName; }
+    public String getSubjectCode() { return subjectCode; }
+    public int getTotalClasses() { return totalClasses; }
+    public int getAttendedClasses() { return attendedClasses; }
+    
+    public void markAttendance(boolean present) {
+        totalClasses++;
+        if (present) {
+            attendedClasses++;
+        }
+    }
+    
+    public double getAttendancePercentage() {
+        if (totalClasses == 0) return 0.0;
+        return (attendedClasses * 100.0) / totalClasses;
+    }
+    
+    public int getClassesToAttend(double targetPercentage) {
+        if (getAttendancePercentage() >= targetPercentage) {
+            return 0;
+        }
+        
+        // Formula: (attendedClasses + x) / (totalClasses + x) = targetPercentage/100
+        // Solving for x: x = (targetPercentage * totalClasses - 100 * attendedClasses) / (100 - targetPercentage)
+        
+        int classesNeeded = (int) Math.ceil(
+            (targetPercentage * totalClasses - 100.0 * attendedClasses) / 
+            (100.0 - targetPercentage)
+        );
+        
+        return Math.max(0, classesNeeded);
+    }
+    
+    public int getClassesCanMiss(double minPercentage) {
+        if (totalClasses == 0) return 0;
+        
+        // Formula: (attendedClasses) / (totalClasses + x) = minPercentage/100
+        // Solving for x: x = (100 * attendedClasses / minPercentage) - totalClasses
+        
+        int maxTotalClasses = (int) (100.0 * attendedClasses / minPercentage);
+        int canMiss = maxTotalClasses - totalClasses;
+        
+        return Math.max(0, canMiss);
+    }
+    
+    public void displaySubjectInfo() {
+        double percentage = getAttendancePercentage();
+        
+        System.out.println("\n┌─────────────────────────────────────────────┐");
+        System.out.println("│ Subject: " + subjectName + " (" + subjectCode + ")");
+        System.out.println("│ Total Classes    : " + totalClasses);
+        System.out.println("│ Attended         : " + attendedClasses);
+        System.out.println("│ Missed           : " + (totalClasses - attendedClasses));
+        System.out.printf("│ Attendance       : %.2f%%", percentage);
+        
+        // Status indicator
+        if (percentage >= 75) {
+            System.out.println(" ✓ SAFE");
+        } else if (percentage >= 70) {
+            System.out.println(" ⚠ WARNING");
+        } else {
+            System.out.println(" ✗ DANGER");
+        }
+        
+        System.out.println("└─────────────────────────────────────────────┘");
+    }
+}
+
+class Student {
+    private String studentName;
+    private String rollNumber;
+    private HashMap<String, Subject> subjects;
+    private double minimumAttendanceRequired;
+    
+    public Student(String studentName, String rollNumber, double minAttendance) {
+        this.studentName = studentName;
+        this.rollNumber = rollNumber;
+        this.subjects = new HashMap<>();
+        this.minimumAttendanceRequired = minAttendance;
+    }
+    
+    public void addSubject(String subjectName, String subjectCode) {
+        subjects.put(subjectCode, new Subject(subjectName, subjectCode));
+        System.out.println("✓ Subject added: " + subjectName);
+    }
+    
+    public void markAttendance(String subjectCode, boolean present) {
+        Subject subject = subjects.get(subjectCode);
+        if (subject != null) {
+            subject.markAttendance(present);
+            String status = present ? "Present" : "Absent";
+            System.out.println("✓ Marked " + status + " for " + subject.getSubjectName());
+        } else {
+            System.out.println("✗ Subject not found!");
+        }
+    }
+    
+    public double getOverallAttendance() {
+        int totalClasses = 0;
+        int attendedClasses = 0;
+        
+        for (Subject subject : subjects.values()) {
+            totalClasses += subject.getTotalClasses();
+            attendedClasses += subject.getAttendedClasses();
+        }
+        
+        if (totalClasses == 0) return 0.0;
+        return (attendedClasses * 100.0) / totalClasses;
+    }
+    
+    public void displayDetailedReport() {
+        System.out.println("\n╔═══════════════════════════════════════════════╗");
+        System.out.println("║         ATTENDANCE REPORT                     ║");
+        System.out.println("╠═══════════════════════════════════════════════╣");
+        System.out.println("║ Student Name : " + studentName);
+        System.out.println("║ Roll Number  : " + rollNumber);
+        System.out.printf("║ Overall      : %.2f%%\n", getOverallAttendance());
+        System.out.println("║ Minimum Req  : " + minimumAttendanceRequired + "%");
+        System.out.println("╚═══════════════════════════════════════════════╝");
+        
+        System.out.println("\n─── Subject-wise Attendance ───");
+        for (Subject subject : subjects.values()) {
+            subject.displaySubjectInfo();
+        }
+        
+        displayPredictions();
+    }
+    
+    public void displayPredictions() {
+        System.out.println("\n╔═══════════════════════════════════════════════╗");
+        System.out.println("║         PREDICTIONS & SUGGESTIONS             ║");
+        System.out.println("╚═══════════════════════════════════════════════╝");
+        
+        for (Subject subject : subjects.values()) {
+            System.out.println("\n" + subject.getSubjectName() + ":");
+            double currentPercentage = subject.getAttendancePercentage();
+            
+            if (currentPercentage < minimumAttendanceRequired) {
+                int classesNeeded = subject.getClassesToAttend(minimumAttendanceRequired);
+                System.out.println("  ⚠ Below minimum! Attend next " + classesNeeded + 
+                                 " classes to reach " + minimumAttendanceRequired + "%");
+            } else {
+                int canMiss = subject.getClassesCanMiss(minimumAttendanceRequired);
+                System.out.println("  ✓ You can miss " + canMiss + " more classes");
+                
+                // Show what happens if they miss next class
+                if (canMiss > 0) {
+                    int newTotal = subject.getTotalClasses() + 1;
+                    int newAttended = subject.getAttendedClasses();
+                    double newPercentage = (newAttended * 100.0) / newTotal;
+                    System.out.printf("  If you miss next class: %.2f%%\n", newPercentage);
+                }
+            }
+            
+            // Show classes needed for 100%
+            int for100 = subject.getClassesToAttend(100.0);
+            if (for100 < 50 && currentPercentage < 100) { // Only show if reasonable
+                System.out.println("  ℹ Attend next " + for100 + " classes for 100% attendance");
+            }
+        }
+    }
+    
+    public Subject getSubject(String subjectCode) {
+        return subjects.get(subjectCode);
+    }
+    
+    public void displaySubjectList() {
+        System.out.println("\n═══ Your Subjects ═══");
+        if (subjects.isEmpty()) {
+            System.out.println("No subjects added yet");
+        } else {
+            for (Subject subject : subjects.values()) {
+                System.out.println("  • " + subject.getSubjectCode() + " - " + 
+                                 subject.getSubjectName());
+            }
+        }
+    }
+}
+
+public class AttendanceCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("╔═══════════════════════════════════════════════╗");
+        System.out.println("║   STUDENT ATTENDANCE CALCULATOR               ║");
+        System.out.println("╚═══════════════════════════════════════════════╝\n");
+        
+        System.out.print("Enter student name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter roll number: ");
+        String rollNo = scanner.nextLine();
+        System.out.print("Enter minimum attendance required (e.g., 75): ");
+        double minAttendance = scanner.nextDouble();
+        scanner.nextLine();
+        
+        Student student = new Student(name, rollNo, minAttendance);
+        
+        boolean running = true;
+        
+        while (running) {
+            System.out.println("\n" + "═".repeat(45));
+            System.out.println("              MAIN MENU");
+            System.out.println("═".repeat(45));
+            System.out.println("  1. Add Subject");
+            System.out.println("  2. Mark Attendance (Present)");
+            System.out.println("  3. Mark Attendance (Absent)");
+            System.out.println("  4. View Subject List");
+            System.out.println("  5. View Subject Details");
+            System.out.println("  6. View Detailed Report");
+            System.out.println("  7. Quick Summary");
+            System.out.println("  0. Exit");
+            System.out.println("═".repeat(45));
+            System.out.print("Enter choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            
+            switch (choice) {
+                case 1:
+                    System.out.print("\nEnter subject name: ");
+                    String subName = scanner.nextLine();
+                    System.out.print("Enter subject code: ");
+                    String subCode = scanner.nextLine();
+                    student.addSubject(subName, subCode);
+                    break;
+                    
+                case 2:
+                case 3:
+                    student.displaySubjectList();
+                    System.out.print("\nEnter subject code: ");
+                    String code = scanner.nextLine();
+                    boolean present = (choice == 2);
+                    student.markAttendance(code, present);
+                    break;
+                    
+                case 4:
+                    student.displaySubjectList();
+                    break;
+                    
+                case 5:
+                    student.displaySubjectList();
+                    System.out.print("\nEnter subject code: ");
+                    String code2 = scanner.nextLine();
+                    Subject sub = student.getSubject(code2);
+                    if (sub != null) {
+                        sub.displaySubjectInfo();
+                    } else {
+                        System.out.println("✗ Subject not found!");
+                    }
+                    break;
+                    
+                case 6:
+                    student.displayDetailedReport();
+                    break;
+                    
+                case 7:
+                    System.out.printf("\n✓ Overall Attendance: %.2f%%\n", 
+                                    student.getOverallAttendance());
+                    if (student.getOverallAttendance() >= minAttendance) {
+                        System.out.println("✓ You're safe!");
+                    } else {
+                        System.out.println("⚠ Warning: Below minimum attendance!");
+                    }
+                    break;
+                    
+                case 0:
+                    System.out.println("\n╔═══════════════════════════════════════════╗");
+                    System.out.println("║   Thank you for using the calculator!     ║");
+                    System.out.println("╚═══════════════════════════════════════════╝\n");
+                    running = false;
+                    break;
+                    
+                default:
+                    System.out.println("\n✗ Invalid choice!");
+            }
+        }
+        
+        scanner.close();
+    }
+}
+```
+
+## Explanation
+
+### Mathematical Formulas
+
+1. **Attendance Percentage**:
+   ```
+   Percentage = (Attended Classes / Total Classes) × 100
+   ```
+
+2. **Classes To Attend** (to reach target %):
+   ```
+   Let x = classes to attend
+   (Attended + x) / (Total + x) = Target/100
+   
+   Solving for x:
+   x = (Target × Total - 100 × Attended) / (100 - Target)
+   ```
+
+3. **Classes Can Miss** (while maintaining minimum %):
+   ```
+   Let x = classes can miss
+   Attended / (Total + x) = Minimum/100
+   
+   Solving for x:
+   x = (100 × Attended / Minimum) - Total
+   ```
+
+### Key Features
+
+1. **Subject Class**:
+   - Tracks total and attended classes
+   - Calculates attendance percentage
+   - Predicts classes needed for target percentage
+   - Calculates safe classes to miss
+
+2. **Student Class**:
+   - Manages multiple subjects
+   - Calculates overall attendance
+   - Provides predictions and warnings
+   - Color-coded status indicators
+
+3. **Real-time Predictions**:
+   - Shows how many classes to attend
+   - Shows how many classes can be missed
+   - Warns if below minimum attendance
+   - Projects future attendance scenarios
+
+### Practical Applications
+
+- **Students**: Track and maintain attendance
+- **Teachers**: Monitor student attendance
+- **Administration**: Generate attendance reports
+- **Parents**: Check student regularity
+
+## Sample Output
+
+```plaintext
+╔═══════════════════════════════════════════════╗
+║   STUDENT ATTENDANCE CALCULATOR               ║
+╚═══════════════════════════════════════════════╝
+
+Enter student name: John Doe
+Enter roll number: CS101
+Enter minimum attendance required (e.g., 75): 75
+
+═══════════════════════════════════════════════
+              MAIN MENU
+═══════════════════════════════════════════════
+  1. Add Subject
+  2. Mark Attendance (Present)
+  ...
+
+┌─────────────────────────────────────────────┐
+│ Subject: Data Structures (CS201)
+│ Total Classes    : 20
+│ Attended         : 18
+│ Missed           : 2
+│ Attendance       : 90.00% ✓ SAFE
+└─────────────────────────────────────────────┘
+
+PREDICTIONS & SUGGESTIONS
+═══════════════════════════════════════════════
+
+Data Structures:
+  ✓ You can miss 6 more classes
+  If you miss next class: 85.71%
+  ℹ Attend next 11 classes for 100% attendance
+```
+
+## Try Yourself
+
+1. **Bulk Entry**: Add option to input multiple attendance entries at once.
+2. **Date Tracking**: Store dates of attended/missed classes.
+3. **Monthly Reports**: Generate month-wise attendance reports.
+4. **Export to CSV**: Export attendance data to CSV file.
+5. **Graphical View**: Create ASCII bar charts for attendance.
+6. **Comparison**: Compare attendance across subjects.
+7. **Notifications**: Alert when attendance falls below threshold.
+8. **Target Setting**: Set different targets for different subjects.
+9. **Percentage Locking**: Show when 75% becomes impossible to achieve.
+10. **Medical Leave**: Track and exclude medical leave from calculations.

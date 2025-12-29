@@ -1,0 +1,489 @@
+---
+title: Library Management System
+shortTitle: Library Management
+description: A comprehensive library management system that handles book cataloging, member management, book issuing/returning, and tracks borrowing history with due dates and fines.
+---
+
+## Problem Description
+
+Create a library management system that allows:
+- Add new books to the catalog
+- Register library members
+- Issue books to members
+- Return books with fine calculation for late returns
+- Search books by title or author
+- View member borrowing history
+- Track available and issued books
+
+This demonstrates complex data management, date handling, and business logic implementation.
+
+## Code
+
+```java title="LibraryManagement.java"
+import java.util.*;
+import java.time.*;
+import java.time.temporal.ChronoUnit;
+
+class Book {
+    private String bookId;
+    private String title;
+    private String author;
+    private String category;
+    private boolean isAvailable;
+    private String issuedTo;
+    private LocalDate issueDate;
+    private LocalDate dueDate;
+    
+    public Book(String bookId, String title, String author, String category) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.isAvailable = true;
+        this.issuedTo = null;
+    }
+    
+    public String getBookId() { return bookId; }
+    public String getTitle() { return title; }
+    public String getAuthor() { return author; }
+    public String getCategory() { return category; }
+    public boolean isAvailable() { return isAvailable; }
+    public String getIssuedTo() { return issuedTo; }
+    public LocalDate getDueDate() { return dueDate; }
+    
+    public void issueBook(String memberId) {
+        this.isAvailable = false;
+        this.issuedTo = memberId;
+        this.issueDate = LocalDate.now();
+        this.dueDate = issueDate.plusDays(14); // 14 days loan period
+    }
+    
+    public int returnBook() {
+        this.isAvailable = true;
+        this.issuedTo = null;
+        
+        // Calculate fine if overdue
+        LocalDate today = LocalDate.now();
+        int fine = 0;
+        if (today.isAfter(dueDate)) {
+            long daysOverdue = ChronoUnit.DAYS.between(dueDate, today);
+            fine = (int) (daysOverdue * 10); // $10 per day fine
+        }
+        
+        this.issueDate = null;
+        this.dueDate = null;
+        return fine;
+    }
+    
+    public void displayBookInfo() {
+        System.out.println("\n┌─────────────────────────────────────────┐");
+        System.out.println("│ Book ID     : " + bookId);
+        System.out.println("│ Title       : " + title);
+        System.out.println("│ Author      : " + author);
+        System.out.println("│ Category    : " + category);
+        System.out.println("│ Status      : " + (isAvailable ? "Available" : "Issued"));
+        if (!isAvailable) {
+            System.out.println("│ Issued To   : " + issuedTo);
+            System.out.println("│ Due Date    : " + dueDate);
+        }
+        System.out.println("└─────────────────────────────────────────┘");
+    }
+}
+
+class Member {
+    private String memberId;
+    private String name;
+    private String email;
+    private String phone;
+    private ArrayList<String> borrowedBooks;
+    private ArrayList<String> borrowHistory;
+    
+    public Member(String memberId, String name, String email, String phone) {
+        this.memberId = memberId;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.borrowedBooks = new ArrayList<>();
+        this.borrowHistory = new ArrayList<>();
+    }
+    
+    public String getMemberId() { return memberId; }
+    public String getName() { return name; }
+    public ArrayList<String> getBorrowedBooks() { return borrowedBooks; }
+    
+    public void borrowBook(String bookId) {
+        borrowedBooks.add(bookId);
+        borrowHistory.add("Borrowed: " + bookId + " on " + LocalDate.now());
+    }
+    
+    public void returnBook(String bookId) {
+        borrowedBooks.remove(bookId);
+        borrowHistory.add("Returned: " + bookId + " on " + LocalDate.now());
+    }
+    
+    public void displayMemberInfo() {
+        System.out.println("\n╔═════════════════════════════════════════╗");
+        System.out.println("║         MEMBER INFORMATION              ║");
+        System.out.println("╠═════════════════════════════════════════╣");
+        System.out.println("║ Member ID   : " + memberId);
+        System.out.println("║ Name        : " + name);
+        System.out.println("║ Email       : " + email);
+        System.out.println("║ Phone       : " + phone);
+        System.out.println("║ Books Issued: " + borrowedBooks.size());
+        System.out.println("╚═════════════════════════════════════════╝");
+        
+        if (!borrowedBooks.isEmpty()) {
+            System.out.println("\nCurrently Borrowed Books:");
+            for (String bookId : borrowedBooks) {
+                System.out.println("  • " + bookId);
+            }
+        }
+    }
+    
+    public void displayBorrowHistory() {
+        System.out.println("\n───── Borrow History for " + name + " ─────");
+        if (borrowHistory.isEmpty()) {
+            System.out.println("No borrowing history");
+        } else {
+            for (String record : borrowHistory) {
+                System.out.println("  " + record);
+            }
+        }
+        System.out.println("─────────────────────────────────────────");
+    }
+}
+
+class Library {
+    private HashMap<String, Book> books;
+    private HashMap<String, Member> members;
+    private int bookCounter;
+    private int memberCounter;
+    
+    public Library() {
+        books = new HashMap<>();
+        members = new HashMap<>();
+        bookCounter = 1000;
+        memberCounter = 5000;
+        
+        // Add some sample books
+        addSampleBooks();
+    }
+    
+    private void addSampleBooks() {
+        addBook("Effective Java", "Joshua Bloch", "Programming");
+        addBook("Clean Code", "Robert Martin", "Programming");
+        addBook("The Pragmatic Programmer", "Hunt & Thomas", "Programming");
+        addBook("A Tale of Two Cities", "Charles Dickens", "Fiction");
+        addBook("1984", "George Orwell", "Fiction");
+    }
+    
+    public String addBook(String title, String author, String category) {
+        String bookId = "BK" + (++bookCounter);
+        Book book = new Book(bookId, title, author, category);
+        books.put(bookId, book);
+        System.out.println("✓ Book added successfully! Book ID: " + bookId);
+        return bookId;
+    }
+    
+    public String registerMember(String name, String email, String phone) {
+        String memberId = "MEM" + (++memberCounter);
+        Member member = new Member(memberId, name, email, phone);
+        members.put(memberId, member);
+        System.out.println("✓ Member registered successfully! Member ID: " + memberId);
+        return memberId;
+    }
+    
+    public boolean issueBook(String bookId, String memberId) {
+        Book book = books.get(bookId);
+        Member member = members.get(memberId);
+        
+        if (book == null) {
+            System.out.println("✗ Book not found!");
+            return false;
+        }
+        
+        if (member == null) {
+            System.out.println("✗ Member not found!");
+            return false;
+        }
+        
+        if (!book.isAvailable()) {
+            System.out.println("✗ Book is currently issued to another member");
+            return false;
+        }
+        
+        if (member.getBorrowedBooks().size() >= 3) {
+            System.out.println("✗ Member has reached maximum borrow limit (3 books)");
+            return false;
+        }
+        
+        book.issueBook(memberId);
+        member.borrowBook(bookId);
+        
+        System.out.println("\n✓ Book issued successfully!");
+        System.out.println("  Book: " + book.getTitle());
+        System.out.println("  Member: " + member.getName());
+        System.out.println("  Due Date: " + book.getDueDate());
+        
+        return true;
+    }
+    
+    public boolean returnBook(String bookId, String memberId) {
+        Book book = books.get(bookId);
+        Member member = members.get(memberId);
+        
+        if (book == null || member == null) {
+            System.out.println("✗ Invalid book or member ID");
+            return false;
+        }
+        
+        if (book.isAvailable()) {
+            System.out.println("✗ This book is not currently issued");
+            return false;
+        }
+        
+        int fine = book.returnBook();
+        member.returnBook(bookId);
+        
+        System.out.println("\n✓ Book returned successfully!");
+        if (fine > 0) {
+            System.out.println("  ⚠ Overdue fine: $" + fine);
+            System.out.println("  Please pay the fine at the counter");
+        } else {
+            System.out.println("  No fine. Thank you for returning on time!");
+        }
+        
+        return true;
+    }
+    
+    public void searchBooks(String keyword) {
+        keyword = keyword.toLowerCase();
+        boolean found = false;
+        
+        System.out.println("\n╔═════════════════════════════════════════╗");
+        System.out.println("║         SEARCH RESULTS                  ║");
+        System.out.println("╚═════════════════════════════════════════╝");
+        
+        for (Book book : books.values()) {
+            if (book.getTitle().toLowerCase().contains(keyword) ||
+                book.getAuthor().toLowerCase().contains(keyword)) {
+                book.displayBookInfo();
+                found = true;
+            }
+        }
+        
+        if (!found) {
+            System.out.println("\nNo books found matching: " + keyword);
+        }
+    }
+    
+    public void displayAllBooks() {
+        System.out.println("\n╔═════════════════════════════════════════╗");
+        System.out.println("║         ALL BOOKS IN LIBRARY            ║");
+        System.out.println("╚═════════════════════════════════════════╝");
+        
+        for (Book book : books.values()) {
+            book.displayBookInfo();
+        }
+    }
+    
+    public void displayAvailableBooks() {
+        System.out.println("\n╔═════════════════════════════════════════╗");
+        System.out.println("║         AVAILABLE BOOKS                 ║");
+        System.out.println("╚═════════════════════════════════════════╝");
+        
+        boolean found = false;
+        for (Book book : books.values()) {
+            if (book.isAvailable()) {
+                book.displayBookInfo();
+                found = true;
+            }
+        }
+        
+        if (!found) {
+            System.out.println("\nNo books available at the moment");
+        }
+    }
+    
+    public Member getMember(String memberId) {
+        return members.get(memberId);
+    }
+    
+    public Book getBook(String bookId) {
+        return books.get(bookId);
+    }
+}
+
+public class LibraryManagement {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Library library = new Library();
+        
+        System.out.println("╔═══════════════════════════════════════════╗");
+        System.out.println("║   JAVAPEDIA LIBRARY MANAGEMENT SYSTEM     ║");
+        System.out.println("╚═══════════════════════════════════════════╝\n");
+        
+        boolean running = true;
+        
+        while (running) {
+            System.out.println("\n" + "═".repeat(45));
+            System.out.println("              MAIN MENU");
+            System.out.println("═".repeat(45));
+            System.out.println("BOOK OPERATIONS:");
+            System.out.println("  1. Add New Book");
+            System.out.println("  2. Search Books");
+            System.out.println("  3. Display All Books");
+            System.out.println("  4. Display Available Books");
+            System.out.println("\nMEMBER OPERATIONS:");
+            System.out.println("  5. Register New Member");
+            System.out.println("  6. View Member Info");
+            System.out.println("  7. View Member History");
+            System.out.println("\nTRANSACTIONS:");
+            System.out.println("  8. Issue Book");
+            System.out.println("  9. Return Book");
+            System.out.println("\n  0. Exit");
+            System.out.println("═".repeat(45));
+            System.out.print("Enter your choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            
+            switch (choice) {
+                case 1:
+                    System.out.print("\nEnter book title: ");
+                    String title = scanner.nextLine();
+                    System.out.print("Enter author name: ");
+                    String author = scanner.nextLine();
+                    System.out.print("Enter category: ");
+                    String category = scanner.nextLine();
+                    library.addBook(title, author, category);
+                    break;
+                    
+                case 2:
+                    System.out.print("\nEnter title or author to search: ");
+                    String keyword = scanner.nextLine();
+                    library.searchBooks(keyword);
+                    break;
+                    
+                case 3:
+                    library.displayAllBooks();
+                    break;
+                    
+                case 4:
+                    library.displayAvailableBooks();
+                    break;
+                    
+                case 5:
+                    System.out.print("\nEnter member name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter email: ");
+                    String email = scanner.nextLine();
+                    System.out.print("Enter phone: ");
+                    String phone = scanner.nextLine();
+                    library.registerMember(name, email, phone);
+                    break;
+                    
+                case 6:
+                    System.out.print("\nEnter member ID: ");
+                    String memId = scanner.nextLine();
+                    Member member = library.getMember(memId);
+                    if (member != null) {
+                        member.displayMemberInfo();
+                    } else {
+                        System.out.println("✗ Member not found!");
+                    }
+                    break;
+                    
+                case 7:
+                    System.out.print("\nEnter member ID: ");
+                    String memId2 = scanner.nextLine();
+                    Member member2 = library.getMember(memId2);
+                    if (member2 != null) {
+                        member2.displayBorrowHistory();
+                    } else {
+                        System.out.println("✗ Member not found!");
+                    }
+                    break;
+                    
+                case 8:
+                    System.out.print("\nEnter book ID: ");
+                    String bookId = scanner.nextLine();
+                    System.out.print("Enter member ID: ");
+                    String memId3 = scanner.nextLine();
+                    library.issueBook(bookId, memId3);
+                    break;
+                    
+                case 9:
+                    System.out.print("\nEnter book ID: ");
+                    String bookId2 = scanner.nextLine();
+                    System.out.print("Enter member ID: ");
+                    String memId4 = scanner.nextLine();
+                    library.returnBook(bookId2, memId4);
+                    break;
+                    
+                case 0:
+                    System.out.println("\n╔═══════════════════════════════════════════╗");
+                    System.out.println("║  Thank you for using Library System!      ║");
+                    System.out.println("╚═══════════════════════════════════════════╝\n");
+                    running = false;
+                    break;
+                    
+                default:
+                    System.out.println("\n✗ Invalid choice!");
+            }
+        }
+        
+        scanner.close();
+    }
+}
+```
+
+## Explanation
+
+### Key Components
+
+1. **Book Class**:
+   - Stores book information (ID, title, author, category)
+   - Tracks availability and issuing status
+   - Manages issue/due dates using `LocalDate`
+   - Calculates fines for overdue returns
+
+2. **Member Class**:
+   - Stores member information
+   - Maintains list of currently borrowed books
+   - Tracks complete borrowing history
+   - Enforces borrow limit (max 3 books)
+
+3. **Library Class**:
+   - Manages all books and members using `HashMap`
+   - Auto-generates unique IDs
+   - Handles book issuing/returning with validation
+   - Provides search functionality
+   - Pre-loads sample books for testing
+
+### Advanced Concepts
+
+- **Date/Time API**: Uses `java.time` package for date calculations
+- **Collection Framework**: `HashMap` for efficient lookups, `ArrayList` for lists
+- **Business Logic**: Fine calculation, borrow limits, availability checking
+- **Data Validation**: Checks for null objects, availability, limits
+- **User Experience**: Formatted output with Unicode characters
+
+### Fine Calculation
+
+- 14-day loan period
+- $10 per day for overdue books
+- Uses `ChronoUnit.DAYS.between()` to calculate days overdue
+
+## Try Yourself
+
+1. **Book Reservation**: Allow members to reserve books that are currently issued.
+2. **Categories**: Add filtering by book category (Fiction, Non-Fiction, etc.).
+3. **Renewals**: Allow members to renew books if not overdue.
+4. **Book Ratings**: Add a rating system for returned books.
+5. **Multiple Copies**: Support multiple copies of the same book.
+6. **Email Notifications**: Simulate sending due date reminders.
+7. **Late Fee Payment**: Track fine payments and outstanding dues.
+8. **Book Damage**: Add condition tracking (New, Good, Damaged).
+9. **Statistics**: Display most borrowed books, active members, etc.
+10. **Export Reports**: Generate monthly reports of all transactions.

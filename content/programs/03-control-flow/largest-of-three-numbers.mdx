@@ -38,3 +38,14 @@ public class LargestNumber {
 2.  **`n1 >= n2 && n1 >= n3`**: Checks if `n1` is greater than or equal to both `n2` and `n3`.
 3.  **`n2 >= n1 && n2 >= n3`**: Checks if `n2` is greater than or equal to both `n1` and `n3`.
 4.  If neither is true, `n3` must be the largest.
+
+## Try Yourself
+
+Test your logic with these challenges.
+
+1.  **Change Values**: Set `n1 = 10`, `n2 = 20`, `n3 = 30` and run the program.
+2.  **Find Smallest**: Modify the conditions to find the *smallest* of the three numbers.
+3.  **All Equal**: What happens if `n1 = 5`, `n2 = 5`, `n3 = 5`? Trace the code.
+4.  **Four Numbers**: Can you extend the logic to find the largest of *four* numbers?
+5.  **Brain Twister**: Can you solve this using the ternary operator (`? :`) in a single line?
+    `double largest = (n1 >= n2) ? ((n1 >= n3) ? n1 : n3) : ((n2 >= n3) ? n2 : n3);`

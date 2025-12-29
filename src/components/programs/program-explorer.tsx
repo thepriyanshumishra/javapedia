@@ -266,14 +266,50 @@ const categories = [
             { title: "Coin Toss", href: "/programs/16-miscellaneous/coin-toss-simulation" },
         ]
     },
+    {
+        id: "real-world-projects",
+        title: "Real-World Projects",
+        description: "Comprehensive critical thinking programs like Banking Systems, Library Management, and more practical applications.",
+        icon: Zap,
+        color: "bg-violet-500/10 text-violet-500",
+        programs: [
+            { title: "Banking System", href: "/programs/17-real-world-projects/banking-system" },
+            { title: "Library Management", href: "/programs/17-real-world-projects/library-management" },
+            { title: "Attendance Calculator", href: "/programs/17-real-world-projects/attendance-calculator" },
+            { title: "Grade Calculator & GPA", href: "/programs/17-real-world-projects/grade-calculator-gpa" },
+            { title: "University Timetable", href: "/programs/17-real-world-projects/university-timetable" },
+            { title: "Payroll System", href: "/programs/17-real-world-projects/payroll-system" },
+            { title: "Shopping Cart", href: "/programs/17-real-world-projects/shopping-cart" },
+            { title: "Movie Ticket Booking", href: "/programs/17-real-world-projects/movie-ticket-booking" },
+            { title: "Hotel Booking", href: "/programs/17-real-world-projects/hotel-booking" },
+            { title: "Contact Manager", href: "/programs/17-real-world-projects/contact-manager" },
+            { title: "To-Do List", href: "/programs/17-real-world-projects/todo-list" },
+            { title: "Expense Tracker", href: "/programs/17-real-world-projects/expense-tracker" },
+            { title: "Scientific Calculator", href: "/programs/17-real-world-projects/scientific-calculator" },
+            { title: "Tic-Tac-Toe", href: "/programs/17-real-world-projects/tic-tac-toe" },
+            { title: "Quiz Application", href: "/programs/17-real-world-projects/quiz-application" },
+            { title: "Voting System", href: "/programs/17-real-world-projects/voting-system" },
+            { title: "Parking Lot Management", href: "/programs/17-real-world-projects/parking-lot-management" },
+            { title: "Hospital Management", href: "/programs/17-real-world-projects/hospital-management" },
+            { title: "Restaurant Billing", href: "/programs/17-real-world-projects/restaurant-billing" },
+            { title: "ATM Simulator", href: "/programs/17-real-world-projects/atm-simulator" },
+            { title: "Traffic Light Simulator", href: "/programs/17-real-world-projects/traffic-light-simulator" },
+            { title: "Student Report Card", href: "/programs/17-real-world-projects/student-report-card" },
+            { title: "Inventory Management", href: "/programs/17-real-world-projects/inventory-management" },
+            { title: "Bus Reservation", href: "/programs/17-real-world-projects/bus-reservation" },
+        ]
+    },
 ];
 
 export function ProgramExplorer() {
     const [selectedId, setSelectedId] = useState<string | null>(null);
 
-    return (
+    const syllabusCategories = categories.slice(0, 12);
+    const miscellaneousCategories = categories.slice(12);
+
+    const renderGrid = (items: typeof categories) => (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-            {categories.map((category) => (
+            {items.map((category) => (
                 <motion.div
                     layout
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -332,6 +368,20 @@ export function ProgramExplorer() {
                     </AnimatePresence>
                 </motion.div>
             ))}
+        </div>
+    );
+
+    return (
+        <div className="space-y-12">
+            <section>
+                <h2 className="text-2xl font-bold px-4 mb-4">Syllabus Programs</h2>
+                {renderGrid(syllabusCategories)}
+            </section>
+
+            <section>
+                <h2 className="text-2xl font-bold px-4 mb-4">Miscellaneous & Practice</h2>
+                {renderGrid(miscellaneousCategories)}
+            </section>
         </div>
     );
 }

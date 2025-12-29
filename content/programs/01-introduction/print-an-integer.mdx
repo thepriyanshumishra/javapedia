@@ -20,7 +20,7 @@ A Java program that prints a number predefined by the user is as follows:
 #### Input
 
 ```java
-public class HelloWorld {
+public class PrintInteger {
 
     public static void main(String[] args) {
 
@@ -54,7 +54,7 @@ A Java program that prints a number entered by the user is as follows:
 ```java
 import java.util.Scanner;
 
-public class HelloWorld {
+public class PrintInteger {
 
     public static void main(String[] args) {
 
@@ -89,3 +89,11 @@ Then, `Enter a number` prompt is printed to give the user a visual cue as to wha
 If you enter any character which is not an integer, the compiler will throw an `InputMismatchException`.
 
 Finally, `number` is printed onto the standard output `(System.out)` - computer screen using the function `println()`.
+
+## Try Yourself
+
+1.  **Negative Number**: Try entering a negative number like `-50`. Does it work?
+2.  **Floating Point**: What happens if you enter `10.5`? Why?
+3.  **Multiple Numbers**: Modify the code to read and print *two* integers.
+4.  **Text Input**: Run the program and enter "Hello". Observe the error (`InputMismatchException`).
+5.  **Brain Twister**: Print the largest possible integer in Java. *Hint: Use `Integer.MAX_VALUE`.*
